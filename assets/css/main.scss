@@ -10,18 +10,18 @@
 
 // font size
 html {
-  font-size: 16px; // change from 16
+  font-size: 18px; // change from 16
 
   @include breakpoint($medium) {
-    font-size: 14px; // change from 18
+    font-size: 18px; // change from 18
   }
 
   @include breakpoint($large) {
-    font-size: 16px; // change from 20
+    font-size: 20px; // change from 20
   }
 
   @include breakpoint($x-large) {
-    font-size: 18px; // change from 22
+    font-size: 22px; // change from 22
   }
 }
 
