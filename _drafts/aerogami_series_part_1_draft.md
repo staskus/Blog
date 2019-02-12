@@ -5,7 +5,7 @@ categories: Tutorial
 excerpt: We'll be creating and releasing an iOS application by showing a real thinking process, going through essential steps and providing the motivation behind them.
 ---
 
-When learning any new technology I find it beneficial to follow a real world example. In this tutorial series we'll be creating and releasing an iOS application. The application will be created by showing a real thinking process, going through essential steps and providing the motivation behind them.
+When learning any new technology I find it beneficial to follow a real world example. In this tutorial series we'll be overviewing the creation and release of an iOS application. The application will be created by explaining a real thinking process, going through essential steps and providing the _why_ behind them.
 
 # Our Project
 
