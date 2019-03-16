@@ -1,5 +1,5 @@
 ---
-title: Creating iOS Application (Part 1)
+title: Creating iOS Application for discovering flight ideas (Part 1)
 date: 2019-02-11
 categories: Tutorial
 excerpt: We'll be creating and releasing an iOS application by showing a real thinking process, going through essential steps and providing the motivation behind them.
@@ -9,7 +9,7 @@ When learning any new technology I find it beneficial to follow a real world exa
 
 # Prerequisites
 
-Prior knowledge of iOS development and Swift syntax is advised.
+Prior knowledge of iOS development and Swift syntax is needed.
 
 # Introduction
 
@@ -23,7 +23,7 @@ We'll be creating a flight discovery application. The users of our application s
 
 In the scope of this project we won't be concerned about the source of information. Our application will use mocked flight information data. However, the structure of the application will support an easy integration with any Rest API. 
 
-## The Approach
+## Our Approach
 
 Throughout the series we'll cover these topics one-by-one:
 
@@ -43,16 +43,18 @@ Here is the sneak peek of how the final product will look like. The full codebas
 
 # High Level View
 
-Before we start, it's beneficial to understand what we need to do during each step of the process.
+Before we start, it's beneficial to understand how we're going to approach the creation of this application.
 
-## The Separation of Concerns
+## Separation of Concerns
 
-Our application should be able to do 3 main things:
+Essentially our application should be able to perform 3 main tasks:
 
 1. Fetch data
 2. Parse data
 3. Display data
 
-We'll separate these different concerns into frameworks for our code to be decoupled and flexible. The primitive diagram of the architecture is displayed in the picture bellow. We'll define data models and protocols in `FlightKit`. This framework will contain data fetching protocols, which will be implemented in `FlightDataKit`. DataKit, as its name suggests, will be used for fetching, persisting and providing data. User interface will only know about data models and protocols and won't be concerned about the implementation. We'll call this framework `FlightUIKit`. The entry point of our application will initialize 
+We'll separate these different concerns into frameworks for our code to be decoupled and flexible. The primitive diagram of the architecture is displayed in the picture bellow. We'll define data models and protocols in `FlightKit`. This framework will contain data fetching protocols, which will be implemented in `FlightDataKit`. DataKit, as its name suggests, will be used for fetching, persisting and providing data. User interface will only know about data models and protocols and won't be concerned about the implementation. We'll call this framework `FlightUIKit`. The entry point of our application will initialize the dependencies required for all the frameworks and present the root view described in `FlightUIKit`. 
 
 <img src="/assets/images/aerogami-tutorial/part1/architecture.png" alt="Application Architecture" width="300"/>
+
+We'll continue in the next part of the series by explaining how to create frameworks and setup the base of the application.  
