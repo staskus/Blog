@@ -1,7 +1,7 @@
 ---
 title: Creating iOS Application for discovering flight ideas (Part 1)
-date: 2019-02-11
-categories: Tutorial
+date: 2019-03-11
+categories: [Tutorial, iOS, Swift]
 excerpt: We'll be creating and releasing an iOS application by showing a real thinking process, going through essential steps and providing the motivation behind them.
 ---
 
@@ -53,8 +53,8 @@ Essentially our application should be able to perform 3 main tasks:
 2. Parse data
 3. Display data
 
-We'll separate these different concerns into frameworks for our code to be decoupled and flexible. The primitive diagram of the architecture is displayed in the picture bellow. We'll define data models and protocols in `FlightKit`. This framework will contain data fetching protocols, which will be implemented in `FlightDataKit`. DataKit, as its name suggests, will be used for fetching, persisting and providing data. User interface will only know about data models and protocols and won't be concerned about the implementation. We'll call this framework `FlightUIKit`. The entry point of our application will initialize the dependencies required for all the frameworks and present the root view described in `FlightUIKit`. 
+We'll separate these different concerns into frameworks for our code to be decoupled and flexible. The primitive diagram of the architecture is displayed in the picture bellow. We'll define data models and protocols in `TravelKit`. This framework will contain data fetching protocols, which will be implemented in `TravelDataKit`. DataKit, as its name suggests, will be used for fetching, persisting and providing data. User interface will only know about data models and protocols and won't be concerned about the implementation. We'll call this framework `TravelFeatureKit`. The entry point of our application will initialize the dependencies required for all the frameworks and present the root view described in `TravelFeatureKit`.
 
 <img src="/assets/images/aerogami-tutorial/part1/architecture.png" alt="Application Architecture" width="300"/>
 
-We'll continue in the next part of the series by explaining how to create frameworks and setup the base of the application.  
+In the next part of the series we'll continue by explaining how to create frameworks and setup the base of the application.
