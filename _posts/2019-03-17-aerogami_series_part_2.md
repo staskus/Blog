@@ -1,5 +1,5 @@
 ---
-title: Creating iOS Application for discovering flight ideas (Part 2)
+title: "Building a real-world iOS app (Part 2): Separating application into frameworks"
 date: 2019-03-17
 categories: [Tutorial, iOS, Swift]
 excerpt: We'll continue creating an application by overviewing how to properly setup the application.
