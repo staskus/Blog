@@ -1,5 +1,5 @@
 ---
-title: "Building a real-world iOS app (Part 3): Fetching and parsing the data from API"
+title: "Building a real-world iOS app (Part 3): Fetching and parsing data from API"
 date: 2019-03-18
 categories: [Tutorial, iOS, Swift]
 excerpt: In this part of the series we'll be fetching and parsing data from the backend using Alamofire and Codable.
@@ -147,6 +147,6 @@ public protocol TripRepository {
 
 Because our UI framework will only know about this protocol, we will be able to provide different types of implementations. [TripRepository](https://github.com/nitesuit/aerogami-ios/blob/bd558d5962e7d97300213ad6896ff8d1f548a074/TravelDataKit/Repositories/Trip/TripRepository.swift) implementation defined in `TravelDataKit` calls the `API` to fetch data and parses it using `Coadable`. However, [FavoriteTripRepository](https://github.com/nitesuit/aerogami-ios/blob/bd558d5962e7d97300213ad6896ff8d1f548a074/TravelDataKit/Repositories/Trip/FavoriteTripRepository.swift) which also implements `TripRepository` interface, uses `UserDefaults` to fetch locally liked `Trips`. It allows us to generate 2 completely different screens in our app. One showing the current feed of flights fetched from the API and another of liked and locally saved trips. Here [FavoritesAssembly](https://github.com/nitesuit/aerogami-ios/blob/bd558d5962e7d97300213ad6896ff8d1f548a074/TravelFeatureKit/Features/Favorites/FavoritesAssembly.swift) simply injects necessary dependencies needed for _favorites_ to a `FavoriteFeed` feature.
 
-# Testing
+# Design
 
-The code for data fetching and parsing is an integral part of the codebase. In the next chapter of these series we'll take a look at the approach of unit testing this functionality.
+Before continuing creating the app, we'll see how we can quickly create simple application designs using Sketch or similar tools. In the next part of the series we'll overview the approach. 
