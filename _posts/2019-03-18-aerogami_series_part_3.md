@@ -149,4 +149,4 @@ Because our UI framework will only know about this protocol, we will be able to 
 
 # Design
 
-Before continuing creating the app, we'll see how we can quickly create simple application designs using Sketch or similar tools. In the next part of the series we'll overview the approach. 
+Before continuing creating the app, we'll see how we can quickly create simple application designs using Sketch or similar tools. In the next part of the series we'll overview the approach.
