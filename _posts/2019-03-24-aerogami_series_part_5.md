@@ -269,7 +269,7 @@ For understanding this flow easier we can imagine a hypothetical scenario of `Fe
 1. AppDelegate uses `FeedConfigurator` and calls `createViewController()` to create `FeedViewController`
 2. `FeedViewController` on `viewWillAppear` calls `interactor.dispatch(Feed.Action.load)` to trigger `load` action
 3. `FeedInteractor` handles `load` action and uses `TripRepository` to load an array of `Trips` from the backend. It passes an array of `Trips` to `FeedPresenter`.
-4. `FeedPresenter` takes an array of `Trips` and mapps it to `FeedViewModel` by formatting and localizing text, loading images and splitting it into fields that view needs to know about.
+4. `FeedPresenter` takes an array of `Trips` and maps it to `FeedViewModel` by formatting and localizing text, loading images and splitting it into fields that view needs to know about.
 5. `FeedViewController`'s method  `display()` is triggered and table view is loaded with new data.
 
 Although this all may seem too much at first, it actually provides developers with huge clarity when building and maintaining the project. Moreover, all these different components have clear inputs and outputs than can be unit tested. With the growing complexity of the feature it becomes convenient to simply check `Action` to see all the different things that `ViewController` does or analyse `Presenter` to understand what kind of data is actually presented.
