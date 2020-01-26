@@ -1,0 +1,125 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous"/><link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css"/><link rel="stylesheet" href="/Pure/styles.css"/><link rel="stylesheet" href="/all.css"/></head><body><div id="layout" class="pure-g"><div><div class="pure-menu pure-menu-horizontal pure-u-1-1 top-header"><a class="pure-menu-heading" href="/">staskus.io</a><ul class="pure-menu-list"><li class="pure-menu-item"><a class="pure-menu-link" href="/about">About</a></li></ul></div></div><div class="sidebar pure-u-1 pure-u-md-1-4"><div class="header"><div id="layout" class="pure-g"><div class="author__avatar"><img src="https://avatars0.githubusercontent.com/u/4062343?s=460&v=4"/></div><div class="pure-u-md-1-1 pure-u-3-4"><h1 class="brand-title">Povilas Staškus</h1><h3 class="brand-tagline">iOS Developer</h3></div></div><div id="layout" class="pure-g"><div class="pure-u-md-1-1"><a><i class="fas fa-map-marker-alt l-box"></i><a class="social-media">Vilnius, Lithuania</a></a></div><div class="pure-u-md-1-1"><a href="mailto:povilas@staskus.io"><i class="fas fa-envelope-open-text l-box"></i><a class="social-media" href="mailto:povilas@staskus.io">Email</a></a></div><div class="pure-u-md-1-1"><a href="https://www.linkedin.com/in/povilas-staškus-6b10528b"><i class="fab fa-linkedin l-box"></i><a class="social-media" href="https://www.linkedin.com/in/povilas-staškus-6b10528b">LinkedIn</a></a></div><div class="pure-u-md-1-1"><a href="https://github.com/nitesuit"><i class="fab fa-github-square l-box"></i><a class="social-media" href="https://github.com/nitesuit">GitHub</a></a></div><div class="pure-u-md-1-1"><a href="https://twitter.com/PovilasStaskus"><i class="fab fa-twitter-square l-box"></i><a class="social-media" href="https://twitter.com/PovilasStaskus">Twitter</a></a></div></div></div></div><div class="content pure-u-1 pure-u-md-3-5 pure-u-xl-6-10"><h2 class="post-title"><a href="/posts/2020-01-26-publish">Migrating from Jekyll to Publish: A site generator for Swift developers</a></h2><p class="post-meta">January 26, 2020</p><div class="post-tags"><a class="post-category post-category-swift" href="/tags/swift">Swift</a><a class="post-category post-category-web" href="/tags/web">Web</a></div><div class="post-description"><div class="kodas"><p><a href="https://github.com/JohnSundell/Publish">Publish</a> is a static site generator built for Swift developers.</p><h1>Idea</h1><p>We'll be migrating a static blog generation from <a href="https://jekyllrb.com">Jekyll</a> to Publish. The previous version of a blog was generated using Jekyll using a provided theme without putting too much effort in understanding the whole creation process. This time around I decided to dig deeper into understanding Publish and remembering long forgotten <em>HTML</em> and <em>CSS</em> skills.</p><p>We'll be trying to create a similar style blog that would remain adaptable for bigger or smaller screen sizes:</p><h4>Previous desktop version</h4><img src="/images/publish/previous_1.png" alt="Previous desktop version of a blog" width="500"/><h4>Previous mobile version</h4><img src="/images/publish/previous_2.png" alt="Previous moble version of a blog" width="300"/><h1>Getting Started</h1><p>After running the steps described in a <a href="https://github.com/JohnSundell/Publish">Publish repository</a> we end up with a</p><h2>Data</h2><p><code>Struct</code> containing <em>raw data</em>.</p><pre><code>     <span class="keyword">struct</span> Data: <span class="type">Equatable</span> {
+        <span class="keyword">let</span> regions: [<span class="type">Region</span>]
+        <span class="keyword">let</span> trips: [<span class="type">Trip</span>]
+    }
+</code></pre><h2>View Model</h2><p><code>Struct</code> containing <em>State</em> (loading, error, empty, loaded) and mapped data that is used by <em>View Controllers</em> for configuring views.</p><pre><code>     <span class="keyword">struct</span> ViewModel: <span class="type">FeatureViewModel</span> {
+        <span class="keyword">let</span> state: <span class="type">ViewState</span>&lt;<span class="type">Feed</span>.<span class="type">ViewModel</span>.<span class="type">Content</span>&gt;
+        <span class="keyword">let</span> title: <span class="type">String</span>
+
+        <span class="keyword">struct</span> Content: <span class="type">FeatureContentViewModel</span>, <span class="type">Equatable</span> {
+            <span class="keyword">var</span> rows: [<span class="type">FeedCardViewModel</span>]
+            <span class="keyword">let</span> availableRegions: [<span class="type">Feed</span>.<span class="type">ViewModel</span>.<span class="type">Content</span>.<span class="type">Region</span>]
+            <span class="keyword">let</span> selectedRegion: <span class="type">Feed</span>.<span class="type">ViewModel</span>.<span class="type">Content</span>.<span class="type">Region</span>?
+
+            <span class="keyword">struct</span> Region: <span class="type">Equatable</span> {
+                <span class="keyword">let</span> id: <span class="type">String</span>
+                <span class="keyword">let</span> name: <span class="type">String</span>
+            }
+
+            <span class="keyword">var</span> hasContent: <span class="type">Bool</span> {
+                <span class="keyword">return</span> !rows.<span class="property">isEmpty</span>
+            }
+        }
+    }
+</code></pre><h2>Action</h2><p><code>Enum</code> with actions that <em>View Controller</em> can do and <em>Interactor</em> can handle.</p><pre><code>     <span class="keyword">enum</span> Action {
+        <span class="keyword">case</span> load
+        <span class="keyword">case</span> changeRegion(regionId: <span class="type">String</span>?)
+    }
+</code></pre><h2>Route</h2><p><code>Enum</code> with destinations that <em>View Controller</em> can route to.</p><pre><code>     <span class="keyword">enum</span> Route: <span class="type">Equatable</span> {
+        <span class="keyword">case</span> book(<span class="type">Trip</span>)
+    }
+</code></pre><h1>Components</h1><h2>Interactor</h2><p>Receives an action, performs work and sends raw data to presenter.</p><ul><li>Input - <em>Action</em></li><li>Output - <em>Data</em></li><li>Uses - <em>Presenter</em></li></ul><h2>Presenter</h2><p>Receives raw data and maps it into <em>View Model</em></p><ul><li>Input - <em>Data</em></li><li>Output - <em>View Model</em></li></ul><h2>View Controller</h2><p>Receives <em>View Model</em> and configures a view according to it. Sends actions to <em>Interactor</em>.</p><ul><li>Input - <em>View Model</em></li><li>Output - <em>Action</em></li><li>Uses - <em>Interactor</em>, <em>Router</em></li></ul><h2>Router</h2><p>Receives <em>Route</em> object from <em>View Controller</em>, that contains information about next destination, and opens next <em>View Controller</em> using <em>Configurator</em></p><ul><li>Input - <em>Route</em></li><li>Uses - <em>Configurator</em></li></ul><h2>Configurator</h2><p>Takes an input and creates configured <em>View Controller</em> with other components.</p><ul><li>Input - Optional configuration data.</li><li>Output - <em>View Controller</em></li><li>Creates - <em>Interactor</em>, <em>Presenter</em>, <em>View Controller</em>, <em>Router</em></li></ul><h1>Feature</h1><p>The group of these components is called <code>Feature</code>. <a href="https://clean-swift.com">Clean Swift</a> provides with XCode templates that allow to generate all of these components together. We are using <a href="https://github.com/nitesuit/aerogami-ios/tree/master/templates/plop/Feature">plop templates</a> for feature generation. All of this allows to avoid writing boilerplate code and concentrate on actual code of the feature.</p><h1>Feed Example</h1><p><code>Feed</code> is a main <a href="https://github.com/nitesuit/aerogami-ios/tree/master/TravelFeatureKit/Features/Feed">feature</a> of the application. We're going to see how all of these different components is used to create a complete feature.</p><h2>Feed Interactor</h2><p><code>Feed Interactor</code> uses repositories of <em>Region</em>, <em>Trip</em> and <em>Airport</em> for loading data.</p><p><code>dispatch</code> function is an entry point of any <code>Interactor</code>.</p><pre><code>     <span class="keyword">func</span> dispatch(<span class="keyword">_</span> action: <span class="type">Feed</span>.<span class="type">Action</span>) {
+        <span class="keyword">switch</span> action {
+        <span class="keyword">case</span> .<span class="dotAccess">load</span>:
+            contentState = .<span class="call">loading</span>(data: contentState.<span class="property">data</span>)
+            <span class="call">load</span>()
+        <span class="keyword">case</span> .<span class="dotAccess">changeRegion</span>(<span class="keyword">let</span> regionId):
+            <span class="call">changeRegion</span>(id: regionId)
+        }
+    }
+</code></pre><p>We can see when <code>FeedInteractor</code> receives <em>load</em> action it sets current state to <em>loading</em> and calls <code>load()</code> method. It combines <code>RegionRepository</code> and <code>TripRepository</code>, maps it to <em>Data</em> object and passes it to <code>FeedPresenter</code> by setting <em>contentState</em>.</p><pre><code>     <span class="keyword">func</span> load() {
+        <span class="keyword">let</span> selectedRegion = regionRepository.<span class="call">getSelectedRegion</span>()
+
+        <span class="type">Observable</span>.<span class="call">combineLatest</span>(
+            <span class="keyword">self</span>.<span class="property">regionRepository</span>.<span class="call">getRegions</span>(),
+            <span class="keyword">self</span>.<span class="property">tripRepository</span>.<span class="call">getTrips</span>(in: selectedRegion?.<span class="property">id</span>)
+            )
+            .<span class="call">map</span> { (regions, trips) -&gt; <span class="type">Feed</span>.<span class="type">Data</span> <span class="keyword">in
+                return</span> <span class="type">Feed</span>.<span class="type">Data</span>(
+                    regions: regions,
+                    trips: trips,
+                    selectedRegionId: selectedRegion?.<span class="property">id</span>,
+                    tripImages: []
+                )
+            }
+            .<span class="call">subscribe</span>(
+                onNext: { data <span class="keyword">in
+                    self</span>.<span class="property">contentState</span> = .<span class="call">loaded</span>(data: data, error: <span class="keyword">nil</span>)
+                    <span class="keyword">self</span>.<span class="call">loadImages</span>(for: data.<span class="property">trips</span>)
+                },
+                onError: { error <span class="keyword">in
+                    self</span>.<span class="property">contentState</span> = .<span class="call">error</span>(error: .<span class="call">loading</span>(reason: <span class="type">R</span>.<span class="property">string</span>.<span class="property">localizable</span>.<span class="call">errorGenericTitle</span>()))
+                }
+            )
+            .<span class="call">disposed</span>(by: disposeBag)
+    }
+</code></pre><h2>Feed Presenter</h2><p><a href="https://github.com/nitesuit/aerogami-ios/blob/master/TravelFeatureKit/Features/Feed/FeedPresenter.swift">Feed Presenter</a> essentially takes <code>Feed.Data</code> and returns <code>Feed.ViewModel</code>.</p><pre><code>     <span class="keyword">func</span> makeContentViewModel(content: <span class="type">Feed</span>.<span class="type">Data</span>) <span class="keyword">throws</span> -&gt; <span class="type">Feed</span>.<span class="type">ViewModel</span>.<span class="type">Content</span> {
+        <span class="keyword">return</span> <span class="type">Feed</span>.<span class="type">ViewModel</span>.<span class="type">Content</span>(
+            rows: <span class="call">makeFeedCardRows</span>(content),
+            availableRegions: <span class="call">makeAvailableRegions</span>(content),
+            selectedRegion: <span class="call">makeSelectedRegion</span>(content)
+        )
+    }
+</code></pre><p>We can see that <em>struct</em> such as <code>FeedCardViewModel</code> is fairly complicated and comprehensively describes for a table view row what needs to be displayed. It ensures that there is absolutely no business logic, mapping or formatting done in a view as it's simply sets these properties to appropriate variables.</p><pre><code>     <span class="keyword">private func</span> makeFeedCardRows(<span class="keyword">_</span> content: <span class="type">Feed</span>.<span class="type">Data</span>) -&gt; [<span class="type">FeedCardViewModel</span>] {
+        <span class="keyword">return</span> <span class="call">getSortedTrips</span>(content).<span class="call">map</span> { trip <span class="keyword">in</span>
+            currencyFormatter.<span class="property">currencyCode</span> = trip.<span class="property">currency</span>
+            <span class="keyword">return</span> <span class="type">FeedCardViewModel</span>(
+                direction: <span class="type">R</span>.<span class="property">string</span>.<span class="property">localizable</span>.<span class="call">feedBothWaysTitle</span>(),
+                trip: <span class="call">makeTripString</span>(trip),
+                price: <span class="call">formatCurrency</span>(trip),
+                dateRange: <span class="call">dateRange</span>(trip),
+                routeName: <span class="type">R</span>.<span class="property">string</span>.<span class="property">localizable</span>.<span class="call">feedBookTitle</span>(),
+                imageUrl: <span class="call">makeTripImageURL</span>(trip, content: content),
+                route: <span class="type">Feed</span>.<span class="type">Route</span>.<span class="call">book</span>(trip),
+                isExpired: trip.<span class="property">expiresAt</span> &lt;= <span class="type">Date</span>()
+            )
+        }
+    }
+</code></pre><h2>Feed View Controller</h2><p>View Controller in this architecture is a very lean and clean class. It does what view <em>should</em> do: present data, handle user actions and delegate these actions to 'interactor'.</p><p><em>display()</em> lets <code>FeedViewController</code> know that the state and <code>Feed.ViewModel</code> was updated. Different views then can use parts of view model to configure themselves.</p><pre><code>     <span class="keyword">func</span> display() {
+        <span class="keyword">guard let</span> viewModel = viewModel?.<span class="property">state</span>.<span class="property">viewModel</span> <span class="keyword">else</span> { <span class="keyword">return</span> }
+
+        tableView.<span class="call">reloadData</span>()
+        headerView.<span class="call">configure</span>(with: viewModel.<span class="property">selectedRegion</span>)
+    }
+</code></pre><p><code>Feed.Action</code> is sent to <code>Feed.Interactor</code> when anything meaningful happens in <code>FeedViewController.</code> For example, loading data when view appears.</p><pre><code>     <span class="keyword">override func</span> viewWillAppear(<span class="keyword">_</span> animated: <span class="type">Bool</span>) {
+        <span class="keyword">super</span>.<span class="call">viewWillAppear</span>(animated)
+
+        interactor.<span class="call">subscribe</span>()
+        interactor.<span class="call">dispatch</span>(<span class="type">Feed</span>.<span class="type">Action</span>.<span class="property">load</span>)
+    }
+</code></pre><p><code>Feed.Route</code> is sent to <code>Feed.Router</code> when <code>FeedViewController</code> wants to transition to other view controller.</p><pre><code>     <span class="keyword">func</span> tableView(<span class="keyword">_</span> tableView: <span class="type">UITableView</span>, didSelectRowAt indexPath: <span class="type">IndexPath</span>) {
+        <span class="keyword">guard let</span> cellViewModel = viewModel?.<span class="property">state</span>.<span class="property">viewModel</span>?.<span class="property">rows</span>[indexPath.<span class="property">row</span>] <span class="keyword">else</span> { <span class="keyword">return</span> }
+
+        router.<span class="call">route</span>(to: cellViewModel.<span class="property">route</span>)
+    }
+</code></pre><h2>Feed Router</h2><p><code>FeedRouter</code> handles <em>route</em> actions and opens other view controllers. It uses <code>BookTripConfigurator</code> for building <code>BookTripViewController</code>.</p><pre><code><span class="keyword">class</span> FeedRouter {
+
+    <span class="keyword">private let</span> bookTripConfigurator: <span class="type">BookTripConfigurator</span>
+
+    <span class="keyword">weak var</span> viewController: <span class="type">FeedViewController</span>?
+
+    <span class="keyword">init</span>(bookTripConfigurator: <span class="type">BookTripConfigurator</span>) {
+        <span class="keyword">self</span>.<span class="property">bookTripConfigurator</span> = bookTripConfigurator
+    }
+
+    <span class="keyword">func</span> route(to route: <span class="type">Feed</span>.<span class="type">Route</span>) {
+        <span class="keyword">switch</span> route {
+        <span class="keyword">case</span> .<span class="dotAccess">book</span>(<span class="keyword">let</span> trip):
+            <span class="keyword">let</span> bookTripViewController = bookTripConfigurator.<span class="call">createViewController</span>(trip: trip)
+            bookTripViewController.<span class="property">modalPresentationStyle</span> = .<span class="dotAccess">overCurrentContext</span>
+            bookTripViewController.<span class="property">modalTransitionStyle</span> = .<span class="dotAccess">coverVertical</span>
+            viewController?.<span class="property">tabBarController</span>?.<span class="call">present</span>(bookTripViewController, animated: <span class="keyword">true</span>, completion: <span class="keyword">nil</span>)
+        }
+    }
+}
+</code></pre><h2>Usage</h2><p>For understanding this flow easier we can imagine a hypothetical scenario of <code>Feed</code> feature.</p><ol><li>AppDelegate uses <code>FeedConfigurator</code> and calls <code>createViewController()</code> to create <code>FeedViewController</code></li><li><code>FeedViewController</code> on <code>viewWillAppear</code> calls <code>interactor.dispatch(Feed.Action.load)</code> to trigger <code>load</code> action</li><li><code>FeedInteractor</code> handles <code>load</code> action and uses <code>TripRepository</code> to load an array of <code>Trips</code> from the backend. It passes an array of <code>Trips</code> to <code>FeedPresenter</code>.</li><li><code>FeedPresenter</code> takes an array of <code>Trips</code> and maps it to <code>FeedViewModel</code> by formatting and localizing text, loading images and splitting it into fields that view needs to know about.</li><li><code>FeedViewController</code>'s method <code>display()</code> is triggered and table view is loaded with new data.</li></ol><p>Although this all may seem too much at first, it actually provides developers with huge clarity when building and maintaining the project. Moreover, all these different components have clear inputs and outputs than can be unit tested. With the growing complexity of the feature it becomes convenient to simply check <code>Action</code> to see all the different things that <code>ViewController</code> does or analyse <code>Presenter</code> to understand what kind of data is actually presented.</p><h2>Result</h2><p>In these series we've seen how to build iOS application by separating it into different frameworks, loading data from API and mapping it using <code>Codable</code>, sketching UIs following Apple's guidelines and develop it all on top of <em>Clean</em> architecture. All of these steps allow the app to be scalable, maintainable and testable.<br><br><img src="/images/aerogami-tutorial/part5/app_demo.gif" alt="App Demo" width="300"/></p></div></div></div><div class="footer pure-u-1"><div class="pure-u-1">© 2019 Povilas Staškus</div><div class="pure-u-1">Generated using <a href="https://github.com/johnsundell/publish">Publish</a>. Written in Swift</div><div class="pure-u-1"><a href="/feed.rss">RSS feed</a></div></div></div></body></html>
