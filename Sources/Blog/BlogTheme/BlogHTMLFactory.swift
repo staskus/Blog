@@ -22,7 +22,8 @@ struct BlogHTMLFactory: HTMLFactory {
                         order: .descending
                     ),
                     on: context.site
-                )
+                ),
+                .footer(for: context.site)
             )
         )
     }
@@ -45,7 +46,8 @@ struct BlogHTMLFactory: HTMLFactory {
             .body(
                 .header(for: context.site),
                 .sidebar(for: context.site),
-                .post(for: item, on: context.site)
+                .post(for: item, on: context.site),
+                .footer(for: context.site)
             )
         )
     }
@@ -56,7 +58,8 @@ struct BlogHTMLFactory: HTMLFactory {
             .head(for: context.site),
             .body(
                 .header(for: context.site),
-                .sidebar(for: context.site)
+                .sidebar(for: context.site),
+                .footer(for: context.site)
             )
         )
     }
@@ -67,7 +70,8 @@ struct BlogHTMLFactory: HTMLFactory {
             .head(for: context.site),
             .body(
                 .header(for: context.site),
-                .sidebar(for: context.site)
+                .sidebar(for: context.site),
+                .footer(for: context.site)
             )
         )
     }
@@ -86,7 +90,8 @@ struct BlogHTMLFactory: HTMLFactory {
                         order: .descending
                     ),
                     on: context.site
-                )
+                ),
+                .footer(for: context.site)
             )
         )
     }

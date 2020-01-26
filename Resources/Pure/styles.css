@@ -159,11 +159,19 @@ h3 {
 
 .footer {
     padding: 1em 0;
-}
-.footer a {
     color: #ccc;
-    font-size: 80%;
+    font-size: 90%;
+    text-align: center;
 }
+
+.footer a {
+    padding: 1em 0;
+    color: #ccc;
+    font-size: 90%;
+    text-decoration: underline;
+    text-align: center;
+}
+
 .footer .pure-menu a:hover,
 .footer .pure-menu a:focus {
     background: none;
@@ -192,10 +200,6 @@ h3 {
         position: fixed;
         top: 2em;
         bottom: 0;
-    }
-
-    .footer {
-        text-align: center;
     }
     
     .social-media {
