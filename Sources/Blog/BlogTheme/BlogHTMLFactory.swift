@@ -22,7 +22,8 @@ struct BlogHTMLFactory: HTMLFactory {
                             sortedBy: \.date,
                             order: .descending
                         ),
-                        on: context.site
+                        on: context.site,
+                        title: "Recent posts"
                     ),
                     .footer(for: context.site)
                 )
@@ -101,7 +102,8 @@ struct BlogHTMLFactory: HTMLFactory {
                             sortedBy: \.date,
                             order: .descending
                         ),
-                        on: context.site
+                        on: context.site,
+                        title: "\(page.tag.string.capitalized) posts"
                     ),
                     .footer(for: context.site)
                 )
