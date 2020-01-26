@@ -7,7 +7,7 @@
 
 import Plot
 
-private extension Node where Context == HTML.BodyContext {
+extension Node where Context == HTML.BodyContext {
     static func grid(_ nodes: Node...) -> Node {
         .div(
             .id("layout"),
