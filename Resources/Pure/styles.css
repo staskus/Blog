@@ -222,6 +222,12 @@ h3 {
     .pure-menu {
         margin-left: 2em;
     }
+    
+    .top-header {
+        position: fixed;
+        top: 0em;
+        background: #fff;
+    }
 }
 
 .center {
