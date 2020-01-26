@@ -1,7 +1,7 @@
 ---
 title: "Building a real-world iOS app (Part 3): Fetching and parsing data from API"
-date: 2019-03-18
-categories: [Tutorial, iOS, Swift]
+date: 2019-03-18 12:00
+tags: Tutorial, iOS, Swift
 excerpt: In this part of the series we'll be fetching and parsing data from the backend using Alamofire and Codable.
 ---
 

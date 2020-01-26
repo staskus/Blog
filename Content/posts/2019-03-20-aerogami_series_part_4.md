@@ -1,7 +1,7 @@
 ---
 title: "Building a real-world iOS app (Part 4): Design"
-date: 2019-03-20
-categories: [Tutorial, iOS, Swift]
+date: 2019-03-20 12:00
+tags: Tutorial, iOS, Swift
 excerpt: We'll see how Sketch can be used to create minimalist application screen design and app icon.
 ---
 
