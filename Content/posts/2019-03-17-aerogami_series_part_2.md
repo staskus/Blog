@@ -13,7 +13,7 @@ As we talked in the [previous part](/tutorial/ios/swift/aerogami_series_part_1/)
 
 After creating frameworks, project navigator should look something like in the picture below.
 
-<img src="/assets/images/aerogami-tutorial/part2/project_frameworks.png" alt="Frameworks in the Project Navigator" width="300"/>
+<img src="/images/aerogami-tutorial/part2/project_frameworks.png" alt="Frameworks in the Project Navigator" width="300"/>
 
 # Setting up CocoaPods
 

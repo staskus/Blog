@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="og:site_name" content="Blog"/><link rel="canonical" href="https://your-website-url.com/posts/2019-03-17-aerogami_series_part_2"/><meta name="twitter:url" content="https://your-website-url.com/posts/2019-03-17-aerogami_series_part_2"/><meta name="og:url" content="https://your-website-url.com/posts/2019-03-17-aerogami_series_part_2"/><title>"Building a real-world iOS app (Part 2): Separating application into frameworks" | Blog</title><meta name="twitter:title" content=""Building a real-world iOS app (Part 2): Separating application into frameworks" | Blog"/><meta name="og:title" content=""Building a real-world iOS app (Part 2): Separating application into frameworks" | Blog"/><meta name="description" content="A description of Blog"/><meta name="twitter:description" content="A description of Blog"/><meta name="og:description" content="A description of Blog"/><meta name="twitter:card" content="summary"/><link rel="stylesheet" href="/styles.css" type="text/css"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="shortcut icon" href="/images/favicon.png" type="image/png"/><link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Blog"/></head><body class="item-page"><header><div class="wrapper"><a class="site-name" href="/">Blog</a></div></header><div class="wrapper"><article><div class="content"><p>In this part of the series we'll overview how to properly setup the application.</p><h1>Creating Frameworks</h1><p>As we talked in the <a href="/tutorial/ios/swift/aerogami_series_part_1/">previous part</a>, we'll begin the creation of the project by creating 3 separate frameworks inside our XCode project (<code>TravelKit</code>, <code>TravelDataKit</code>, <code>TravelFeatureKit</code>). An article on <a href="https://www.raywenderlich.com/5109-creating-a-framework-for-ios">raywenderlich.com</a> has a thorough explanation of the whole process.</p><p>After creating frameworks, project navigator should look something like in the picture below.</p><img src="/images/aerogami-tutorial/part2/project_frameworks.png" alt="Frameworks in the Project Navigator" width="300"/><h1>Setting up CocoaPods</h1><p>We'll be using <a href="https://cocoapods.org">CocoaPods</a> for managing dependencies in our project. Although setting up CocoaPods is fairly straightforward, there can be some difficulties when having local frameworks involved. The configuration is defined in <code>Podfile</code> which is located in the root folder of the project.</p><p><code>Podfile</code> will be configured in a way that is clean and clear so it would not get messy when number of dependencies in the project grow. Essentially, we'll define the reusable pods at the top of the file and group different groups of pods that can be reused for different frameworks.</p><p>The part of <code>Podfile</code> that defines pods of <code>TravelKit</code>.</p><pre><code class="language-ruby">platform :ios, '11.0'
+use_frameworks!
+inhibit_all_warnings!
+
+deployment_target = '11.0'
+
+workspace 'TravelApplication.xcworkspace'
+
+#Versions
+$swinjectVersion =                    '~&gt; 2.4'
+$swiftDateVersion =                   '~&gt; 5.0'
+&lt;...&gt;
+
+def shared_TravelKit_pods
+    pod 'RxSwift',                    $rxSwiftVersion
+    pod 'SwiftDate',                  $swiftDateVersion
+end
+
+target 'TravelKit' do
+    project 'TravelKit.xcodeproj'
+    platform :ios, deployment_target
+
+    shared_TravelKit_pods
+
+  target 'TravelKitTests' do
+    project 'TravelKit.xcodeproj'
+    inherit! :search_paths
+
+    shared_testing_pods
+  end
+end
+&lt;...&gt;
+</code></pre><p>These different shared pods should be assembled and used of the actual application target.</p><pre><code class="language-ruby">&lt;...&gt;
+def shared_Apps_pods
+  shared_TravelKit_pods
+  &lt;...&gt;
+end
+
+target 'TravelApplication' do
+    project 'TravelApplication.xcodeproj'
+    platform :ios, deployment_target
+    shared_Apps_pods
+end
+&lt;...&gt;
+</code></pre><p>The full <a href="https://github.com/nitesuit/aerogami-ios/blob/master/Podfile">Podfile</a> can be found on <code>GitHub</code> as the rest of the project.</p><h1>Dependency Injection</h1><p>I prefer to think early about the way dependencies will be managed inside the application. Although dependency injection can be achieved without 3rd party libraries, for this project we'll use <a href="https://github.com/Swinject/Swinject">Swinject</a> that has easy to use interfaces for managing dependencies.</p><p>Our classes will use <code>initializer injection</code> thus all the dependencies will be given through the initializer. The classes will be initialized in assemblies. Assembly is a <code>Swinject</code> class which has access to a container of already injected dependencies and provides a way to register new dependencies.</p><p>For example, this is how the assembly of the <code>Feed</code> that displays the list of flights might looks like:</p><pre><code class="language-swift">import Foundation
+import Swinject
+import TravelKit
+
+public class FeedAssembly: Assembly {
+
+    public init() {
+    }
+
+    public func assemble(container: Container) {
+        container.register(FeedConfigurator.self) { r in
+            FeedConfigurator(
+                regionRepository: r.resolve(RegionRepository.self)!,
+                tripRepository: r.resolve(TripRepository.self)!,
+                airportRepository: r.resolve(AirportRepository.self)!,
+                tripImageRepository: r.resolve(TripImageRepository.self)!
+                )
+            }
+            .initCompleted { (resolver, feedConfigurator) in
+                feedConfigurator.bookTripConfigurator = resolver.resolve(BookTripConfigurator.self)!
+            }
+            .inObjectScope(.container)
+    }
+}
+</code></pre><p>Here, we inject <code>FeedConfigurator</code> class. It is essentially a factory class for the whole <code>Feed</code> feature and its view. <code>Swinject</code> automatically passes the dependencies such as <code>RegionRepository</code> or <code>TripRepository</code>. We expect these dependencies to be injected in another assembly so we can resolve it here.</p><p>Our application will have <code>AssemblerFactory</code> that will contain all the different assemblies of the application and create them during initialization process.</p><pre><code class="language-swift">import Foundation
+import Swinject
+import TravelFeatureKit
+import TravelDataKit
+
+class AssemblerFactory {
+
+    func create() -&gt; Assembler {
+        let assemblies: [Assembly] = [
+            ApplicationAssembly(),
+            RegionRepositoryAssembly(),
+            TripRepositoryAssembly(),
+            AirportRepositoryAssembly(),
+
+            MainAssembly(),
+            FavoritesAssembly(),
+            FeedAssembly(),
+            BookTripAssembly(),
+            BookURLRepositoryAssembly(affiliateId: Constants.affiliateId)
+        ]
+
+        let assembler = Assembler(assemblies)
+
+        return assembler
+    }
+}
+</code></pre><p>We use this assembly to create the first <code>ViewController</code> of the application and set it as <code>rootViewController</code>. See <a href="https://github.com/nitesuit/aerogami-ios/blob/master/TravelApplication/Application/ApplicationLoader.swift">ApplicationLoader</a>.</p><pre><code class="language-swift">  self.assembler = AssemblerFactory().create()
+  let rootConfigurator = assembler.resolver.resolve(MainConfigurator.self)!
+  let rootViewController = rootConfigurator.createViewController()
+  window?.rootViewController = rootViewController
+  window?.makeKeyAndVisible()
+</code></pre><p>In the following parts of the series we'll be creating classes for fetching and presenting data that will use assemblies for injecting dependencies. We'll see more closely how having proper dependency injection allows code to be more reusable, safe and testable.</p></div><span>Tagged with: </span><ul class="tag-list"><li><a href="/tags/tutorial">Tutorial</a></li><li><a href="/tags/ios">iOS</a></li><li><a href="/tags/swift">Swift</a></li></ul></article></div><footer><p>Generated using <a href="https://github.com/johnsundell/publish">Publish</a></p><p><a href="/feed.rss">RSS feed</a></p></footer></body></html>

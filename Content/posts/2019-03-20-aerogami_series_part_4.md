@@ -29,13 +29,13 @@ Apple provides great resources for getting started. [Human Interface Guidelines]
 
 We'll take the inspiration from already existing _AppStore_ app. The main screen of this app has a feed that we want to display in our travel application as well. 
 
-<img src="/assets/images/aerogami-tutorial/part4/app_screen_example.png" alt="App Scren Example" width="300"/>
+<img src="/images/aerogami-tutorial/part4/app_screen_example.png" alt="App Scren Example" width="300"/>
 
 Apple also provides us with [design resources](https://developer.apple.com/design/resources/) that contain [Sketch](https://www.sketch.com) files with designs of already existing applications. When learning to sketch or design something, I found it really beneficial to have these in front of me. 
 
 After tweaking these screens and applying our color palette we can create the first version of our design. 
 
-<img src="/assets/images/aerogami-tutorial/part4/app_screen_real.png" alt="Feed Screen" width="300"/>
+<img src="/images/aerogami-tutorial/part4/app_screen_real.png" alt="Feed Screen" width="300"/>
 
 It displays the essential information such as _origin_, _destination_, _dates_ and _price_. We can also show images which provide visual information about the destination.
 
@@ -45,11 +45,11 @@ Application icon is also a huge part of first impression of any application. We 
 
 We can use a little bit of imagination and tweak given icons on Sketch to give it a look of a travel or flight application. 
 
-<img src="/assets/images/aerogami-tutorial/part4/app_icon.gif" alt="Making of App Icon" width="300"/>
+<img src="/images/aerogami-tutorial/part4/app_icon.gif" alt="Making of App Icon" width="300"/>
 
 The resulting icon looks like this.
 
-<img src="/assets/images/aerogami-tutorial/part4/app_icon.png" alt="App Icon" width="300"/>
+<img src="/images/aerogami-tutorial/part4/app_icon.png" alt="App Icon" width="300"/>
 
 We can use [makeappicon.com](https://makeappicon.com) to generate all the necessary sizes of the icon so it could be used for different screen sizes as well as on AppStore. 
 

@@ -278,4 +278,4 @@ Although this all may seem too much at first, it actually provides developers wi
 
 In these series we've seen how to build iOS application by separating it into different frameworks, loading data from API and mapping it using `Codable`, sketching UIs following Apple's guidelines and develop it all on top of _Clean_ architecture. All of these steps allow the app to be scalable, maintainable and testable.  
 
-<img src="/assets/images/aerogami-tutorial/part5/app_demo.gif" alt="App Demo" width="300"/>
+<img src="/images/aerogami-tutorial/part5/app_demo.gif" alt="App Demo" width="300"/>
