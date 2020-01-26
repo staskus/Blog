@@ -1,5 +1,5 @@
 ---
-title: "Building a real-world iOS app (Part 5): Using Clean Swift for developing testable and scalable views."
+title: Building a real-world iOS app (Part 5): Using Clean Swift for developing testable and scalable views
 date: 2019-03-24 12:00
 tags: Tutorial, iOS, Swift
 excerpt: In this part of the series we'll be using Clean Swift architecture for developing new features and keeping our code testable, scalable and maintainable. 
