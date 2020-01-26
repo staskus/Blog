@@ -11,8 +11,7 @@ import Publish
 
 extension Node where Context == HTML.BodyContext {
     static func post(for item: Item<Blog>, on site: Blog) -> Node {
-        return .div(
-            .class("content pure-u-1 pure-u-md-3-5 pure-u-xl-6-10"),
+        return .pageContent(
             .h2(
                 .class("post-title"),
                 .a(
@@ -24,12 +23,12 @@ extension Node where Context == HTML.BodyContext {
                 .class("post-meta"),
                 .text(DateFormatter.blog.string(from: item.date))
             ),
+            .tagList(for: item, on: site),
             .div(
                 .class("post-description"),
                 .div(
                     .contentBody(item.body)
-                ),
-                .tagList(for: item, on: site)
+                )
             )
         )
     }

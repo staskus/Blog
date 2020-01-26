@@ -38,7 +38,9 @@ struct BlogHTMLFactory: HTMLFactory {
             .body(
                 .grid(
                     .header(for: context.site),
-                    .sidebar(for: context.site)
+                    .sidebar(for: context.site),
+                    .pageContent(.h1(.text(section.title))),
+                    .footer(for: context.site)
                 )
             )
         )
@@ -68,6 +70,7 @@ struct BlogHTMLFactory: HTMLFactory {
                 .grid(
                     .header(for: context.site),
                     .sidebar(for: context.site),
+                    .pageContent(.contentBody(page.body)),
                     .footer(for: context.site)
                 )
             )

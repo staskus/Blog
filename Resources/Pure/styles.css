@@ -98,7 +98,7 @@ h3 {
 }
 
 .post {
-    padding-bottom: 2em;
+    padding-bottom: 0.5em;
 }
 .post-title {
     font-size: 2em;
@@ -120,6 +120,11 @@ h3 {
     margin: 0;
 }
 
+.post-tags {
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+}
+
 .author__avatar img {
     width: 50px;
     height: 50px;
@@ -132,19 +137,23 @@ h3 {
     padding: 0.3em 1em;
     color: #fff;
     background: #999;
-    font-size: 80%;
+    font-size: 60%;
+    border-radius: 8px;
 }
-    .post-category-design {
-        background: #5aba59;
+
+/*    American Palette https://flatuicolors.com/palette/us*/
+
+    .post-category-swift {
+        background: #90AFC5;
     }
-    .post-category-pure {
-        background: #4d85d1;
+    .post-category-ios {
+        background: #336B87;
     }
-    .post-category-yui {
-        background: #8156a7;
+    .post-category-tutorial {
+        background: #2A3132;
     }
-    .post-category-js {
-        background: #df2d4f;
+    .post-category-other {
+        background: #763526;
     }
 
 .post-images {

@@ -24,14 +24,14 @@ extension Node where Context == HTML.BodyContext {
                 ),
                 .p(
                     .class("post-meta"),
-                    .text(DateFormatter.blog.string(from: item.date))
+                    .text(DateFormatter.blog.string(from: item.date)),
+                    tagList(for: item, on: site)
                 )
             ),
             .div(
                 .class("post-description"),
                 .p(.text(item.metadata.excerpt))
-            ),
-            tagList(for: item, on: site)
+            )
         )
     }
 }

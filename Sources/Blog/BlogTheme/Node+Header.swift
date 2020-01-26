@@ -8,6 +8,8 @@
 import Plot
 
 extension Node where Context == HTML.BodyContext {
+    private static var sections: [Blog.SectionID] { [Blog.SectionID.about] }
+    
     static func header(for site: Blog) -> Node {
         return .div(
             .div(
@@ -19,7 +21,7 @@ extension Node where Context == HTML.BodyContext {
                 ),
                 .ul(
                     .class("pure-menu-list"),
-                    .forEach(Blog.SectionID.allCases, { section in
+                    .forEach(sections, { section in
                         .li(
                             .class("pure-menu-item"),
                             .a(
