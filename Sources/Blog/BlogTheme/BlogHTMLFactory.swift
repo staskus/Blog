@@ -15,7 +15,14 @@ struct BlogHTMLFactory: HTMLFactory {
             .head(for: context.site),
             .body(
                 .header(for: context.site),
-                .sidebar(for: context.site)
+                .sidebar(for: context.site),
+                .posts(
+                    for: context.allItems(
+                        sortedBy: \.date,
+                        order: .descending
+                    ),
+                    on: context.site
+                )
             )
         )
     }
@@ -37,7 +44,8 @@ struct BlogHTMLFactory: HTMLFactory {
             .head(for: context.site),
             .body(
                 .header(for: context.site),
-                .sidebar(for: context.site)
+                .sidebar(for: context.site),
+                .post(for: item, on: context.site)
             )
         )
     }
@@ -70,7 +78,15 @@ struct BlogHTMLFactory: HTMLFactory {
             .head(for: context.site),
             .body(
                 .header(for: context.site),
-                .sidebar(for: context.site)
+                .sidebar(for: context.site),
+                .posts(
+                    for: context.items(
+                        taggedWith: page.tag,
+                        sortedBy: \.date,
+                        order: .descending
+                    ),
+                    on: context.site
+                )
             )
         )
     }
