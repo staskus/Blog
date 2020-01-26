@@ -15,7 +15,7 @@ There are a few tools online to generate color palettes so the colors would fit 
 
 Chosen colors should be put in a common place so it could be easily accessible.
 
-```swift
+```
 struct Theme {
     static let primary = UIColor(red: 255/255, green: 82/255, blue: 82/255, alpha: 1.0)
     static let primaryLight = Theme.primary.withAlphaComponent(0.9)

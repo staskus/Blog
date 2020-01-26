@@ -8,12 +8,13 @@ let package = Package(
         .executable(name: "Blog", targets: ["Blog"])
     ],
     dependencies: [
-        .package(url: "https://github.com/johnsundell/publish.git", from: "0.3.0")
+        .package(url: "https://github.com/johnsundell/publish.git", from: "0.3.0"),
+        .package(url: "https://github.com/johnsundell/splashpublishplugin", from: "0.1.0")
     ],
     targets: [
         .target(
             name: "Blog",
-            dependencies: ["Publish"]
+            dependencies: ["Publish", "SplashPublishPlugin"]
         )
     ]
 )

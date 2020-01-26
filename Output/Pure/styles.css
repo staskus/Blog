@@ -242,3 +242,58 @@ h3 {
 .center {
   justify-content: center;
 }
+
+pre {
+    margin-bottom: 1.5em;
+    background-color: rgba(34, 37, 41, 1);
+    padding: 16px 0;
+    border-radius: 8px;
+}
+
+pre code {
+    font-family: monospace;
+    display: block;
+    padding: 0 20px;
+    color:  rgba(215, 215, 215, 1);
+    line-height: 1.4em;
+    font-size: 0.95em;
+    overflow-x: auto;
+    white-space: pre;
+    -webkit-overflow-scrolling: touch;
+}
+
+pre code .keyword {
+    color: rgba(252, 95, 193, 1);
+}
+
+pre code .type {
+    color: rgba(158, 241, 221, 1);
+}
+
+pre code .call {
+    color: rgba(158, 241, 221, 1);
+}
+
+pre code .property {
+    color: #21ab9d;
+}
+
+pre code .number {
+    color: rgba(200, 184, 106, 1);
+}
+
+pre code .string {
+    color: rgba(250, 106, 102, 1);
+}
+
+pre code .comment {
+    color: #6b8a94;
+}
+
+pre code .dotAccess {
+    color: rgba(158, 241, 221, 1);
+}
+
+pre code .preprocessing {
+    color: #b68a00;
+}

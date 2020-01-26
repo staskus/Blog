@@ -1,84 +1,84 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous"/><link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css"/><link rel="stylesheet" href="/Pure/styles.css"/><link rel="stylesheet" href="/all.css"/></head><body><div id="layout" class="pure-g"><div><div class="pure-menu pure-menu-horizontal pure-u-1-1 top-header"><a class="pure-menu-heading" href="/">staskus.io</a><ul class="pure-menu-list"><li class="pure-menu-item"><a class="pure-menu-link" href="/about">About</a></li></ul></div></div><div class="sidebar pure-u-1 pure-u-md-1-4"><div class="header"><div id="layout" class="pure-g"><div class="author__avatar"><img src="https://avatars0.githubusercontent.com/u/4062343?s=460&v=4"/></div><div class="pure-u-md-1-1 pure-u-3-4"><h1 class="brand-title">Povilas Staškus</h1><h3 class="brand-tagline">iOS Developer</h3></div></div><div id="layout" class="pure-g"><div class="pure-u-md-1-1"><a><i class="fas fa-map-marker-alt l-box"></i><a class="social-media">Vilnius, Lithuania</a></a></div><div class="pure-u-md-1-1"><a href="mailto:povilas@staskus.io"><i class="fas fa-envelope-open-text l-box"></i><a class="social-media" href="mailto:povilas@staskus.io">Email</a></a></div><div class="pure-u-md-1-1"><a href="https://www.linkedin.com/in/povilas-staškus-6b10528b"><i class="fab fa-linkedin l-box"></i><a class="social-media" href="https://www.linkedin.com/in/povilas-staškus-6b10528b">LinkedIn</a></a></div><div class="pure-u-md-1-1"><a href="https://github.com/nitesuit"><i class="fab fa-github-square l-box"></i><a class="social-media" href="https://github.com/nitesuit">GitHub</a></a></div><div class="pure-u-md-1-1"><a href="https://twitter.com/PovilasStaskus"><i class="fab fa-twitter-square l-box"></i><a class="social-media" href="https://twitter.com/PovilasStaskus">Twitter</a></a></div></div></div></div><div class="content pure-u-1 pure-u-md-3-5 pure-u-xl-6-10"><h2 class="post-title"><a href="/posts/2019-03-18-aerogami_series_part_3">Building a real-world iOS app (Part 3): Fetching and parsing data from API</a></h2><p class="post-meta">March 18, 2019</p><div class="post-tags"><a class="post-category post-category-tutorial" href="/tags/tutorial">Tutorial</a><a class="post-category post-category-ios" href="/tags/ios">iOS</a><a class="post-category post-category-swift" href="/tags/swift">Swift</a></div><div class="post-description"><div><p>In the <a href="/tutorial/ios/swift/aerogami_series_part_2/">previous part</a> we discovered a way to separate our application into frameworks and setup the architecture of our app to support dependency injection. In this part of the series we'll be fetching and parsing data from the backend using Alamofire and Codable.</p><h1>API Client</h1><p>Although in the scope of this tutorial we'll be using mocked data, the application will be completely ready to support calls to REST APIs.</p><h3>Protocol</h3><p>We define our <a href="https://github.com/nitesuit/aerogami-ios/blob/master/TravelAPIKit/APIClient.swift">APIClient</a> protocol that serves as a lean interface between data fetching classes and actual implementation.</p><pre><code class="language-swift">import RxSwift
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous"/><link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css"/><link rel="stylesheet" href="/Pure/styles.css"/><link rel="stylesheet" href="/all.css"/></head><body><div id="layout" class="pure-g"><div><div class="pure-menu pure-menu-horizontal pure-u-1-1 top-header"><a class="pure-menu-heading" href="/">staskus.io</a><ul class="pure-menu-list"><li class="pure-menu-item"><a class="pure-menu-link" href="/about">About</a></li></ul></div></div><div class="sidebar pure-u-1 pure-u-md-1-4"><div class="header"><div id="layout" class="pure-g"><div class="author__avatar"><img src="https://avatars0.githubusercontent.com/u/4062343?s=460&v=4"/></div><div class="pure-u-md-1-1 pure-u-3-4"><h1 class="brand-title">Povilas Staškus</h1><h3 class="brand-tagline">iOS Developer</h3></div></div><div id="layout" class="pure-g"><div class="pure-u-md-1-1"><a><i class="fas fa-map-marker-alt l-box"></i><a class="social-media">Vilnius, Lithuania</a></a></div><div class="pure-u-md-1-1"><a href="mailto:povilas@staskus.io"><i class="fas fa-envelope-open-text l-box"></i><a class="social-media" href="mailto:povilas@staskus.io">Email</a></a></div><div class="pure-u-md-1-1"><a href="https://www.linkedin.com/in/povilas-staškus-6b10528b"><i class="fab fa-linkedin l-box"></i><a class="social-media" href="https://www.linkedin.com/in/povilas-staškus-6b10528b">LinkedIn</a></a></div><div class="pure-u-md-1-1"><a href="https://github.com/nitesuit"><i class="fab fa-github-square l-box"></i><a class="social-media" href="https://github.com/nitesuit">GitHub</a></a></div><div class="pure-u-md-1-1"><a href="https://twitter.com/PovilasStaskus"><i class="fab fa-twitter-square l-box"></i><a class="social-media" href="https://twitter.com/PovilasStaskus">Twitter</a></a></div></div></div></div><div class="content pure-u-1 pure-u-md-3-5 pure-u-xl-6-10"><h2 class="post-title"><a href="/posts/2019-03-18-aerogami_series_part_3">Building a real-world iOS app (Part 3): Fetching and parsing data from API</a></h2><p class="post-meta">March 18, 2019</p><div class="post-tags"><a class="post-category post-category-tutorial" href="/tags/tutorial">Tutorial</a><a class="post-category post-category-ios" href="/tags/ios">iOS</a><a class="post-category post-category-swift" href="/tags/swift">Swift</a></div><div class="post-description"><div class="kodas"><p>In the <a href="/tutorial/ios/swift/aerogami_series_part_2/">previous part</a> we discovered a way to separate our application into frameworks and setup the architecture of our app to support dependency injection. In this part of the series we'll be fetching and parsing data from the backend using Alamofire and Codable.</p><h1>API Client</h1><p>Although in the scope of this tutorial we'll be using mocked data, the application will be completely ready to support calls to REST APIs.</p><h3>Protocol</h3><p>We define our <a href="https://github.com/nitesuit/aerogami-ios/blob/master/TravelAPIKit/APIClient.swift">APIClient</a> protocol that serves as a lean interface between data fetching classes and actual implementation.</p><pre><code><span class="keyword">import</span> RxSwift
 
-public protocol APIClient {
-    func get(path: String) -&gt; Observable&lt;Any&gt;
+<span class="keyword">public protocol</span> APIClient {
+    <span class="keyword">func</span> get(path: <span class="type">String</span>) -&gt; <span class="type">Observable</span>&lt;<span class="type">Any</span>&gt;
 }
-</code></pre><p>It returns <code>Observable&lt;Any&gt;</code> which is a part of <code>RxSwift</code>. We won't be going through the basics of <code>RxSwift</code>, so it's beneficial to take a look <a href="https://github.com/ReactiveX/RxSwift">official documentation</a> before continuing.</p><h3>Implementation</h3><p>The actual implementation is in <a href="https://github.com/nitesuit/aerogami-ios/blob/master/TravelAPIKit/BaseAPIClient.swift">BaseAPIClient</a>, which uses <a href="https://github.com/Alamofire/Alamofire">Alamofire</a> for making HTTP requests. The only method <code>get(path: String)</code> makes <code>GET</code> request by concating given path to a base URL.</p><pre><code class="language-swift">import RxAlamofire
-import RxSwift
+</code></pre><p>It returns <code>Observable&lt;Any&gt;</code> which is a part of <code>RxSwift</code>. We won't be going through the basics of <code>RxSwift</code>, so it's beneficial to take a look <a href="https://github.com/ReactiveX/RxSwift">official documentation</a> before continuing.</p><h3>Implementation</h3><p>The actual implementation is in <a href="https://github.com/nitesuit/aerogami-ios/blob/master/TravelAPIKit/BaseAPIClient.swift">BaseAPIClient</a>, which uses <a href="https://github.com/Alamofire/Alamofire">Alamofire</a> for making HTTP requests. The only method <code>get(path: String)</code> makes <code>GET</code> request by concating given path to a base URL.</p><pre><code><span class="keyword">import</span> RxAlamofire
+<span class="keyword">import</span> RxSwift
 
-public class BaseAPIClient: APIClient {
-    private let baseUrl: String
+<span class="keyword">public class</span> BaseAPIClient: <span class="type">APIClient</span> {
+    <span class="keyword">private let</span> baseUrl: <span class="type">String</span>
 
-    public init(baseUrl: String) {
-        self.baseUrl = baseUrl
+    <span class="keyword">public init</span>(baseUrl: <span class="type">String</span>) {
+        <span class="keyword">self</span>.<span class="property">baseUrl</span> = baseUrl
     }
 
-    public func get(path: String) -&gt; Observable&lt;Any&gt; {
-        return RxAlamofire
-            .requestJSON(.get, "\(baseUrl)/\(path)")
-            .map { $1 }
+    <span class="keyword">public func</span> get(path: <span class="type">String</span>) -&gt; <span class="type">Observable</span>&lt;<span class="type">Any</span>&gt; {
+        <span class="keyword">return</span> <span class="type">RxAlamofire</span>
+            .<span class="call">requestJSON</span>(.<span class="dotAccess">get</span>, <span class="string">"</span>\(baseUrl)<span class="string">/</span>\(path)<span class="string">"</span>)
+            .<span class="call">map</span> { $1 }
     }
 }
-</code></pre><h3>Mock</h3><p>If you clone the <a href="https://github.com/nitesuit/aerogami-ios">repository</a>, it will use <a href="https://github.com/nitesuit/aerogami-ios/blob/master/TravelAPIKit/BaseAPIClient.swift">MockAPIClient</a> which takes data from files. Because it uses the same public interface, <code>MockAPIClient</code> and <code>BaseAPIClient</code> can be interchanged depending on needs. See <a href="https://github.com/nitesuit/aerogami-ios/blob/bd558d5962e7d97300213ad6896ff8d1f548a074/TravelApplication/Application/Assembly/ApplicationAssembly.swift">ApplicationAssembly</a> which assigns dependencies for <code>APIClient</code> interface. Depending on different configuration, it can assign any of these two. This little example perfectly illustrates the power of <code>dependency injection</code> and usage of <code>protocols</code>.<br><br># Data</p><p>The main entity in this project is a <code>Trip</code>. It describes the origin and destination of the flight as well as price and dates.</p><pre><code class="language-js">{  
-   "currency":"EUR",
-   "created_at":1547991979887,
-   "airlines":"FR",
-   "departure_at":1552848000000,
-   "destination":{  
-      "city":"Malaga",
-      "country_code":"ES",
-      "airport_code":"AGP"
+</code></pre><h3>Mock</h3><p>If you clone the <a href="https://github.com/nitesuit/aerogami-ios">repository</a>, it will use <a href="https://github.com/nitesuit/aerogami-ios/blob/master/TravelAPIKit/BaseAPIClient.swift">MockAPIClient</a> which takes data from files. Because it uses the same public interface, <code>MockAPIClient</code> and <code>BaseAPIClient</code> can be interchanged depending on needs. See <a href="https://github.com/nitesuit/aerogami-ios/blob/bd558d5962e7d97300213ad6896ff8d1f548a074/TravelApplication/Application/Assembly/ApplicationAssembly.swift">ApplicationAssembly</a> which assigns dependencies for <code>APIClient</code> interface. Depending on different configuration, it can assign any of these two. This little example perfectly illustrates the power of <code>dependency injection</code> and usage of <code>protocols</code>.<br><br># Data</p><p>The main entity in this project is a <code>Trip</code>. It describes the origin and destination of the flight as well as price and dates.</p><pre><code>{  
+   <span class="string">"currency"</span>:<span class="string">"EUR"</span>,
+   <span class="string">"created_at"</span>:<span class="number">1547991979887</span>,
+   <span class="string">"airlines"</span>:<span class="string">"FR"</span>,
+   <span class="string">"departure_at"</span>:<span class="number">1552848000000</span>,
+   <span class="string">"destination"</span>:{  
+      <span class="string">"city"</span>:<span class="string">"Malaga"</span>,
+      <span class="string">"country_code"</span>:<span class="string">"ES"</span>,
+      <span class="string">"airport_code"</span>:<span class="string">"AGP"</span>
    },
-   "flight_number":4048,
-   "departure":{  
-      "city":"Copenhagen",
-      "country_code":"DK",
-      "airport_code":"CPH"
+   <span class="string">"flight_number"</span>:<span class="number">4048</span>,
+   <span class="string">"departure"</span>:{  
+      <span class="string">"city"</span>:<span class="string">"Copenhagen"</span>,
+      <span class="string">"country_code"</span>:<span class="string">"DK"</span>,
+      <span class="string">"airport_code"</span>:<span class="string">"CPH"</span>
    },
-   "return_at":1553153100000,
-   "price":72,
-   "id":"c4449ff0-1cb9-11e9-b9f8-b3ba95b35000",
-   "expires_at":1739200281000
+   <span class="string">"return_at"</span>:<span class="number">1553153100000</span>,
+   <span class="string">"price"</span>:<span class="number">72</span>,
+   <span class="string">"id"</span>:<span class="string">"c4449ff0-1cb9-11e9-b9f8-b3ba95b35000"</span>,
+   <span class="string">"expires_at"</span>:<span class="number">1739200281000</span>
 }
-</code></pre><p><a href="https://github.com/nitesuit/aerogami-ios/blob/master/TravelApplication/Application/Mocking/TripMock.json">See full Trips JSON file</a></p><p>We'll define our entities inside <code>TravelKit</code> framework. They should be made public, so they could be reached inside other frameworks. We'll use excellent <a href="https://developer.apple.com/documentation/swift/codable">Codable</a> type that starting from Swift 4 provides a powerful and clean way to encode and decode data.</p><p>Take a look at <a href="https://github.com/nitesuit/aerogami-ios/blob/master/TravelKit/Repositories/Trip/Trip.swift">Trip</a> class. We don't need to define keys of each values if they match. It's possible to define what naming strategies are used during decoding or encoding process. For example, <code>.convertFromSnakeCase</code> strategy, as its name suggests, converts keys from snake case and assigns values automatically if they match.</p><pre><code class="language-swift">import Foundation
+</code></pre><p><a href="https://github.com/nitesuit/aerogami-ios/blob/master/TravelApplication/Application/Mocking/TripMock.json">See full Trips JSON file</a></p><p>We'll define our entities inside <code>TravelKit</code> framework. They should be made public, so they could be reached inside other frameworks. We'll use excellent <a href="https://developer.apple.com/documentation/swift/codable">Codable</a> type that starting from Swift 4 provides a powerful and clean way to encode and decode data.</p><p>Take a look at <a href="https://github.com/nitesuit/aerogami-ios/blob/master/TravelKit/Repositories/Trip/Trip.swift">Trip</a> class. We don't need to define keys of each values if they match. It's possible to define what naming strategies are used during decoding or encoding process. For example, <code>.convertFromSnakeCase</code> strategy, as its name suggests, converts keys from snake case and assigns values automatically if they match.</p><pre><code><span class="keyword">import</span> Foundation
 
-public struct Trip: Codable, Equatable {
-    public var id: String = ""
-    public var currency: String = ""
-    public var price = 0
+<span class="keyword">public struct</span> Trip: <span class="type">Codable</span>, <span class="type">Equatable</span> {
+    <span class="keyword">public var</span> id: <span class="type">String</span> = <span class="string">""</span>
+    <span class="keyword">public var</span> currency: <span class="type">String</span> = <span class="string">""</span>
+    <span class="keyword">public var</span> price = <span class="number">0</span>
 
-    public var airlines = ""
-    public var flightNumber = 0
+    <span class="keyword">public var</span> airlines = <span class="string">""</span>
+    <span class="keyword">public var</span> flightNumber = <span class="number">0</span>
 
-    public var destination: TripLocation!
-    public var departure: TripLocation!
+    <span class="keyword">public var</span> destination: <span class="type">TripLocation</span>!
+    <span class="keyword">public var</span> departure: <span class="type">TripLocation</span>!
 
-    public var createdAt = Date()
-    public var departureAt = Date()
-    public var returnAt = Date()
-    public var expiresAt = Date()
+    <span class="keyword">public var</span> createdAt = <span class="type">Date</span>()
+    <span class="keyword">public var</span> departureAt = <span class="type">Date</span>()
+    <span class="keyword">public var</span> returnAt = <span class="type">Date</span>()
+    <span class="keyword">public var</span> expiresAt = <span class="type">Date</span>()
     
-    public init() {}
+    <span class="keyword">public init</span>() {}
 }
 
-public struct TripLocation: Codable, Equatable {
-    public var city: String!
-    public var countryCode: String!
-    public var airportCode: String!
+<span class="keyword">public struct</span> TripLocation: <span class="type">Codable</span>, <span class="type">Equatable</span> {
+    <span class="keyword">public var</span> city: <span class="type">String</span>!
+    <span class="keyword">public var</span> countryCode: <span class="type">String</span>!
+    <span class="keyword">public var</span> airportCode: <span class="type">String</span>!
     
-    public init() {}
+    <span class="keyword">public init</span>() {}
 }
-</code></pre><p>After receiving <code>JSON</code> data we can define <code>decoder</code> and automatically parse values.</p><pre><code class="language-swift">    public static var decoder: JSONDecoder = {
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        decoder.dateDecodingStrategy = .millisecondsSince1970
-        return decoder
+</code></pre><p>After receiving <code>JSON</code> data we can define <code>decoder</code> and automatically parse values.</p><pre><code>     <span class="keyword">public static var</span> decoder: <span class="type">JSONDecoder</span> = {
+        <span class="keyword">let</span> decoder = <span class="type">JSONDecoder</span>()
+        decoder.<span class="property">keyDecodingStrategy</span> = .<span class="dotAccess">convertFromSnakeCase</span>
+        decoder.<span class="property">dateDecodingStrategy</span> = .<span class="dotAccess">millisecondsSince1970</span>
+        <span class="keyword">return</span> decoder
     }()
 
-    let trips = try? decoder.decode([Trip].self, from: data)
-</code></pre><p>With this simple and straightforward Codable API our data is cleanly parsed into statically typed object or array of objects after <a href="https://github.com/nitesuit/aerogami-ios/blob/master/TravelDataKit/Repositories/Trip/Remote/APITripDataStore.swift">fetching from API</a>.</p><h1>Repositories</h1><p>Classes that are used to fetch data will be called repositories. In <code>TravelKit</code> we'll only define the protocols of these repositories. Our UI framework <code>TravelFeatureKit</code> will only know about <code>TravelKit</code> and protocols of repositories thus the implementations, defined in <code>TravelDataKit</code>, will be easily changeable.</p><p>Our <code>TripRepository</code> protocol defines the only way to fetch trips.</p><pre><code class="language-swift">import RxSwift
+    <span class="keyword">let</span> trips = <span class="keyword">try</span>? decoder.<span class="call">decode</span>([<span class="type">Trip</span>].<span class="keyword">self</span>, from: data)
+</code></pre><p>With this simple and straightforward Codable API our data is cleanly parsed into statically typed object or array of objects after <a href="https://github.com/nitesuit/aerogami-ios/blob/master/TravelDataKit/Repositories/Trip/Remote/APITripDataStore.swift">fetching from API</a>.</p><h1>Repositories</h1><p>Classes that are used to fetch data will be called repositories. In <code>TravelKit</code> we'll only define the protocols of these repositories. Our UI framework <code>TravelFeatureKit</code> will only know about <code>TravelKit</code> and protocols of repositories thus the implementations, defined in <code>TravelDataKit</code>, will be easily changeable.</p><p>Our <code>TripRepository</code> protocol defines the only way to fetch trips.</p><pre><code><span class="keyword">import</span> RxSwift
 
-public protocol TripRepository {
-    func getTrips(in region: String?) -&gt; Observable&lt;[Trip]&gt;
+<span class="keyword">public protocol</span> TripRepository {
+    <span class="keyword">func</span> getTrips(in region: <span class="type">String</span>?) -&gt; <span class="type">Observable</span>&lt;[<span class="type">Trip</span>]&gt;
 }
-</code></pre><p>Because our UI framework will only know about this protocol, we will be able to provide different types of implementations. <a href="https://github.com/nitesuit/aerogami-ios/blob/bd558d5962e7d97300213ad6896ff8d1f548a074/TravelDataKit/Repositories/Trip/TripRepository.swift">TripRepository</a> implementation defined in <code>TravelDataKit</code> calls the <code>API</code> to fetch data and parses it using <code>Coadable</code>. However, <a href="https://github.com/nitesuit/aerogami-ios/blob/bd558d5962e7d97300213ad6896ff8d1f548a074/TravelDataKit/Repositories/Trip/FavoriteTripRepository.swift">FavoriteTripRepository</a> which also implements <code>TripRepository</code> interface, uses <code>UserDefaults</code> to fetch locally liked <code>Trips</code>. It allows us to generate 2 completely different screens in our app. One showing the current feed of flights fetched from the API and another of liked and locally saved trips. Here <a href="https://github.com/nitesuit/aerogami-ios/blob/bd558d5962e7d97300213ad6896ff8d1f548a074/TravelFeatureKit/Features/Favorites/FavoritesAssembly.swift">FavoritesAssembly</a> simply injects necessary dependencies needed for <em>favorites</em> to a <code>FavoriteFeed</code> feature.</p><h1>Design</h1><p>Before continuing creating the app, we'll see how we can quickly create simple application designs using Sketch or similar tools. In the next part of the series we'll overview the approach.</p></div></div></div><div class="footer pure-u-1"><div class="pure-u-1">© 2019 Povilas Staškus</div><div class="pure-u-1">Generated using <a href="https://github.com/johnsundell/publish">Publish</a></div><div class="pure-u-1"><a href="/feed.rss">RSS feed</a></div></div></div></body></html>
+</code></pre><p>Because our UI framework will only know about this protocol, we will be able to provide different types of implementations. <a href="https://github.com/nitesuit/aerogami-ios/blob/bd558d5962e7d97300213ad6896ff8d1f548a074/TravelDataKit/Repositories/Trip/TripRepository.swift">TripRepository</a> implementation defined in <code>TravelDataKit</code> calls the <code>API</code> to fetch data and parses it using <code>Coadable</code>. However, <a href="https://github.com/nitesuit/aerogami-ios/blob/bd558d5962e7d97300213ad6896ff8d1f548a074/TravelDataKit/Repositories/Trip/FavoriteTripRepository.swift">FavoriteTripRepository</a> which also implements <code>TripRepository</code> interface, uses <code>UserDefaults</code> to fetch locally liked <code>Trips</code>. It allows us to generate 2 completely different screens in our app. One showing the current feed of flights fetched from the API and another of liked and locally saved trips. Here <a href="https://github.com/nitesuit/aerogami-ios/blob/bd558d5962e7d97300213ad6896ff8d1f548a074/TravelFeatureKit/Features/Favorites/FavoritesAssembly.swift">FavoritesAssembly</a> simply injects necessary dependencies needed for <em>favorites</em> to a <code>FavoriteFeed</code> feature.</p><h1>Design</h1><p>Before continuing creating the app, we'll see how we can quickly create simple application designs using Sketch or similar tools. In the next part of the series we'll overview the approach.</p></div></div></div><div class="footer pure-u-1"><div class="pure-u-1">© 2019 Povilas Staškus</div><div class="pure-u-1">Generated using <a href="https://github.com/johnsundell/publish">Publish</a>. Written in Swift</div><div class="pure-u-1"><a href="/feed.rss">RSS feed</a></div></div></div></body></html>
