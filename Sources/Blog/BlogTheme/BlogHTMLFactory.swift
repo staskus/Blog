@@ -70,7 +70,7 @@ struct BlogHTMLFactory: HTMLFactory {
                 .grid(
                     .header(for: context.site),
                     .sidebar(for: context.site),
-                    .pageContent(.contentBody(page.body)),
+                    .page(for: page, on: context.site),
                     .footer(for: context.site)
                 )
             )
