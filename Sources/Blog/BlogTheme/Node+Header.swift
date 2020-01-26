@@ -15,7 +15,7 @@ extension Node where Context == HTML.BodyContext {
                 .a(
                     .class("pure-menu-heading"),
                     .text(site.title),
-                    .href(site.url)
+                    .href("/")
                 ),
                 .ul(
                     .class("pure-menu-list"),
