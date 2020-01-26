@@ -27,7 +27,6 @@ extension Node where Context == HTML.BodyContext {
             .div(
                 .class("post-description"),
                 .div(
-                    .class("kodas"),
                     .contentBody(item.body)
                 )
             )

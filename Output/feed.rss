@@ -1,128 +1,121 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content"><channel><title>Povilas Staškus</title><description>iOS Developer</description><link>https://www.staskus.io</link><language>en</language><lastBuildDate>Sun, 26 Jan 2020 16:30:52 +0200</lastBuildDate><pubDate>Sun, 26 Jan 2020 16:30:52 +0200</pubDate><ttl>250</ttl><atom:link href="https://www.staskus.io/feed.rss" rel="self" type="application/rss+xml"/><item><guid isPermaLink="true">https://www.staskus.io/posts/2020-01-26-publish</guid><title>Migrating from Jekyll to Publish: A site generator for Swift developers</title><description></description><link>https://www.staskus.io/posts/2020-01-26-publish</link><pubDate>Sun, 26 Jan 2020 18:00:00 +0200</pubDate><content:encoded><![CDATA[<p><a href="https://github.com/JohnSundell/Publish">Publish</a> is a static site generator built for Swift developers.</p><h1>Idea</h1><p>We'll be migrating a static blog generation from <a href="https://jekyllrb.com">Jekyll</a> to Publish. The previous version of a blog was generated using Jekyll using a provided theme without putting too much effort in understanding the whole creation process. This time around I decided to dig deeper into understanding Publish and remembering long forgotten <em>HTML</em> and <em>CSS</em> skills.</p><p>We'll be trying to create a similar style blog that would remain adaptable for bigger or smaller screen sizes:</p><h4>Previous desktop version</h4><img src="https://www.staskus.io/images/publish/previous_1.png" alt="Previous desktop version of a blog" width="500"/><h4>Previous mobile version</h4><img src="https://www.staskus.io/images/publish/previous_2.png" alt="Previous moble version of a blog" width="300"/><h1>Getting Started</h1><p>After running the steps described in a <a href="https://github.com/JohnSundell/Publish">Publish repository</a> we end up with a</p><h2>Data</h2><p><code>Struct</code> containing <em>raw data</em>.</p><pre><code>     <span class="keyword">struct</span> Data: <span class="type">Equatable</span> {
-        <span class="keyword">let</span> regions: [<span class="type">Region</span>]
-        <span class="keyword">let</span> trips: [<span class="type">Trip</span>]
-    }
-</code></pre><h2>View Model</h2><p><code>Struct</code> containing <em>State</em> (loading, error, empty, loaded) and mapped data that is used by <em>View Controllers</em> for configuring views.</p><pre><code>     <span class="keyword">struct</span> ViewModel: <span class="type">FeatureViewModel</span> {
-        <span class="keyword">let</span> state: <span class="type">ViewState</span>&lt;<span class="type">Feed</span>.<span class="type">ViewModel</span>.<span class="type">Content</span>&gt;
-        <span class="keyword">let</span> title: <span class="type">String</span>
-
-        <span class="keyword">struct</span> Content: <span class="type">FeatureContentViewModel</span>, <span class="type">Equatable</span> {
-            <span class="keyword">var</span> rows: [<span class="type">FeedCardViewModel</span>]
-            <span class="keyword">let</span> availableRegions: [<span class="type">Feed</span>.<span class="type">ViewModel</span>.<span class="type">Content</span>.<span class="type">Region</span>]
-            <span class="keyword">let</span> selectedRegion: <span class="type">Feed</span>.<span class="type">ViewModel</span>.<span class="type">Content</span>.<span class="type">Region</span>?
-
-            <span class="keyword">struct</span> Region: <span class="type">Equatable</span> {
-                <span class="keyword">let</span> id: <span class="type">String</span>
-                <span class="keyword">let</span> name: <span class="type">String</span>
-            }
-
-            <span class="keyword">var</span> hasContent: <span class="type">Bool</span> {
-                <span class="keyword">return</span> !rows.<span class="property">isEmpty</span>
-            }
-        }
-    }
-</code></pre><h2>Action</h2><p><code>Enum</code> with actions that <em>View Controller</em> can do and <em>Interactor</em> can handle.</p><pre><code>     <span class="keyword">enum</span> Action {
-        <span class="keyword">case</span> load
-        <span class="keyword">case</span> changeRegion(regionId: <span class="type">String</span>?)
-    }
-</code></pre><h2>Route</h2><p><code>Enum</code> with destinations that <em>View Controller</em> can route to.</p><pre><code>     <span class="keyword">enum</span> Route: <span class="type">Equatable</span> {
-        <span class="keyword">case</span> book(<span class="type">Trip</span>)
-    }
-</code></pre><h1>Components</h1><h2>Interactor</h2><p>Receives an action, performs work and sends raw data to presenter.</p><ul><li>Input - <em>Action</em></li><li>Output - <em>Data</em></li><li>Uses - <em>Presenter</em></li></ul><h2>Presenter</h2><p>Receives raw data and maps it into <em>View Model</em></p><ul><li>Input - <em>Data</em></li><li>Output - <em>View Model</em></li></ul><h2>View Controller</h2><p>Receives <em>View Model</em> and configures a view according to it. Sends actions to <em>Interactor</em>.</p><ul><li>Input - <em>View Model</em></li><li>Output - <em>Action</em></li><li>Uses - <em>Interactor</em>, <em>Router</em></li></ul><h2>Router</h2><p>Receives <em>Route</em> object from <em>View Controller</em>, that contains information about next destination, and opens next <em>View Controller</em> using <em>Configurator</em></p><ul><li>Input - <em>Route</em></li><li>Uses - <em>Configurator</em></li></ul><h2>Configurator</h2><p>Takes an input and creates configured <em>View Controller</em> with other components.</p><ul><li>Input - Optional configuration data.</li><li>Output - <em>View Controller</em></li><li>Creates - <em>Interactor</em>, <em>Presenter</em>, <em>View Controller</em>, <em>Router</em></li></ul><h1>Feature</h1><p>The group of these components is called <code>Feature</code>. <a href="https://clean-swift.com">Clean Swift</a> provides with XCode templates that allow to generate all of these components together. We are using <a href="https://github.com/nitesuit/aerogami-ios/tree/master/templates/plop/Feature">plop templates</a> for feature generation. All of this allows to avoid writing boilerplate code and concentrate on actual code of the feature.</p><h1>Feed Example</h1><p><code>Feed</code> is a main <a href="https://github.com/nitesuit/aerogami-ios/tree/master/TravelFeatureKit/Features/Feed">feature</a> of the application. We're going to see how all of these different components is used to create a complete feature.</p><h2>Feed Interactor</h2><p><code>Feed Interactor</code> uses repositories of <em>Region</em>, <em>Trip</em> and <em>Airport</em> for loading data.</p><p><code>dispatch</code> function is an entry point of any <code>Interactor</code>.</p><pre><code>     <span class="keyword">func</span> dispatch(<span class="keyword">_</span> action: <span class="type">Feed</span>.<span class="type">Action</span>) {
-        <span class="keyword">switch</span> action {
-        <span class="keyword">case</span> .<span class="dotAccess">load</span>:
-            contentState = .<span class="call">loading</span>(data: contentState.<span class="property">data</span>)
-            <span class="call">load</span>()
-        <span class="keyword">case</span> .<span class="dotAccess">changeRegion</span>(<span class="keyword">let</span> regionId):
-            <span class="call">changeRegion</span>(id: regionId)
-        }
-    }
-</code></pre><p>We can see when <code>FeedInteractor</code> receives <em>load</em> action it sets current state to <em>loading</em> and calls <code>load()</code> method. It combines <code>RegionRepository</code> and <code>TripRepository</code>, maps it to <em>Data</em> object and passes it to <code>FeedPresenter</code> by setting <em>contentState</em>.</p><pre><code>     <span class="keyword">func</span> load() {
-        <span class="keyword">let</span> selectedRegion = regionRepository.<span class="call">getSelectedRegion</span>()
-
-        <span class="type">Observable</span>.<span class="call">combineLatest</span>(
-            <span class="keyword">self</span>.<span class="property">regionRepository</span>.<span class="call">getRegions</span>(),
-            <span class="keyword">self</span>.<span class="property">tripRepository</span>.<span class="call">getTrips</span>(in: selectedRegion?.<span class="property">id</span>)
-            )
-            .<span class="call">map</span> { (regions, trips) -&gt; <span class="type">Feed</span>.<span class="type">Data</span> <span class="keyword">in
-                return</span> <span class="type">Feed</span>.<span class="type">Data</span>(
-                    regions: regions,
-                    trips: trips,
-                    selectedRegionId: selectedRegion?.<span class="property">id</span>,
-                    tripImages: []
-                )
-            }
-            .<span class="call">subscribe</span>(
-                onNext: { data <span class="keyword">in
-                    self</span>.<span class="property">contentState</span> = .<span class="call">loaded</span>(data: data, error: <span class="keyword">nil</span>)
-                    <span class="keyword">self</span>.<span class="call">loadImages</span>(for: data.<span class="property">trips</span>)
-                },
-                onError: { error <span class="keyword">in
-                    self</span>.<span class="property">contentState</span> = .<span class="call">error</span>(error: .<span class="call">loading</span>(reason: <span class="type">R</span>.<span class="property">string</span>.<span class="property">localizable</span>.<span class="call">errorGenericTitle</span>()))
-                }
-            )
-            .<span class="call">disposed</span>(by: disposeBag)
-    }
-</code></pre><h2>Feed Presenter</h2><p><a href="https://github.com/nitesuit/aerogami-ios/blob/master/TravelFeatureKit/Features/Feed/FeedPresenter.swift">Feed Presenter</a> essentially takes <code>Feed.Data</code> and returns <code>Feed.ViewModel</code>.</p><pre><code>     <span class="keyword">func</span> makeContentViewModel(content: <span class="type">Feed</span>.<span class="type">Data</span>) <span class="keyword">throws</span> -&gt; <span class="type">Feed</span>.<span class="type">ViewModel</span>.<span class="type">Content</span> {
-        <span class="keyword">return</span> <span class="type">Feed</span>.<span class="type">ViewModel</span>.<span class="type">Content</span>(
-            rows: <span class="call">makeFeedCardRows</span>(content),
-            availableRegions: <span class="call">makeAvailableRegions</span>(content),
-            selectedRegion: <span class="call">makeSelectedRegion</span>(content)
-        )
-    }
-</code></pre><p>We can see that <em>struct</em> such as <code>FeedCardViewModel</code> is fairly complicated and comprehensively describes for a table view row what needs to be displayed. It ensures that there is absolutely no business logic, mapping or formatting done in a view as it's simply sets these properties to appropriate variables.</p><pre><code>     <span class="keyword">private func</span> makeFeedCardRows(<span class="keyword">_</span> content: <span class="type">Feed</span>.<span class="type">Data</span>) -&gt; [<span class="type">FeedCardViewModel</span>] {
-        <span class="keyword">return</span> <span class="call">getSortedTrips</span>(content).<span class="call">map</span> { trip <span class="keyword">in</span>
-            currencyFormatter.<span class="property">currencyCode</span> = trip.<span class="property">currency</span>
-            <span class="keyword">return</span> <span class="type">FeedCardViewModel</span>(
-                direction: <span class="type">R</span>.<span class="property">string</span>.<span class="property">localizable</span>.<span class="call">feedBothWaysTitle</span>(),
-                trip: <span class="call">makeTripString</span>(trip),
-                price: <span class="call">formatCurrency</span>(trip),
-                dateRange: <span class="call">dateRange</span>(trip),
-                routeName: <span class="type">R</span>.<span class="property">string</span>.<span class="property">localizable</span>.<span class="call">feedBookTitle</span>(),
-                imageUrl: <span class="call">makeTripImageURL</span>(trip, content: content),
-                route: <span class="type">Feed</span>.<span class="type">Route</span>.<span class="call">book</span>(trip),
-                isExpired: trip.<span class="property">expiresAt</span> &lt;= <span class="type">Date</span>()
-            )
-        }
-    }
-</code></pre><h2>Feed View Controller</h2><p>View Controller in this architecture is a very lean and clean class. It does what view <em>should</em> do: present data, handle user actions and delegate these actions to 'interactor'.</p><p><em>display()</em> lets <code>FeedViewController</code> know that the state and <code>Feed.ViewModel</code> was updated. Different views then can use parts of view model to configure themselves.</p><pre><code>     <span class="keyword">func</span> display() {
-        <span class="keyword">guard let</span> viewModel = viewModel?.<span class="property">state</span>.<span class="property">viewModel</span> <span class="keyword">else</span> { <span class="keyword">return</span> }
-
-        tableView.<span class="call">reloadData</span>()
-        headerView.<span class="call">configure</span>(with: viewModel.<span class="property">selectedRegion</span>)
-    }
-</code></pre><p><code>Feed.Action</code> is sent to <code>Feed.Interactor</code> when anything meaningful happens in <code>FeedViewController.</code> For example, loading data when view appears.</p><pre><code>     <span class="keyword">override func</span> viewWillAppear(<span class="keyword">_</span> animated: <span class="type">Bool</span>) {
-        <span class="keyword">super</span>.<span class="call">viewWillAppear</span>(animated)
-
-        interactor.<span class="call">subscribe</span>()
-        interactor.<span class="call">dispatch</span>(<span class="type">Feed</span>.<span class="type">Action</span>.<span class="property">load</span>)
-    }
-</code></pre><p><code>Feed.Route</code> is sent to <code>Feed.Router</code> when <code>FeedViewController</code> wants to transition to other view controller.</p><pre><code>     <span class="keyword">func</span> tableView(<span class="keyword">_</span> tableView: <span class="type">UITableView</span>, didSelectRowAt indexPath: <span class="type">IndexPath</span>) {
-        <span class="keyword">guard let</span> cellViewModel = viewModel?.<span class="property">state</span>.<span class="property">viewModel</span>?.<span class="property">rows</span>[indexPath.<span class="property">row</span>] <span class="keyword">else</span> { <span class="keyword">return</span> }
-
-        router.<span class="call">route</span>(to: cellViewModel.<span class="property">route</span>)
-    }
-</code></pre><h2>Feed Router</h2><p><code>FeedRouter</code> handles <em>route</em> actions and opens other view controllers. It uses <code>BookTripConfigurator</code> for building <code>BookTripViewController</code>.</p><pre><code><span class="keyword">class</span> FeedRouter {
-
-    <span class="keyword">private let</span> bookTripConfigurator: <span class="type">BookTripConfigurator</span>
-
-    <span class="keyword">weak var</span> viewController: <span class="type">FeedViewController</span>?
-
-    <span class="keyword">init</span>(bookTripConfigurator: <span class="type">BookTripConfigurator</span>) {
-        <span class="keyword">self</span>.<span class="property">bookTripConfigurator</span> = bookTripConfigurator
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content"><channel><title>Povilas Staškus</title><description>iOS Developer</description><link>https://www.staskus.io</link><language>en</language><lastBuildDate>Sun, 26 Jan 2020 23:45:10 +0200</lastBuildDate><pubDate>Sun, 26 Jan 2020 23:45:10 +0200</pubDate><ttl>250</ttl><atom:link href="https://www.staskus.io/feed.rss" rel="self" type="application/rss+xml"/><item><guid isPermaLink="true">https://www.staskus.io/posts/2020-01-26-publish</guid><title>Migrating from Jekyll to Publish: A site generator for Swift developers</title><description></description><link>https://www.staskus.io/posts/2020-01-26-publish</link><pubDate>Sun, 26 Jan 2020 18:00:00 +0200</pubDate><content:encoded><![CDATA[<p><a href="https://github.com/JohnSundell/Publish">Publish</a> is a static site generator built for Swift developers. We'll be migrating a static blog generation from <a href="https://jekyllrb.com">Jekyll</a> to Publish. The previous version of a blog was generated using Jekyll and a provided theme without putting too much effort in understanding the whole creation process. This time I decided to dig deeper into understanding Publish and remembering long forgotten <em>HTML</em> and <em>CSS</em> skills.</p><p>We'll be trying to create a similar style blog that was created using Jekyll. It should remain adaptable for bigger or smaller screen sizes:</p><h4>Previous desktop version</h4><img src="https://www.staskus.io/images/publish/previous_1.png" alt="Previous desktop version of a blog" width="500"/><h4>Previous mobile version</h4><img src="https://www.staskus.io/images/publish/previous_2.png" alt="Previous moble version of a blog" width="300"/><h1>Getting Started</h1><p>After running the steps described in a <a href="https://github.com/JohnSundell/Publish">Publish repository</a> we end up with a sample project that showcases the main parts and features of Publish.</p><p>In the folder structure we can see <code>posts</code> folder that contains an example post. I copy-pasted my blog posts <code>.md</code> files from old Jekyll blog to see if it works. We only need to change couple fields to make it work. The only difference is a metadata format on top of <code>.md</code> file. By removing quotes from strings, brackets from arrays and renaming categories to tags we can get Jekyll articles immediately generated into a new blog.</p><img src="https://www.staskus.io/images/publish/blog_1.png" alt="Previous desktop version of a blog" width="500"/><h1>Website</h1><p>If we open up <code>main.swift</code> file we see:</p><pre><code><span class="keyword">try</span> <span class="type">Blog</span>().<span class="call">publish</span>(withTheme: .<span class="dotAccess">foundation</span>)
+</code></pre><p>In Publish a website is a simple Swift struct that should contain mandatory fields required by a <code>Website</code> protocol as well as any additional fields that might be needed.</p><p>As this blog contains personal information as well as links to social media accounts, I included them in a <code>Blog</code> structure.</p><pre><code><span class="keyword">struct</span> Blog: <span class="type">Website</span> {
+    <span class="keyword">enum</span> SectionID: <span class="type">String</span>, <span class="type">WebsiteSectionID</span> {
+        <span class="keyword">case</span> posts
+        <span class="keyword">case</span> about
     }
 
-    <span class="keyword">func</span> route(to route: <span class="type">Feed</span>.<span class="type">Route</span>) {
-        <span class="keyword">switch</span> route {
-        <span class="keyword">case</span> .<span class="dotAccess">book</span>(<span class="keyword">let</span> trip):
-            <span class="keyword">let</span> bookTripViewController = bookTripConfigurator.<span class="call">createViewController</span>(trip: trip)
-            bookTripViewController.<span class="property">modalPresentationStyle</span> = .<span class="dotAccess">overCurrentContext</span>
-            bookTripViewController.<span class="property">modalTransitionStyle</span> = .<span class="dotAccess">coverVertical</span>
-            viewController?.<span class="property">tabBarController</span>?.<span class="call">present</span>(bookTripViewController, animated: <span class="keyword">true</span>, completion: <span class="keyword">nil</span>)
-        }
+    <span class="keyword">struct</span> ItemMetadata: <span class="type">WebsiteItemMetadata</span> {
+    	<span class="comment">// Additional field in post .md metadata</span>
+        <span class="keyword">var</span> excerpt: <span class="type">String</span>
+    }
+
+    <span class="keyword">var</span> url = <span class="type">URL</span>(string: <span class="string">"https://www.staskus.io"</span>)!
+    <span class="keyword">var</span> title = <span class="string">"staskus.io"</span>
+    <span class="keyword">var</span> name = <span class="string">"Povilas Staškus"</span>
+    <span class="keyword">var</span> description = <span class="string">"iOS Developer"</span>
+    <span class="keyword">var</span> language: <span class="type">Language</span> { .<span class="dotAccess">english</span> }
+    <span class="keyword">var</span> imagePath: <span class="type">Path</span>? { <span class="keyword">nil</span> }
+    <span class="keyword">var</span> socialMediaLinks: [<span class="type">SocialMediaLink</span>] { [.<span class="dotAccess">location</span>, .<span class="dotAccess">email</span>, .<span class="dotAccess">linkedIn</span>, .<span class="dotAccess">github</span>, .<span class="dotAccess">twitter</span>] }
+}
+</code></pre><h1>Theme</h1><p>Basic <code>foundation</code> theme is used after generating a website for the first time. However, it's only there to give an example of how custom site theme should be created.</p><p>A <code>Theme</code> is built by conforming to <code>HTMLFactory</code> protocol.</p><p>Not all the pages are needed to be created for your site to be fully functioning. For a blog we must have: 1) an index page, that shows header, sidebar and list of posts. 2) item page, that will show full post.</p><pre><code><span class="keyword">class</span> BlogHTMLFactory: <span class="type">HTMLFactory</span> {
+
+    <span class="keyword">func</span> makeIndexHTML(for index: <span class="type">Index</span>,
+                       context: <span class="type">PublishingContext</span>&lt;<span class="type">Blog</span>&gt;) <span class="keyword">throws</span> -&gt; <span class="type">HTML</span> {
+    	<span class="comment">// Returning HTML of an Index Page</span>
+    }
+
+    <span class="keyword">func</span> makeSectionHTML(for section: <span class="type">Section</span>&lt;<span class="type">Site</span>&gt;,
+                         context: <span class="type">PublishingContext</span>&lt;<span class="type">Blog</span>&gt;) <span class="keyword">throws</span> -&gt; <span class="type">HTML</span> {
+    	<span class="comment">// Returning HTML of a Section Index Page that displays section items</span>
+    }
+
+    <span class="keyword">func</span> makeItemHTML(for item: <span class="type">Item</span>&lt;<span class="type">Site</span>&gt;,
+                      context: <span class="type">PublishingContext</span>&lt;<span class="type">Blog</span>&gt;) <span class="keyword">throws</span> -&gt; <span class="type">HTML</span> {
+    	<span class="comment">// Returning HTML of a Post Page</span>
+    }
+
+    <span class="keyword">func</span> makePageHTML(for page: <span class="type">Page</span>,
+                      context: <span class="type">PublishingContext</span>&lt;<span class="type">Blog</span>&gt;) <span class="keyword">throws</span> -&gt; <span class="type">HTML</span> {
+    	<span class="comment">// Returning HTML of a Section Page</span> 
+    }
+
+    <span class="keyword">func</span> makeTagListHTML(for page: <span class="type">TagListPage</span>,
+                         context: <span class="type">PublishingContext</span>&lt;<span class="type">Blog</span>&gt;) <span class="keyword">throws</span> -&gt; <span class="type">HTML</span>? {
+    	<span class="comment">// Returning HTML of a Page with list of available tags</span>
+    }
+
+    <span class="keyword">func</span> makeTagDetailsHTML(for page: <span class="type">TagDetailsPage</span>,
+                            context: <span class="type">PublishingContext</span>&lt;<span class="type">Blog</span>&gt;) <span class="keyword">throws</span> -&gt; <span class="type">HTML</span>? {
+    	<span class="comment">// Returning HTML of a Page for a specific tag</span>
     }
 }
-</code></pre><h2>Usage</h2><p>For understanding this flow easier we can imagine a hypothetical scenario of <code>Feed</code> feature.</p><ol><li>AppDelegate uses <code>FeedConfigurator</code> and calls <code>createViewController()</code> to create <code>FeedViewController</code></li><li><code>FeedViewController</code> on <code>viewWillAppear</code> calls <code>interactor.dispatch(Feed.Action.load)</code> to trigger <code>load</code> action</li><li><code>FeedInteractor</code> handles <code>load</code> action and uses <code>TripRepository</code> to load an array of <code>Trips</code> from the backend. It passes an array of <code>Trips</code> to <code>FeedPresenter</code>.</li><li><code>FeedPresenter</code> takes an array of <code>Trips</code> and maps it to <code>FeedViewModel</code> by formatting and localizing text, loading images and splitting it into fields that view needs to know about.</li><li><code>FeedViewController</code>'s method <code>display()</code> is triggered and table view is loaded with new data.</li></ol><p>Although this all may seem too much at first, it actually provides developers with huge clarity when building and maintaining the project. Moreover, all these different components have clear inputs and outputs than can be unit tested. With the growing complexity of the feature it becomes convenient to simply check <code>Action</code> to see all the different things that <code>ViewController</code> does or analyse <code>Presenter</code> to understand what kind of data is actually presented.</p><h2>Result</h2><p>In these series we've seen how to build iOS application by separating it into different frameworks, loading data from API and mapping it using <code>Codable</code>, sketching UIs following Apple's guidelines and develop it all on top of <em>Clean</em> architecture. All of these steps allow the app to be scalable, maintainable and testable.<br><br><img src="https://www.staskus.io/images/aerogami-tutorial/part5/app_demo.gif" alt="App Demo" width="300"/></p>]]></content:encoded></item><item><guid isPermaLink="true">https://www.staskus.io/posts/2019-03-24-aerogami_series_part_5</guid><title>Building a real-world iOS app (Part 5): Using Clean Swift for developing testable and scalable views</title><description></description><link>https://www.staskus.io/posts/2019-03-24-aerogami_series_part_5</link><pubDate>Sun, 24 Mar 2019 12:00:00 +0200</pubDate><content:encoded><![CDATA[<p>When starting to develop any application it's beneficial to think early about the way code can be testable and whether it would be scalable or maintainable. Many iOS applications have suffered from what is called <em>Massive View Controller</em> problem. By putting all the code that fetches, maps, presents and styles into one ViewController it very quickly overgrows in size and complexity. A lot of solutions where introduced to tackle this problem such as MVVM, MVVM + ReactiveCocoa or VIPER. In this application we'll be using <a href="https://clean-swift.com">Clean Swift</a> approach for breaking up massive view controllers into testable and maintainable parts.</p><h1>Data Structures</h1><h2>Data</h2><p><code>Struct</code> containing <em>raw data</em>.</p><pre><code>     <span class="keyword">struct</span> Data: <span class="type">Equatable</span> {
+</code></pre><p>Although we can write <code>HTML</code> code using Swift, the styling of the site is done using <code>CSS.</code> For the creation of this blog, I decided to use <a href="https://purecss.io">Pure.css</a>. The desired blog theme is quite minimalist and the features that <a href="https://purecss.io">Pure.css</a> provides seem more than enough to achieve what we want. Even after many years without any <code>CSS</code> and <code>HTML</code> experience it was possible to make pretty decent layout. For the rest of this article, we won't be focusing on that. The code can be found on <a href="https://github.com/nitesuit/Blog">GitHub</a> for those who are interested.</p><h1>Index Page</h1><p><code>makeIndexHTML</code> builds HTML of an index page. The structure is the same as writing plain HTML tags. We set <em>language</em>, <em>head</em> and then structure layout inside <em>body</em>.</p><p>Body uses <code>.grid</code> node that creates Pure.css grid in which we can structure our layout. We have <code>.header</code>, <code>.sidebar</code>, <code>.posts</code> and <code>.footer</code> that are put one after the other.</p><pre><code><span class="keyword">class</span> BlogHTMLFactory: <span class="type">HTMLFactory</span> {
+
+    <span class="keyword">func</span> makeIndexHTML(for index: <span class="type">Index</span>,
+                       context: <span class="type">PublishingContext</span>&lt;<span class="type">Blog</span>&gt;) <span class="keyword">throws</span> -&gt; <span class="type">HTML</span> {
+    	<span class="type">HTML</span>(
+            .<span class="call">lang</span>(context.<span class="property">site</span>.<span class="property">language</span>),
+            .<span class="call">head</span>(for: context.<span class="property">site</span>),
+            .<span class="call">body</span>(
+                .<span class="call">grid</span>(
+                    .<span class="call">header</span>(for: context.<span class="property">site</span>),
+                    .<span class="call">sidebar</span>(for: context.<span class="property">site</span>),
+                    .<span class="call">posts</span>(
+                        for: context.<span class="call">allItems</span>(
+                            sortedBy: \.<span class="property">date</span>,
+                            order: .<span class="dotAccess">descending</span>
+                        ),
+                        on: context.<span class="property">site</span>,
+                        title: <span class="string">"Recent posts"</span>
+                    ),
+                    .<span class="call">footer</span>(for: context.<span class="property">site</span>)
+                )
+            )
+        )
+    }
+}
+</code></pre><p>Any node can be written as a <code>static</code> func extension of a <code>Node</code>. <code>Context == HTML.BodyContext</code> indicate that this node can be only used inside <em>body</em>. It's a nice and clean way to declare new nodes, as they can be then used using dot syntax.</p><pre><code><span class="keyword">extension</span> <span class="type">Node</span> <span class="keyword">where</span> <span class="type">Context</span> == <span class="type">HTML</span>.<span class="type">BodyContext</span> {
+    <span class="keyword">static func</span> grid(<span class="keyword">_</span> nodes: <span class="type">Node</span>...) -&gt; <span class="type">Node</span> {
+        .<span class="call">div</span>(
+            .<span class="call">id</span>(<span class="string">"layout"</span>),
+            .<span class="call">class</span>(<span class="string">"pure-g"</span>),
+            .<span class="call">group</span>(nodes)
+        )
+    }
+}
+</code></pre><h1>Post</h1><p>A post can be declared the same way as any other node. On the top, we show the title of the post. Below, we show date. We can use any powerful features that Swift infrastructure provides us. In this instance, we use <code>DateFormatter</code> to format a date. In a similar way any more complex or sophisticated logic could be used inside this code.</p><pre><code><span class="keyword">extension</span> <span class="type">Node</span> <span class="keyword">where</span> <span class="type">Context</span> == <span class="type">HTML</span>.<span class="type">BodyContext</span> {
+    <span class="keyword">static func</span> post(for item: <span class="type">Item</span>&lt;<span class="type">Blog</span>&gt;, on site: <span class="type">Blog</span>) -&gt; <span class="type">Node</span> {
+        <span class="keyword">return</span> .<span class="call">pageContent</span>(
+            .<span class="call">h2</span>(
+                .<span class="call">class</span>(<span class="string">"post-title"</span>),
+                .<span class="call">a</span>(
+                    .<span class="call">href</span>(item.<span class="property">path</span>),
+                    .<span class="call">text</span>(item.<span class="property">title</span>)
+                )
+            ),
+            .<span class="call">p</span>(
+                .<span class="call">class</span>(<span class="string">"post-meta"</span>),
+                .<span class="call">text</span>(<span class="type">DateFormatter</span>.<span class="property">blog</span>.<span class="call">string</span>(from: item.<span class="property">date</span>))
+            ),
+            .<span class="call">tagList</span>(for: item, on: site),
+            .<span class="call">div</span>(
+                .<span class="call">class</span>(<span class="string">"post-description"</span>),
+                .<span class="call">div</span>(
+                    .<span class="call">contentBody</span>(item.<span class="property">body</span>)
+                )
+            )
+        )
+    }
+}
+</code></pre><h1>Generating the site</h1><p>We've seen how by creating nodes we can step by step create pages for our blog. However, I would argue that the biggest power of Publish comes from <code>plugins</code> and additional building steps that we can create or use.</p><p><a href="https://github.com/JohnSundell/Splash">Splash</a> is a Swift syntax highlighter for blogs that has a plugin built for Publish. During the blog generation process, this plugin uses markdown parser to identify code inside <code>.md</code> files and apply syntax highlighting.</p><p>We can use or build any steps that might do additional checks, append necessary information or simply tweak a site in any way needed.</p><pre><code><span class="keyword">import</span> SplashPublishPlugin
+
+<span class="keyword">try</span> <span class="type">Blog</span>().<span class="call">publish</span>(
+    withTheme: .<span class="dotAccess">blog</span>,
+    additionalSteps: [.<span class="call">deploy</span>(using: .<span class="call">gitHub</span>(<span class="string">"nitesuit/nitesuit.github.io"</span>))],
+    plugins: [.<span class="call">splash</span>(withClassPrefix: <span class="string">""</span>)]
+)
+</code></pre><h1>Result</h1><p>Publish worked seamlessly in this website creation process and provided all the convenience of Swift strong type system. Using well-known technology helped stay focused while trying to figure out not so familiar layout and styling techniques. Now that all the parts of the site are well understood, Publish together with Swift gives a lot of power for future improvements.</p><p>The code of the blog can be found on <a href="https://github.com/nitesuit/Blog">GitHub</a>.</p><h4>New desktop version</h4><img src="https://www.staskus.io/images/publish/blog_new_2.png" alt="New desktop version of a blog" width="500"/><h4>New mobile version</h4><img src="https://www.staskus.io/images/publish/blog_new_2.png" alt="New mobile version of a blog" width="300"/>]]></content:encoded></item><item><guid isPermaLink="true">https://www.staskus.io/posts/2019-03-24-aerogami_series_part_5</guid><title>Building a real-world iOS app (Part 5): Using Clean Swift for developing testable and scalable views</title><description></description><link>https://www.staskus.io/posts/2019-03-24-aerogami_series_part_5</link><pubDate>Sun, 24 Mar 2019 12:00:00 +0200</pubDate><content:encoded><![CDATA[<p>When starting to develop any application it's beneficial to think early about the way code can be testable and whether it would be scalable or maintainable. Many iOS applications have suffered from what is called <em>Massive View Controller</em> problem. By putting all the code that fetches, maps, presents and styles into one ViewController it very quickly overgrows in size and complexity. A lot of solutions where introduced to tackle this problem such as MVVM, MVVM + ReactiveCocoa or VIPER. In this application we'll be using <a href="https://clean-swift.com">Clean Swift</a> approach for breaking up massive view controllers into testable and maintainable parts.</p><h1>Data Structures</h1><h2>Data</h2><p><code>Struct</code> containing <em>raw data</em>.</p><pre><code>     <span class="keyword">struct</span> Data: <span class="type">Equatable</span> {
         <span class="keyword">let</span> regions: [<span class="type">Region</span>]
         <span class="keyword">let</span> trips: [<span class="type">Trip</span>]
     }

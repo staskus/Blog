@@ -114,6 +114,11 @@ h3 {
     color: #444;
     line-height: 1.8em;
 }
+
+.post-description a {
+    text-decoration: underline;
+}
+
 .post-meta {
     color: #999;
     font-size: 90%;
