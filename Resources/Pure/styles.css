@@ -43,7 +43,7 @@ h3 {
 
 .sidebar {
     background: #fff;
-    color: #000;
+    color: rgba(0, 0, 0, 0.8);
 }
 
 .brand-title,

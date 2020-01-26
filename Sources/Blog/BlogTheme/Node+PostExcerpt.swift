@@ -5,6 +5,7 @@
 //  Created by Povilas Staskus on 1/26/20.
 //
 
+import Foundation
 import Publish
 import Plot
 
@@ -23,23 +24,7 @@ extension Node where Context == HTML.BodyContext {
                 ),
                 .p(
                     .class("post-meta"),
-                    .text("By "),
-                    .a(
-                        .href("#"),
-                        .class("post-author"),
-                        .text("Tilo Mitra")
-                    ),
-                    .text(" under "),
-                    .a(
-                        .class("post-category post-category-design"),
-                        .href("#"),
-                        .text("CSS")
-                    ),
-                    .a(
-                        .class("post-category post-category-pure"),
-                        .href("#"),
-                        .text("Pure")
-                    )
+                    .text(DateFormatter.blog.string(from: item.date))
                 )
             ),
             .div(
