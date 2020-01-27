@@ -17,7 +17,7 @@ extension SocialMediaLink {
     static var location: SocialMediaLink {
         return SocialMediaLink(
             title: "Vilnius, Lithuania",
-            url: "",
+            url: "https://en.wikipedia.org/wiki/Vilnius",
             icon: "fas fa-map-marker-alt"
         )
     }

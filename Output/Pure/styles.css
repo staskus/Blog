@@ -199,6 +199,10 @@ h3 {
     display: none;
 }
 
+.social-icon {
+    font-size: 1.5em;
+}
+
 @media (min-width: 48em) {
     .content {
         padding: 2em 1em 0;
@@ -218,6 +222,10 @@ h3 {
     
     .social-media {
         display: inline;
+    }
+    
+    .social-icon {
+        font-size: 1em;
     }
     
     .author__avatar {
