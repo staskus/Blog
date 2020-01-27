@@ -19,7 +19,7 @@ struct Blog: Website {
         var excerpt: String
     }
 
-    var url = URL(string: "https://www.staskus.io")!
+    var url = URL(string: "www.staskus.io")!
     var title = "staskus.io"
     var name = "Povilas Staškus"
     var description = "iOS Developer"
