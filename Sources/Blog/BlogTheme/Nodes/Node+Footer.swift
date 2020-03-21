@@ -8,10 +8,8 @@
 import Plot
 
 extension Node where Context == HTML.BodyContext {
-    
-    let currentYear = Calendar.current.component(.year, from: Date())
-    
     static func footer(for site: Blog) -> Node {
+        let currentYear = Calendar.current.component(.year, from: Date())
         return .div(
             .class("footer pure-u-1"),
             .div(
