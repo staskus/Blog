@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/johnsundell/publish.git",
         "state": {
           "branch": null,
-          "revision": "ff50bdcc154efd89a16eb7006182e7d70ef38aff",
-          "version": "0.4.0"
+          "revision": "9458bacb992f1fde35648fd4bb379fb7335d571c",
+          "version": "0.5.0"
         }
       },
       {
@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/johnsundell/splash.git",
         "state": {
           "branch": null,
-          "revision": "4da9bbd0bc14d5774b112fc4bb1859d5a67fb478",
-          "version": "0.10.0"
+          "revision": "2d55b33529e1a3a354d5ef9a5437d4abd842a5a3",
+          "version": "0.11.1"
         }
       },
       {
@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/johnsundell/sweep.git",
         "state": {
           "branch": null,
-          "revision": "d357d12c9558e51f037bf2f956d5cf6c73dc0d44",
-          "version": "0.3.0"
+          "revision": "801c2878e4c6c5baf32fe132e1f3f3af6f9fd1b0",
+          "version": "0.4.0"
         }
       }
     ]
