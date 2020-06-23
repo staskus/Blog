@@ -5,7 +5,7 @@ tags: Tutorial, iOS, Swift
 excerpt: In this part of the series we'll be fetching and parsing data from the backend using Alamofire and Codable.
 ---
 
-In the [previous part](/tutorial/ios/swift/aerogami_series_part_2/) we discovered a way to separate our application into frameworks and setup the architecture of our app to support dependency injection. In this part of the series we'll be fetching and parsing data from the backend using Alamofire and Codable.
+In the [previous part](2019-03-17-aerogami_series_part_2) we discovered a way to separate our application into frameworks and setup the architecture of our app to support dependency injection. In this part of the series we'll be fetching and parsing data from the backend using Alamofire and Codable.
 
 # API Client
 
@@ -13,7 +13,7 @@ Although in the scope of this tutorial we'll be using mocked data, the applicati
 
 ### Protocol
 
-We define our [APIClient](https://github.com/nitesuit/aerogami-ios/blob/master/TravelAPIKit/APIClient.swift) protocol that serves as a lean interface between data fetching classes and actual implementation. 
+We define our [APIClient](https://github.com/nitesuit/aerogami-ios/blob/master/TravelAPIKit/APIClient.swift) protocol that serves as a lean interface between data fetching classes and actual implementation.
 
 ```swift
 import RxSwift
@@ -50,25 +50,25 @@ public class BaseAPIClient: APIClient {
 
 ### Mock
 
-If you clone the [repository](https://github.com/nitesuit/aerogami-ios), it will use [MockAPIClient](https://github.com/nitesuit/aerogami-ios/blob/master/TravelAPIKit/BaseAPIClient.swift) which takes data from files. Because it uses the same public interface, `MockAPIClient` and `BaseAPIClient` can be interchanged depending on needs. See [ApplicationAssembly](https://github.com/nitesuit/aerogami-ios/blob/bd558d5962e7d97300213ad6896ff8d1f548a074/TravelApplication/Application/Assembly/ApplicationAssembly.swift) which assigns dependencies for `APIClient` interface. Depending on different configuration, it can assign any of these two. This little example perfectly illustrates the power of `dependency injection` and usage of `protocols`.  
+If you clone the [repository](https://github.com/nitesuit/aerogami-ios), it will use [MockAPIClient](https://github.com/nitesuit/aerogami-ios/blob/master/TravelAPIKit/BaseAPIClient.swift) which takes data from files. Because it uses the same public interface, `MockAPIClient` and `BaseAPIClient` can be interchanged depending on needs. See [ApplicationAssembly](https://github.com/nitesuit/aerogami-ios/blob/bd558d5962e7d97300213ad6896ff8d1f548a074/TravelApplication/Application/Assembly/ApplicationAssembly.swift) which assigns dependencies for `APIClient` interface. Depending on different configuration, it can assign any of these two. This little example perfectly illustrates the power of `dependency injection` and usage of `protocols`.
 
 # Data
 
 The main entity in this project is a `Trip`. It describes the origin and destination of the flight as well as price and dates.
 
 ```js
-{  
+{
    "currency":"EUR",
    "created_at":1547991979887,
    "airlines":"FR",
    "departure_at":1552848000000,
-   "destination":{  
+   "destination":{
       "city":"Malaga",
       "country_code":"ES",
       "airport_code":"AGP"
    },
    "flight_number":4048,
-   "departure":{  
+   "departure":{
       "city":"Copenhagen",
       "country_code":"DK",
       "airport_code":"CPH"
@@ -79,9 +79,10 @@ The main entity in this project is a `Trip`. It describes the origin and destina
    "expires_at":1739200281000
 }
 ```
+
 [See full Trips JSON file](https://github.com/nitesuit/aerogami-ios/blob/master/TravelApplication/Application/Mocking/TripMock.json)
 
-We'll define our entities inside `TravelKit` framework. They should be made public, so they could be reached inside other frameworks. We'll use excellent [Codable](https://developer.apple.com/documentation/swift/codable) type that starting from Swift 4 provides a powerful and clean way to encode and decode data. 
+We'll define our entities inside `TravelKit` framework. They should be made public, so they could be reached inside other frameworks. We'll use excellent [Codable](https://developer.apple.com/documentation/swift/codable) type that starting from Swift 4 provides a powerful and clean way to encode and decode data.
 
 Take a look at [Trip](https://github.com/nitesuit/aerogami-ios/blob/master/TravelKit/Repositories/Trip/Trip.swift) class. We don't need to define keys of each values if they match. It's possible to define what naming strategies are used during decoding or encoding process. For example, `.convertFromSnakeCase` strategy, as its name suggests, converts keys from snake case and assigns values automatically if they match.
 
@@ -103,7 +104,7 @@ public struct Trip: Codable, Equatable {
     public var departureAt = Date()
     public var returnAt = Date()
     public var expiresAt = Date()
-    
+
     public init() {}
 }
 
@@ -111,7 +112,7 @@ public struct TripLocation: Codable, Equatable {
     public var city: String!
     public var countryCode: String!
     public var airportCode: String!
-    
+
     public init() {}
 }
 ```
@@ -133,7 +134,7 @@ With this simple and straightforward Codable API our data is cleanly parsed into
 
 # Repositories
 
-Classes that are used to fetch data will be called repositories. In `TravelKit` we'll only define the protocols of these repositories. Our UI framework `TravelFeatureKit` will only know about `TravelKit` and protocols of repositories thus the implementations, defined in `TravelDataKit`, will be easily changeable. 
+Classes that are used to fetch data will be called repositories. In `TravelKit` we'll only define the protocols of these repositories. Our UI framework `TravelFeatureKit` will only know about `TravelKit` and protocols of repositories thus the implementations, defined in `TravelDataKit`, will be easily changeable.
 
 Our `TripRepository` protocol defines the only way to fetch trips.
 
