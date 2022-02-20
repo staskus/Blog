@@ -9,7 +9,7 @@ In this part of the series we'll overview how to properly setup the application.
 
 # Creating Frameworks
 
-As we talked in the [previous part](2019-03-11-aerogami_series_part_1), we'll begin the creation of the project by creating 3 separate frameworks inside our XCode project (`TravelKit`, `TravelDataKit`, `TravelFeatureKit`). An article on [raywenderlich.com](https://www.raywenderlich.com/5109-creating-a-framework-for-ios) has a thorough explanation of the whole process.
+As we talked in the [previous part](/posts/2019-03-11-aerogami_series_part_1), we'll begin the creation of the project by creating 3 separate frameworks inside our XCode project (`TravelKit`, `TravelDataKit`, `TravelFeatureKit`). An article on [raywenderlich.com](https://www.raywenderlich.com/5109-creating-a-framework-for-ios) has a thorough explanation of the whole process.
 
 After creating frameworks, project navigator should look something like in the picture below.
 

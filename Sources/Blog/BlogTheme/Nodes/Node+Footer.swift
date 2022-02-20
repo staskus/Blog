@@ -23,8 +23,7 @@ extension Node where Context == HTML.BodyContext {
                 .a(
                     .text("Publish"),
                     .href("https://github.com/johnsundell/publish")
-                ),
-                .text(". Written in Swift")
+                )
             ),
             .div(
                 .class("pure-u-1"),
