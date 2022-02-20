@@ -13,6 +13,15 @@ struct Blog: Website {
     enum SectionID: String, WebsiteSectionID {
         case posts
         case about
+        case afterWork
+        
+        var name: String {
+            switch self {
+            case .posts: return "Posts"
+            case .about: return "About"
+            case .afterWork: return "After work"
+            }
+        }
     }
 
     struct ItemMetadata: WebsiteItemMetadata {
