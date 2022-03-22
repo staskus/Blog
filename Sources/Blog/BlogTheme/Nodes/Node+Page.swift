@@ -10,7 +10,15 @@ import Plot
 import Publish
 
 extension Node where Context == HTML.BodyContext {
-    static func page(for page: Page, on site: Blog) -> Node {
+    static func page(for page: Page, context: PublishingContext<Blog>) -> Node {
+        switch page.path.string {
+            case Blog.SectionID.notes.rawValue: return .notesPage(for: page, context: context)
+            default: return .defaultPage(for: page, on: context.site)
+        }
+        
+    }
+
+    static func defaultPage(for page: Page, on site: Blog) -> Node {
         return .pageContent(
             .h2(
                 .class("post-title"),

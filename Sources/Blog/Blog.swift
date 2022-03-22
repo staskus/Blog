@@ -13,11 +13,13 @@ struct Blog: Website {
     enum SectionID: String, WebsiteSectionID {
         case posts
         case about
+        case notes
         case afterWork
-        
+         
         var name: String {
             switch self {
             case .posts: return "Posts"
+            case .notes: return "Notes"
             case .about: return "About"
             case .afterWork: return "After work"
             }
@@ -26,6 +28,9 @@ struct Blog: Website {
 
     struct ItemMetadata: WebsiteItemMetadata {
         var excerpt: String
+        var topic: String {
+            return excerpt
+        }
     }
 
     var url = URL(string: "https://www.staskus.io")!

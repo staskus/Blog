@@ -18,10 +18,12 @@ struct BlogHTMLFactory: HTMLFactory {
                     .header(for: context.site),
                     .sidebar(for: context.site),
                     .posts(
-                        for: context.allItems(
+                        for: context
+                        .allItems(
                             sortedBy: \.date,
                             order: .descending
-                        ),
+                        )
+                        .filter { $0.sectionID == .posts },
                         on: context.site,
                         title: "Recent posts"
                     ),
@@ -54,7 +56,7 @@ struct BlogHTMLFactory: HTMLFactory {
                 .grid(
                     .header(for: context.site),
                     .sidebar(for: context.site),
-                    .post(for: item, on: context.site),
+                    .item(for: item, on: context.site),
                     .footer(for: context.site)
                 )
                 
@@ -70,7 +72,7 @@ struct BlogHTMLFactory: HTMLFactory {
                 .grid(
                     .header(for: context.site),
                     .sidebar(for: context.site),
-                    .page(for: page, on: context.site),
+                    .page(for: page, context: context),
                     .footer(for: context.site)
                 )
             )
