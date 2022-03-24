@@ -178,9 +178,42 @@ To implement we need to use a queue (FIFO) data structure to ensure we search wi
     }
 ```
 
+3 facts to know about BFS:
+1. Inorder traversal of BST is an array sorted in the ascending order.
+2. Successor = "after node", i.e. the next node, or the smallest node after the current one.
+3. Predecessor = "before node", i.e. the previous node, or the largest node before the current one.
+
 ### Bidirectional Search
 
 Find the shorted path between 2 nodes by performing 2 simultaneous BFS from both nodes.
+
+## Example problems to know how to solve:
+
+### Convert Sorted Array to Binary Search Tree
+
+Keep splitting the sorted array in half so the root would be the middle element.
+
+```swift
+// O(n) time complexity, O(logn) space complexity
+
+class Solution {
+    func sortedArrayToBST(_ nums: [Int]) -> TreeNode? {
+        return createMinimalBST(nums, start: 0, end: nums.count - 1)
+    }
+    
+    private func createMinimalBST(_ nums: [Int], start: Int, end: Int) -> TreeNode? {
+        guard start <= end else { return nil }
+        
+        let mid = ((start + end) / 2)
+    
+        return TreeNode(
+            nums[mid],
+            createMinimalBST(nums, start: start, end: mid - 1),
+            createMinimalBST(nums, start: mid + 1, end: end)
+            )
+    }
+}
+```
 
 # Additional Information
 
