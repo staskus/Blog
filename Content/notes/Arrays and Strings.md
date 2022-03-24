@@ -1,6 +1,6 @@
 ---
 title: Array and Strings
-excerpt: Algorithms
+excerpt: Data Structures
 ---
 
 ## Hash Tables

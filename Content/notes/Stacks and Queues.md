@@ -1,6 +1,6 @@
 ---
 title: Stacks and Queues
-excerpt: Algorithms 
+excerpt: Data Structures 
 ---
 
 ## Stack

@@ -1,6 +1,6 @@
 ---
 title: Linked Lists
-excerpt: Algorithms
+excerpt: Data Structures
 ---
 
 In a linked list, each node points to the next node in the linked list. In a doubly-linked-list, each node also points to the previous node. 
