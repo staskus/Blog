@@ -215,6 +215,116 @@ class Solution {
 }
 ```
 
+### Given a binary tree, return the level order traversal of its nodes
+
+It can be done using a simple recursion or a BFS. BFS allows printing easier level by level. In both cases, we need to save the "level" in the queue or pass it during the recursion.
+
+### Check if Binary Tree is balanced
+
+A balanced tree is defined to be a tree such that the heights of the two subtrees of any node never differ by more than one. 
+
+Calculating the height of each branch is not fully effective. We need to introduce an "early exit" the moment we find one branch not being balanced.
+
+```swift
+// O(N) time and O(H) space because of the early exit
+// We first go as deep left as possible and then increase the height when going up. The moment we find the difference between left and right more than 1, we throw an error.
+class Solution {
+    enum TreeError: Error {
+        case notBalanced
+    }
+    
+    func isBalanced(_ root: TreeNode?) -> Bool {
+        guard let root = root else { return true }
+        
+        do {
+            try checkHeight(root)
+            return true
+        } catch {
+            return false
+        }
+    }
+    
+    @discardableResult
+    private func checkHeight(_ root: TreeNode?) throws -> Int {      
+        guard let root = root else { return -1 }
+
+        let left = try checkHeight(root.left) // Throwing error as an early exit
+        let right =  try checkHeight(root.right)
+        
+        if (abs(left - right) < 2) {
+            return max(left, right) + 1
+        } else {
+            throw TreeError.notBalanced
+        }
+    }
+}
+```
+
+### Validate Binary Search Tree
+
+```
+A valid BST is defined as follows:
+
+* The left subtree of a node contains only nodes with keys less than the node's key.
+* The right subtree of a node contains only nodes with keys greater than the node's key.
+* Both the left and right subtrees must also be binary search trees.
+```
+
+![Leetcode.com](/images/notes/86b326043320bbd1a5d8d05117e1187489c2d15b285e3a773dd4476c23e2dc14.png)  
+
+
+We have 2 main routes to take.
+
+First one is more intuitive, traverse the tree recursively, passing valid ranges and then validating them against the current value:
+
+```swift
+// O(n), O(n)
+func isValidBST(_ root: TreeNode?) -> Bool {
+    guard let root = root else { return true }
+    
+    return isValidBST(root.left, -Int.max..<root.val) && isValidBST(root.right, root.val+1..<Int.max)
+}
+
+private func isValidBST(_ root: TreeNode?, _ allowedRange: Range<Int>) -> Bool {
+    guard let root = root else { return true }
+            
+    if !allowedRange.contains(root.val) {
+        return false
+    }
+    
+    return isValidBST(root.left, allowedRange.lowerBound..<root.val) && isValidBST(root.right, root.val+1..<allowedRange.upperBound)
+}
+```
+
+Using DFS Inorder traversal is a more interesting solution. `Left -> Node -> Right`. Traversing like this we expect each node to have a larger value if it is a binary search tree. 
+
+```swift
+// O(n), O(n)
+private var previous: Int?
+
+func isValidBST(_ root: TreeNode?) -> Bool {
+guard let root = root else { return true }
+    
+    // Left
+    if !isValidBST(root.left) {
+        return false
+    }
+    
+    // Node
+    if let previous = previous, previous >= root.val {
+        return false
+    }
+    previous = root.val
+    
+    // Right
+    if !isValidBST(root.right) {
+        return false
+    }
+    
+    return true
+}
+```
+
 # Additional Information
 
 ## Spanning Tree
