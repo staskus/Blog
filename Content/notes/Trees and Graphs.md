@@ -180,8 +180,8 @@ To implement we need to use a queue (FIFO) data structure to ensure we search wi
 
 3 facts to know about BFS:
 1. Inorder traversal of BST is an array sorted in the ascending order.
-2. Successor = "after node", i.e. the next node, or the smallest node after the current one.
-3. Predecessor = "before node", i.e. the previous node, or the largest node before the current one.
+2. Successor = "after node", i.e. the next node in "In order traversal (Left -> Node -> Previous)", or the smallest node after the current one.
+3. Predecessor = "before node", i.e. the previous node "In order traversal (Left -> Node -> Previous)", or the largest node before the current one.
 
 ### Bidirectional Search
 
@@ -324,6 +324,20 @@ guard let root = root else { return true }
     return true
 }
 ```
+
+### Find a successor (next node) in a binary search tree
+
+
+```
+Successor = "after node", i.e. the next node in the inorder traversal, or the smallest node after the current one.
+```
+```
+Predecessor = "before node", i.e. the previous node in the inorder traversal, or the largest node before the current one.
+```
+
+So to find a successor we either need to go:
+- One right node and as many left nodes as possible
+- If no right node exists, go up the tree until the node is the left child of the parent and return the parent
 
 # Additional Information
 
