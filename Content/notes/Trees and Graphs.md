@@ -345,6 +345,30 @@ This issue can be solved with DFS with some caveats.
 * Once we reach the end of the graph then we add that node to the **beginning** of the course schedule.
 * If cycles are found, it's impossible to create a schedule. Cycles can be avoided by **visited** and **visiting** (or gray and black) node marking.
 
+### Lowest Common Ancestor in a Binary Tree of 2 nodes
+
+The idea is to do a DFS recursive search throughout the tree. At each point we make 2 recursive calls (to the left and to the right). At the moment where **both** left and right branches result in a node being found, or any of the branches result in a node being found **and** the current node is a node we are looking for, we return a node.
+
+```swift
+// O(n), O(n)
+private func findNode(from node: TreeNode?, to p: TreeNode, orTo q: TreeNode) -> Bool {
+    guard let node = node else {
+        return false
+    }
+    
+    let left = findNode(from: node.left, to: p, orTo: q) ? 1 : 0
+    let right = findNode(from: node.right, to: p, orTo: q) ? 1 : 0
+    let current = node.val == p.val || node.val == q.val ? 1 : 0
+    
+    // If any two are correct
+    if left + right + current >= 2 {
+        ancestor = node
+    }
+    
+    return left + right + current > 0
+}
+```
+
 # Additional Information
 
 ## Spanning Tree
