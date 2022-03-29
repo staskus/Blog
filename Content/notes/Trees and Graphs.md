@@ -419,7 +419,7 @@ If a question has a constraint of going through k edges, then we just use a dyna
 Solving shortest path problem using Dynamic Programming:
 - Asking: Can I find the shortest path using at most 1 edge? Can I find the shortest path using at most 2 edges, etc until N-1 edges
 
-**Dynamic Programming:**
+**Dynamic Programming**
 1. Look if the same problem can be split into some smaller problems in a tree structure. Then it means we can solve it using recursion. We need to know the base case to return early from recursion.
 2. Make it work brute force way
 3. Optimize it using “memoization” (creating dict or set for efficiency)
