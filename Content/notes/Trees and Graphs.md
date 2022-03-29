@@ -339,6 +339,14 @@ So to find a successor we either need to go:
 - One right node and as many left nodes as possible
 - If no right node exists, go up the tree until the node is the left child of the parent and return the parent
 
+### Course Schedule
+
+Given the list of courses and dependency list of which courses must come before the others, return a list of course order.
+
+This issue can be solved with DFS with some caveats.
+- We might not have one graph, there might be multiple graphs. So we might need to do multiple DFS until all nodes (courses) have been visited.
+- Once we reach the end of the graph then we add that node to the **beginning** of the course schedule.
+
 # Additional Information
 
 ## Spanning Tree
