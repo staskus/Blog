@@ -328,12 +328,9 @@ guard let root = root else { return true }
 ### Find a successor (next node) in a binary search tree
 
 
-```
-Successor = "after node", i.e. the next node in the inorder traversal, or the smallest node after the current one.
-```
-```
-Predecessor = "before node", i.e. the previous node in the inorder traversal, or the largest node before the current one.
-```
+* Successor = "after node", i.e. the next node in the inorder traversal, or the smallest node after the current one.
+
+* Predecessor = "before node", i.e. the previous node in the inorder traversal, or the largest node before the current one.
 
 So to find a successor we either need to go:
 - One right node and as many left nodes as possible
@@ -344,8 +341,9 @@ So to find a successor we either need to go:
 Given the list of courses and dependency list of which courses must come before the others, return a list of course order.
 
 This issue can be solved with DFS with some caveats.
-- We might not have one graph, there might be multiple graphs. So we might need to do multiple DFS until all nodes (courses) have been visited.
-- Once we reach the end of the graph then we add that node to the **beginning** of the course schedule.
+* We might not have one graph, there might be multiple graphs. So we might need to do multiple DFS until all nodes (courses) have been visited.
+* Once we reach the end of the graph then we add that node to the **beginning** of the course schedule.
+* If cycles are found, it's impossible to create a schedule. Cycles can be avoided by **visited** and **visiting** (or gray and black) node marking.
 
 # Additional Information
 
