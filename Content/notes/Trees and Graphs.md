@@ -389,34 +389,43 @@ Problems in Swift:
 
 The gist of the algorithm
 ```swift
-    func numOfWays(_ nums: [Int]) -> Int {
-       func divideAndConquer(_ sublist: [Int]) -> Int {
-           if sublist.count <= 2 {
-               return 1 // base case
-           }
-           
-           let root = sublist[0]
-           
-           let left = sublist.filter { $0 < root }
-           let right = sublist.filter { $0 > root }
-           
-           return nCk(left.count + right.count, left.count) * divideAndConquer(left) * divideAndConquer(right)
-       }
+func numOfWays(_ nums: [Int]) -> Int {
+    func divideAndConquer(_ sublist: [Int]) -> Int {
+        if sublist.count <= 2 {
+            return 1 // base case
+        }
         
-        return (divideAndConquer(nums) - 1) // With big trees the result will overflow
+        let root = sublist[0]
+        
+        let left = sublist.filter { $0 < root }
+        let right = sublist.filter { $0 > root }
+        
+        return nCk(left.count + right.count, left.count) * divideAndConquer(left) * divideAndConquer(right)
     }
     
-    func nCk(_ n: Int, _ k: Int) -> Int {
-        //C (n , k) = n! / [ (n-k)! k! ]
-        
-        if (k > n) { return 0 }
-        var result = 1
-        for i in 0..<min(k, n-k) {
-            result = (result * (n - i))/(i + 1)
-        }
-        return result
+    return (divideAndConquer(nums) - 1) // With big trees the result will overflow
+}
+
+func nCk(_ n: Int, _ k: Int) -> Int {
+    //C (n , k) = n! / [ (n-k)! k! ]
+    
+    if (k > n) { return 0 }
+    var result = 1
+    for i in 0..<min(k, n-k) {
+        result = (result * (n - i))/(i + 1)
     }
+    return result
+}
 ```
+
+### Path Sum
+
+Given the root of a binary tree and an integer targetSum, return the number of paths where the sum of the values along the path equals targetSum.
+
+This problem can be solved using a **prefix sum** technique. 
+
+![picture 1](/images/notes/4b53bbaf1ca1cab5b0a3959afb3ae6aaeefd5c8bf7772fb509f1d80a00ca5492.png)  
+
 
 # Additional Information
 
