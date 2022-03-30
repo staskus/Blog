@@ -369,6 +369,55 @@ private func findNode(from node: TreeNode?, to p: TreeNode, orTo q: TreeNode) ->
 }
 ```
 
+### Number of Ways to Reorder Array to Get Same BST
+
+How many times we can reorder the same given array to get the same BST.
+
+The intuition:
+* The first array element needs to be the same to have the same root
+* Smaller elements need to keep the same relative position to other small elements
+* Larger elements need to keep the same relative position to other large elements
+
+The solution:
+* Divide and conquer. Keep splitting given array into 2 arrays with larger numbers than the first one and smaller numbers than the first one. Calculate the number of combination for each array
+* Combinatorics nCk (to find the number of ways selecting k things out of n things)
+* Multiply all the results recursively
+
+Problems in Swift:
+* No built-in way to calculate nCk
+* No built-in way to calculate using large numbers BigInt
+
+The gist of the algorithm
+```swift
+    func numOfWays(_ nums: [Int]) -> Int {
+       func divideAndConquer(_ sublist: [Int]) -> Int {
+           if sublist.count <= 2 {
+               return 1 // base case
+           }
+           
+           let root = sublist[0]
+           
+           let left = sublist.filter { $0 < root }
+           let right = sublist.filter { $0 > root }
+           
+           return nCk(left.count + right.count, left.count) * divideAndConquer(left) * divideAndConquer(right)
+       }
+        
+        return (divideAndConquer(nums) - 1) // With big trees the result will overflow
+    }
+    
+    func nCk(_ n: Int, _ k: Int) -> Int {
+        //C (n , k) = n! / [ (n-k)! k! ]
+        
+        if (k > n) { return 0 }
+        var result = 1
+        for i in 0..<min(k, n-k) {
+            result = (result * (n - i))/(i + 1)
+        }
+        return result
+    }
+```
+
 # Additional Information
 
 ## Spanning Tree
