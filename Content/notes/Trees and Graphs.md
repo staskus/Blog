@@ -424,8 +424,42 @@ Given the root of a binary tree and an integer targetSum, return the number of p
 
 This problem can be solved using a **prefix sum** technique. 
 
-![picture 1](/images/notes/4b53bbaf1ca1cab5b0a3959afb3ae6aaeefd5c8bf7772fb509f1d80a00ca5492.png)  
+![LeetCode.com](/images/notes/4b53bbaf1ca1cab5b0a3959afb3ae6aaeefd5c8bf7772fb509f1d80a00ca5492.png)
 
+**Prefix sum** technique can be used to solve problems such as:
+* Find a number of arrays/matrices/tree paths that sum to a target
+
+It's easier to understand the explanation using sum of arrays:
+
+```swift
+class Solution {
+    func subarraySum(_ nums: [Int], _ k: Int) -> Int {
+        var count = 0
+        var sumCount: [Int: Int] = [:]
+        var sum = 0
+        
+        for num in nums {
+            sum += num
+            
+            // Special case if we find sum at the first position
+            if sum == k {
+                count += 1
+            }
+            
+            // This is the most important part
+            // Let's say we have array [10, 5, 3] and target sum 8
+            // When we come to 3, the sum is 18 and 18 - target sum = 10
+            // In this case we encounter sum 10 for the second time, it means that in-between we had numbers that summed up to target sum (8). 
+            // Counter-intuitive but super clever
+            count += sumCount[sum - k, default: 0] 
+            
+            sumCount[sum, default: 0] += 1
+        }
+        
+        return count
+    }
+}
+```
 
 # Additional Information
 
