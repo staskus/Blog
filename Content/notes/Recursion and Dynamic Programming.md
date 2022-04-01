@@ -20,7 +20,7 @@ Recursive problems are space-intensive and take at least O(n) of memory. The sam
 
 ### Tribonacci Number
 
-![LeetCode.com](images/notes/b8daa97dce2af0a8feb01d20e075456e68904da809bc44e9afb26ac5a82ca17e.png)  
+![LeetCode.com](/images/notes/b8daa97dce2af0a8feb01d20e075456e68904da809bc44e9afb26ac5a82ca17e.png)  
 
 Such a problem can also be solved iteratively. When we use memoization we can notice that we only need to know the last 3 numbers. Instead of saving all the numbers in the dictionary, we can only save the last 3 in the variable:
 
