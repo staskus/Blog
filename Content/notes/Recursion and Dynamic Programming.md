@@ -125,3 +125,26 @@ private func backtrack(_ result: inout [String],
     }
 }
 ```
+
+### Coin Change
+
+Given the set of coins (1, 2, 5) in how many ways we can combine it to a given sum (100). 
+
+The trick for a quick solution is this algorithm. 
+
+We calculate the number of combinations for a given amount by adding to it already calculates combinations for x-coin amount `combinations[x] += combinations[x - coin]`.
+
+```swift
+var combinations = Array(repeating: 0, count: amount + 1)
+        combinations[0] = 1 // algo requires it
+        
+        for coin in coins {
+            if coin <= amount {
+                for x in coin..<amount+1 {
+                    combinations[x] += combinations[x - coin]
+                }
+            }
+        }
+        
+        return combinations[amount]
+```
