@@ -5,6 +5,6 @@ import SplashPublishPlugin
 
 try Blog().publish(
     withTheme: .blog,
-    additionalSteps: [.deploy(using: .gitHub("staskus/nitesuit.github.io"))],
+    additionalSteps: [.deploy(using: .gitHub("staskus/staskus.github.io"))],
     plugins: [.splash(withClassPrefix: "")]
 )
