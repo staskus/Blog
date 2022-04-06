@@ -75,7 +75,7 @@ end
 <...>
 ```
 
-The full [Podfile](https://github.com/nitesuit/aerogami-ios/blob/master/Podfile) can be found on `GitHub` as the rest of the project.
+The full [Podfile](https://github.com/staskus/aerogami-ios/blob/master/Podfile) can be found on `GitHub` as the rest of the project.
 
 # Dependency Injection
 
@@ -145,7 +145,7 @@ class AssemblerFactory {
 }
 ```
 
-We use this assembly to create the first `ViewController` of the application and set it as `rootViewController`. See [ApplicationLoader](https://github.com/nitesuit/aerogami-ios/blob/master/TravelApplication/Application/ApplicationLoader.swift).
+We use this assembly to create the first `ViewController` of the application and set it as `rootViewController`. See [ApplicationLoader](https://github.com/staskus/aerogami-ios/blob/master/TravelApplication/Application/ApplicationLoader.swift).
 
 ```swift
   self.assembler = AssemblerFactory().create()

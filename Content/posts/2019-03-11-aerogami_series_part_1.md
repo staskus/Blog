@@ -5,7 +5,7 @@ tags: Tutorial, iOS, Swift
 excerpt: We'll be creating and releasing an iOS application by showing a real thinking process, going through essential steps and providing the motivation behind them.
 ---
 
-When learning any new technology I find it beneficial to follow a real world example. In this tutorial series we'll be creating and releasing an iOS application. The application will be created by showing a real thinking process, going through essential steps and providing the motivation behind them. Although every single line of code won't be covered, all of it will be always available on [GitHub](https://github.com/nitesuit/aerogami-ios). 
+When learning any new technology I find it beneficial to follow a real world example. In this tutorial series we'll be creating and releasing an iOS application. The application will be created by showing a real thinking process, going through essential steps and providing the motivation behind them. Although every single line of code won't be covered, all of it will be always available on [GitHub](https://github.com/staskus/aerogami-ios). 
 
 # Prerequisites
 
@@ -37,7 +37,7 @@ Throughout the series we'll cover these topics one-by-one:
 
 ## The Final Product
 
-Here is the sneak peek of how the final product will look like. The full codebase can be found on [GitHub](https://github.com/nitesuit/aerogami-ios).
+Here is the sneak peek of how the final product will look like. The full codebase can be found on [GitHub](https://github.com/staskus/aerogami-ios).
 
 <img src="/images/aerogami-tutorial/part1/screenshot.png" alt="Application Screenshot" width="200"/>
 

@@ -110,11 +110,11 @@ Takes an input and creates configured _View Controller_ with other components.
 
 # Feature
 
-The group of these components is called `Feature`. [Clean Swift](https://clean-swift.com) provides with XCode templates that allow to generate all of these components together. We are using [plop templates](https://github.com/nitesuit/aerogami-ios/tree/master/templates/plop/Feature) for feature generation. All of this allows to avoid writing boilerplate code and concentrate on actual code of the feature.
+The group of these components is called `Feature`. [Clean Swift](https://clean-swift.com) provides with XCode templates that allow to generate all of these components together. We are using [plop templates](https://github.com/staskus/aerogami-ios/tree/master/templates/plop/Feature) for feature generation. All of this allows to avoid writing boilerplate code and concentrate on actual code of the feature.
 
 # Feed Example
 
-`Feed` is a main [feature](https://github.com/nitesuit/aerogami-ios/tree/master/TravelFeatureKit/Features/Feed) of the application. We're going to see how all of these different components is used to create a complete feature.
+`Feed` is a main [feature](https://github.com/staskus/aerogami-ios/tree/master/TravelFeatureKit/Features/Feed) of the application. We're going to see how all of these different components is used to create a complete feature.
 
 ## Feed Interactor
 
@@ -167,7 +167,7 @@ We can see when `FeedInteractor` receives _load_ action it sets current state to
 
 ## Feed Presenter
 
-[Feed Presenter](https://github.com/nitesuit/aerogami-ios/blob/master/TravelFeatureKit/Features/Feed/FeedPresenter.swift) essentially takes `Feed.Data` and returns `Feed.ViewModel`.
+[Feed Presenter](https://github.com/staskus/aerogami-ios/blob/master/TravelFeatureKit/Features/Feed/FeedPresenter.swift) essentially takes `Feed.Data` and returns `Feed.ViewModel`.
 
 ```swift
     func makeContentViewModel(content: Feed.Data) throws -> Feed.ViewModel.Content {

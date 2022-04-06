@@ -41,7 +41,7 @@ extension SocialMediaLink {
     static var github: SocialMediaLink {
         return SocialMediaLink(
             title: "GitHub",
-            url: "https://github.com/nitesuit",
+            url: "https://github.com/staskus",
             icon: "fab fa-github-square"
         )
     }
