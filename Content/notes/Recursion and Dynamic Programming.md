@@ -95,7 +95,7 @@ It's better to know that this is a backtracking algorithm, that has generally a 
 ```swift
 private var max = 0
 
-func generateParenthesis(_ n: Int) -> [String] {
+func generateParenthesis(_ n: Int) -> [String] {****
     max = n
     var result: [String] = []
     backtrack(&result, 0, 0)
