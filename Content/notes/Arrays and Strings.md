@@ -75,8 +75,41 @@ let n = matrix.count
 }
 ```
 
-## Zero Matrix
+### Zero Matrix
 
 If the element is 0, its entire row and column should be zero.
 
 In such a task optimal solution is using constant space, meaning changing matrix in place. The challenge is coming up with the flag to notify which rows and columns need to be turned to zeros. Usually, we can set flags at the beginning of rows and columns and iterate through the matrix 2 times. 
+
+### Best Time to Buy and Sell Stock
+
+Given the array of values, find the smallest value to buy and the largest to sell.
+
+We can use 2 pointers approach. If the price of the left pointer is larger than a price of a right pointer, we move with the left pointer forward. Else, we calculate a possible sell price.
+
+```swift
+class Solution {
+    // TimeComplexity O(n)
+    // SpaceComplexity 0(1)
+    func maxProfit(_ prices: [Int]) -> Int {
+        // 2 pointer approach
+        // If right finds smaller, left moves to the right
+        
+        var leftPtr = 0
+        var rightPtr = 0
+        var maxValue = 0
+        
+        while rightPtr < prices.count {
+            if prices[leftPtr] >= prices[rightPtr] {
+                leftPtr = rightPtr
+            } else {
+                maxValue = max(maxValue, prices[rightPtr] - prices[leftPtr])
+            }
+        
+            rightPtr += 1  
+        }
+        
+        return maxValue
+    }
+}
+```
