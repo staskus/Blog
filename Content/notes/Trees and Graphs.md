@@ -461,6 +461,12 @@ class Solution {
 }
 ```
 
+### Course Schedule
+
+Given the number of courses and a list of prerequisites (the courses that depend on each other) determine if it's possible to create a schedule.
+
+This task is asking to find cycles in a graph. If a cycle exists, it means the schedule cannot be formed. Perform a DFS, if we encounter a node that was already visited in the same path, the cycle exists.
+
 # Additional Information
 
 ## Spanning Tree
