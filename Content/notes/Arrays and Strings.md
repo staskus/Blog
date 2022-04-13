@@ -113,3 +113,45 @@ class Solution {
     }
 }
 ```
+
+### Valid Palindrome
+
+A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.
+
+"A man, a plan, a canal: Panama" is a palindrome in this case.
+
+There are 2 main approaches:
+* Filter the original, create a reverse string, compare reversed with the original (O(n), O(n))
+* 2 pointer approach. One from left to right, the other from right to left, skip non-alphanumeric characters. (O(n), O(1))
+
+``` swift
+func isPalindrome(_ s: String) -> Bool {
+    let letters = Array(s)
+    var leftIndex = 0
+    var rightIndex = letters.count - 1
+    
+    while leftIndex < rightIndex {
+        let leftLetter = Character(letters[leftIndex].lowercased())
+        let rightLetter = Character(letters[rightIndex].lowercased())
+        
+        if !leftLetter.isNumber && !leftLetter.isLetter {
+            leftIndex += 1
+            continue
+        }
+        
+        if !rightLetter.isNumber && !rightLetter.isLetter {
+            rightIndex -= 1
+            continue
+        }
+        
+        if leftLetter != rightLetter {
+            return false
+        }
+        
+        leftIndex += 1
+        rightIndex -= 1
+    }
+    
+    return true
+}
+```
