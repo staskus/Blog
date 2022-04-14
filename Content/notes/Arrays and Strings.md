@@ -155,3 +155,26 @@ func isPalindrome(_ s: String) -> Bool {
     return true
 }
 ```
+
+### Maximum Subarray
+
+Find a subarray that sums to the maximum value and return this value.
+
+```swift
+// "Dynamic Programming, Kadane's Algorithm"
+// I came up on my own, no need to memorize.
+// The idea is that we can dismiss "maxCandidate" if adding it to the sum is still less than the sum because it contributes negatively to the total.
+
+// O(n), O(1)
+func maxSubArray(_ nums: [Int]) -> Int {        
+    var maxNum = -Int.max
+    var maxCandidate = 0
+    
+    for num in nums {
+        maxCandidate = max(num, maxCandidate + num)
+        maxNum = max(maxCandidate, maxNum)  
+    }
+    
+    return maxNum
+}
+```
