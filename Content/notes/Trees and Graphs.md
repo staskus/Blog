@@ -487,6 +487,35 @@ func invertTree(_ root: TreeNode?) -> TreeNode? {
 }
 ```
 
+### Lowest Common Ancestor of a Binary Search Tree
+
+Because this is a binary search tree the solution can be iterative. At each point we can either go left or right depending on the p, q and root values. When p and q values are between the root, the root is our lowest common ancestor.
+
+```swift
+// O(n) O(1)
+func lowestCommonAncestor(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
+    guard let p = p, let q = q else { return nil }
+    
+    var root = root
+    
+    while root != nil {
+        let rootVal = root!.val
+        let pVal = p.val
+        let qVal = q.val
+        
+        if pVal > rootVal && qVal > rootVal {
+            root = root!.right
+        } else if pVal < rootVal && qVal < rootVal {
+            root = root!.left
+        } else {
+            return root
+        }
+    }
+    
+    return nil
+}
+```
+
 # Additional Information
 
 ## Spanning Tree
