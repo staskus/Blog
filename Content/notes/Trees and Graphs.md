@@ -467,6 +467,26 @@ Given the number of courses and a list of prerequisites (the courses that depend
 
 This task is asking to find cycles in a graph. If a cycle exists, it means the schedule cannot be formed. Perform a DFS, if we encounter a node that was already visited in the same path, the cycle exists.
 
+### Invert Binary Tree
+
+To invert a binary tree we need to replace the left and right nodes at each step of the tree. We can use both recursive and iterative approaches. Time and space complexity in both cases is O(n)
+
+```swift
+// If we use iterative approach, we can use queues
+// O(n), O(n)
+func invertTree(_ root: TreeNode?) -> TreeNode? {
+    guard let root = root else { return nil }
+    
+    let right = invertTree(root.right)
+    let left = invertTree(root.left)
+    
+    root.left = right
+    root.right = left
+
+    return root
+}
+```
+
 # Additional Information
 
 ## Spanning Tree
