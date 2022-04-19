@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="en"><head><title>Povilas Staškus - iOS Developer</title><meta name="twitter:title" content="Povilas Staškus - iOS Developer"/><meta name="og:title" content="Povilas Staškus - iOS Developer"/><meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous"/><link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css"/><link rel="stylesheet" href="/Pure/styles.css"/><link rel="stylesheet" href="/all.css"/></head><body><div id="layout" class="pure-g"><div><div class="pure-menu pure-menu-horizontal pure-u-1-1 top-header"><a class="pure-menu-heading" href="/">staskus.io</a><ul class="pure-menu-list"><li class="pure-menu-item"><a class="pure-menu-link" href="/about">About</a></li><li class="pure-menu-item"><a class="pure-menu-link" href="/notes">Notes</a></li><li class="pure-menu-item"><a class="pure-menu-link" href="/afterWork">After work</a></li></ul></div></div><div class="sidebar pure-u-1 pure-u-md-1-4"><div class="header"><div id="layout" class="pure-g"><div class="author__avatar"><img src="https://avatars0.githubusercontent.com/u/4062343?s=460&v=4"/></div><div class="pure-u-md-1-1 pure-u-3-4"><h1 class="brand-title">Povilas Staškus</h1><h3 class="brand-tagline">iOS Developer</h3></div></div><div id="layout" class="pure-g"><div class="pure-u-md-1-1"><a href="https://en.wikipedia.org/wiki/Vilnius"><i class="fas fa-map-marker-alt l-box social-icon"></i><a class="social-media" href="https://en.wikipedia.org/wiki/Vilnius">Vilnius, Lithuania</a></a></div><div class="pure-u-md-1-1"><a href="mailto:povilas@staskus.io"><i class="fas fa-envelope-open-text l-box social-icon"></i><a class="social-media" href="mailto:povilas@staskus.io">Email</a></a></div><div class="pure-u-md-1-1"><a href="https://www.linkedin.com/in/povilas-staškus-6b10528b"><i class="fab fa-linkedin l-box social-icon"></i><a class="social-media" href="https://www.linkedin.com/in/povilas-staškus-6b10528b">LinkedIn</a></a></div><div class="pure-u-md-1-1"><a href="https://github.com/staskus"><i class="fab fa-github-square l-box social-icon"></i><a class="social-media" href="https://github.com/staskus">GitHub</a></a></div><div class="pure-u-md-1-1"><a href="https://twitter.com/PovilasStaskus"><i class="fab fa-twitter-square l-box social-icon"></i><a class="social-media" href="https://twitter.com/PovilasStaskus">Twitter</a></a></div></div></div></div><div class="content pure-u-1 pure-u-md-3-5 pure-u-xl-6-10"><h2 class="post-title"><a href="/notes/Sorting">Sorting</a></h2><p class="post-meta">Last modified: 2022 April 19</p><div class="post-description"><div><h1>Sorting Algorithms</h1><h2>Bubble Sort</h2><p>Time: O(n$^2$), Memory: O(1)</p><ol><li>Go through the array</li><li>Swap 2 elements</li><li>Continue until the array is sorted</li></ol><h2>Selection Sort</h2><p>Time: O(n$^2$), Memory O(1)</p><ol><li>Look through the array</li><li>Find the smallest element and move it to the front</li><li>Repeat</li></ol><h2>Insertion Sort</h2><p>Insertion sort is fast if the array is already sorted or the dataset is really small.</p><p>Time: O(n$^2$)</p><pre><code><span class="comment">// http://raywenderlich.github.io/swift-algorithm-club/Insertion%20Sort/</span>
+
+<span class="keyword">func</span> insertionSort(<span class="keyword">_</span> array: [<span class="type">Int</span>]) -&gt; [<span class="type">Int</span>] {
+  <span class="keyword">var</span> a = array
+  <span class="keyword">for</span> x <span class="keyword">in</span> <span class="number">1</span>..&lt;a.<span class="property">count</span> {
+    <span class="keyword">var</span> y = x
+    <span class="keyword">let</span> temp = a[y]
+    <span class="keyword">while</span> y &gt; <span class="number">0</span> &amp;&amp; temp &lt; a[y - <span class="number">1</span>] {
+      a[y] = a[y - <span class="number">1</span>]                <span class="comment">// 1</span>
+      y -= <span class="number">1</span>
+    }
+    a[y] = temp                      <span class="comment">// 2</span>
+  }
+  <span class="keyword">return</span> a
+}
+</code></pre><h2>Merge Sort</h2><p>Time: O(n log(n)), Memory: O(n)</p><ol><li>Divide the array in half until the array is the size of 1</li><li>Merge them back together in a sorted way</li></ol><p>Merge sort is more efficient and works faster than quicksort in the case of larger array sizes or datasets.</p><img src="/images/notes/7e695531912858f96e685ace9f097d2692be7ebcd2c4e9808388f7a07f171669.png" alt="De-Coding Technical Interview Process - Emma Bostian"/><pre><code><span class="keyword">func</span> mergeSort(<span class="keyword">_</span> array: [<span class="type">Int</span>]) -&gt; [<span class="type">Int</span>] {
+    <span class="keyword">guard</span> array.<span class="property">count</span> &gt; <span class="number">1</span> <span class="keyword">else</span> { <span class="keyword">return</span> array }
+    
+    <span class="keyword">let</span> middleIndex = array.<span class="property">count</span> / <span class="number">2</span>
+
+    <span class="keyword">let</span> leftSide = <span class="call">mergeSort</span>(<span class="type">Array</span>(array[<span class="number">0</span>..&lt;middleIndex]))
+    <span class="keyword">let</span> rightSide = <span class="call">mergeSort</span>(<span class="type">Array</span>(array[middleIndex...]))
+
+    <span class="keyword">return</span> <span class="call">merge</span>(leftSide, rightSide)
+}
+
+<span class="keyword">func</span> merge(<span class="keyword">_</span> leftArray: [<span class="type">Int</span>], <span class="keyword">_</span> rightArray: [<span class="type">Int</span>]) -&gt; [<span class="type">Int</span>] {
+    <span class="keyword">var</span> leftIndex = <span class="number">0</span>
+    <span class="keyword">var</span> rightIndex = <span class="number">0</span>
+
+    <span class="keyword">var</span> orderedArray: [<span class="type">Int</span>] = []
+
+    <span class="comment">// Append one by one in a sorted way
+    // Because we start merging from one element arrays, we are guaranteed that elements will be sorted</span>
+
+    <span class="keyword">while</span> leftIndex &lt; leftArray.<span class="property">count</span> &amp;&amp; rightIndex &lt; rightArray.<span class="property">count</span> {
+        <span class="keyword">if</span> leftArray[leftIndex] &lt; rightArray[rightIndex] {
+            orderedArray.<span class="call">append</span>(leftArray[leftIndex])
+            leftIndex += <span class="number">1</span>
+        } <span class="keyword">else if</span> leftArray[leftIndex] &gt; rightArray[rightIndex] {
+            orderedArray.<span class="call">append</span>(rightArray[rightIndex])
+            rightIndex += <span class="number">1</span>
+        } <span class="keyword">else</span> {
+            orderedArray.<span class="call">append</span>(leftArray[leftIndex])
+            leftIndex += <span class="number">1</span>
+            orderedArray.<span class="call">append</span>(rightArray[rightIndex])
+            rightIndex += <span class="number">1</span>
+        }
+    }
+
+    <span class="comment">// If the left is larger, add the remaining left array elements</span>
+
+    <span class="keyword">while</span> leftIndex &lt; leftArray.<span class="call">count</span> {
+        orderedArray.<span class="call">append</span>(leftArray[leftIndex])
+        leftIndex += <span class="number">1</span>
+    }
+
+    <span class="comment">// If the right is larger, add the remaining right array elements</span>
+
+    <span class="keyword">while</span> rightIndex &lt; rightArray.<span class="call">count</span> {
+        orderedArray.<span class="call">append</span>(rightArray[rightIndex])
+        rightIndex += <span class="number">1</span>
+    }
+
+    <span class="keyword">return</span> orderedArray
+}
+</code></pre><h2>Quick Sort</h2><p>Time: average - O(n log(n)), worst - O(n$^2$). Memory: O(log(n))</p><ol><li>Pick a random element (pivot). There're theories on which element is better to pick. Else, just pick a mid element.</li><li>Split an array into three parts: less than the pivot, equal to the pivot, larger than the pivot</li><li>Merge them back together</li></ol><p>Quicksort is more efficient and works faster than merge sort in case of smaller array sizes or datasets.</p><img src="/images/notes/fa7d4a6f8a071d1f4a6f1e3e9572c148813a06ed4f917a948a40f932f719b073.png" alt="http://raywenderlich.github.io/swift-algorithm-club/Quicksort/"/><img src="/images/notes/80f6b547b2282e1625e834be09bfa310ff0bb1f97819d40ace9eb9b28633f2e3.png" alt="De-Coding Technical Interview Process - Emma Bostian"/><p>In-place:</p><pre><code><span class="keyword">func</span> quickSort(<span class="keyword">_</span> array: <span class="keyword">inout</span> [<span class="type">Int</span>]) {
+    <span class="call">quickSort</span>(&amp;array, <span class="number">0</span>, array.<span class="property">count</span> - <span class="number">1</span>)
+}
+
+<span class="keyword">func</span> quickSort(<span class="keyword">_</span> array: <span class="keyword">inout</span> [<span class="type">Int</span>], <span class="keyword">_</span> left: <span class="type">Int</span>, <span class="keyword">_</span> right: <span class="type">Int</span>) {
+    <span class="keyword">let</span> index = <span class="call">partition</span>(&amp;array, left, right)
+
+    <span class="keyword">if</span> left &lt; index - <span class="number">1</span> {
+        <span class="call">quickSort</span>(&amp;array, left, index - <span class="number">1</span>)
+    }
+
+    <span class="keyword">if</span> right &gt; index {
+        <span class="call">quickSort</span>(&amp;array, index, right)
+    }
+}
+
+<span class="keyword">func</span> partition(<span class="keyword">_</span> array: <span class="keyword">inout</span> [<span class="type">Int</span>], <span class="keyword">_</span> left: <span class="type">Int</span>, <span class="keyword">_</span> right: <span class="type">Int</span>) -&gt; <span class="type">Int</span> {
+    <span class="keyword">let</span> pivot = array[(left + right) / <span class="number">2</span>]
+
+    <span class="keyword">var</span> left = left
+    <span class="keyword">var</span> right = right
+
+    <span class="keyword">while</span> left &lt;= <span class="call">right</span> {
+        <span class="keyword">while</span> array[left] &lt; <span class="call">pivot</span> {
+            left += <span class="number">1</span>
+        }
+
+        <span class="keyword">while</span> array[right] &gt; <span class="call">pivot</span> {
+            right -= <span class="number">1</span>
+        }
+
+        <span class="keyword">if</span> left &lt;= right {
+            array.<span class="call">swapAt</span>(left, right)
+            left += <span class="number">1</span>
+            right -= <span class="number">1</span>
+        }
+    }
+
+    <span class="keyword">return</span> left
+}
+</code></pre><p>Creating additional arrays (Easy implementation)</p><pre><code><span class="comment">// Naive implementation. Creating a new array for every partition.
+// Might be acceptable, better know this one than not know at all</span>
+
+<span class="keyword">func</span> quickSort2(<span class="keyword">_</span> array: [<span class="type">Int</span>]) -&gt; [<span class="type">Int</span>] {
+    <span class="keyword">if</span> array.<span class="property">count</span> &lt; <span class="number">2</span> { <span class="keyword">return</span> array }
+
+    <span class="keyword">let</span> pivotIndex = array.<span class="property">count</span> / <span class="number">2</span>
+    <span class="keyword">let</span> pivot = array[pivotIndex]
+    <span class="keyword">var</span> less: [<span class="type">Int</span>] = []
+    <span class="keyword">var</span> greater: [<span class="type">Int</span>] = []
+
+    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;array.<span class="property">count</span> {
+        <span class="keyword">if</span> i != pivotIndex {
+            array[i] &gt; pivot ? greater.<span class="call">append</span>(array[i]) : less.<span class="call">append</span>(array[i])
+        }
+    }
+
+    <span class="keyword">return</span> <span class="call">quickSort2</span>(less) + [pivot] + <span class="call">quickSort2</span>(greater)
+}
+</code></pre><h2>Heap Sort</h2><p>Time: O(n log(n))</p><h2>Radix Sort</h2><p>Time: O(kn) where k - number of passes of the sorting algorithm</p><p>This sort is usually used for integers as we iterate through each digit of the number grouping numbers by digit.</p></div></div></div><div class="footer pure-u-1"><div class="pure-u-1">© 2022 Povilas Staškus</div><div class="pure-u-1">Generated using <a href="https://github.com/johnsundell/publish">Publish</a></div><div class="pure-u-1"><a href="/feed.rss">RSS feed</a></div></div></div></body></html>

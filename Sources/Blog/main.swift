@@ -8,3 +8,4 @@ try Blog().publish(
     additionalSteps: [.deploy(using: .gitHub("staskus/staskus.github.io"))],
     plugins: [.splash(withClassPrefix: "")]
 )
+
