@@ -196,8 +196,142 @@ func quickSort2(_ array: [Int]) -> [Int] {
 
 Time:  O(n log(n))
 
+## Counting Sort
+
+Time Complexity: O(n+k) where n is the number of elements in input array and k is the range of input. Space: O(n+k)
+
+It can be used to sort strings where the range of characters is clearly limited.
+
+1. Create an array representing counts of each character (ASCII / lowercase English)
+2. Store a count of each character
+3. Build a new string
+
+
+```swift
+func countingSort(_ array: [Int])-> [Int] {
+    guard array.count > 0 else {return []}
+
+    // Step 1
+    // Create an array to store the count of each element
+    let maxElement = array.max() ?? 0
+
+    var countArray = [Int](repeating: 0, count: Int(maxElement + 1))
+    for element in array {
+        countArray[element] += 1
+    }
+
+    // Step 2
+    // Set each value to be the sum of the previous two values
+    for index in 1 ..< countArray.count {
+        let sum = countArray[index] + countArray[index - 1]
+        countArray[index] = sum
+    }
+
+    // Step 3
+    // Place the element in the final array as per the number of elements before it
+    // Loop through the array in reverse to keep the stability of the new sorted array
+    // (For Example: 7 is at index 3 and 6, thus in sortedArray the position of 7 at index 3 should be before 7 at index 6
+    var sortedArray = [Int](repeating: 0, count: array.count)
+    for index in stride(from: array.count - 1, through: 0, by: -1) {
+        let element = array[index]
+        countArray[element] -= 1
+        sortedArray[countArray[element]] = element
+    }
+    return sortedArray
+}
+```
+
 ## Radix Sort
 
 Time: O(kn) where k - number of passes of the sorting algorithm
 
 This sort is usually used for integers as we iterate through each digit of the number grouping numbers by digit.
+
+### Example Tasks
+
+### Merge Sorted Array
+
+Given 2 sorted arrays, merge them in place. Prerequisite: the second array is the size of the final array with preappended zeros at the end.
+
+```swift
+// O(n + m), O(1)
+func merge(_ nums1: inout [Int], _ m: Int, _ nums2: [Int], _ n: Int) {
+    var p1 = m - 1
+    var p2 = n - 1
+    
+    for p in stride(from: nums1.count - 1, through: 0, by: -1) {
+        if p2 < 0 {
+            break
+        }
+        
+        if p1 >= 0, nums1[p1] > nums2[p2] {          
+            nums1[p] = nums1[p1]
+            p1 -= 1
+        } else {
+            nums1[p] = nums2[p2]
+            p2 -= 1
+        }
+    }
+}
+```
+
+## Group Anagrams
+
+The easiest way to group array of anagrams into array of anagram arrays is to use a *hashmap* and key as sorted string. However, the time complexity is not ideal.
+
+```swift
+// Time Complexity:  O ( N K log ⁡ K ) O(NKlogK), where  N N is the length of strs, and  K K is the maximum length of a string in strs. The outer loop has complexity  O ( N ) O(N) as we iterate through each string. Then, we sort each string in  O ( K log ⁡ K ) O(KlogK) time
+// O(NK)
+func groupAnagrams(_ strs: [String]) -> [[String]] {
+    var groupedAnagrams: [String: [String]] = [:]
+    
+    for string in strs {
+        groupedAnagrams[String(string.sorted()), default: []].append(string)
+    }
+    
+    return Array(groupedAnagrams.values)
+}   
+```
+
+If the problem only uses only a specific set of characters (ASCII), we can create a key out of character counts. The inner loop is faster than sorting a string (K vs KlogK)
+
+```swift
+    func groupAnagrams(_ strs: [String]) -> [[String]] {
+        var groupedAnagrams: [String: [String]] = [:]
+        
+        for string in strs {
+            let characterCount = stringToCharacterCount(string)
+            let key = characterCountToKey(characterCount)
+            groupedAnagrams[key, default: []].append(string)
+        }
+        
+        return Array(groupedAnagrams.values)
+    }
+    
+    private func stringToCharacterCount(_ string: String) -> [Int] {
+        var count: [Int] = Array(repeating: 0, count: 26)
+        
+        var characterToNumber: (Character) -> Int = {
+            Int($0.asciiValue!) - Int(Character("a").asciiValue!)
+        }
+        
+        for character in Array(string) {
+            count[characterToNumber(character)] += 1
+        }
+        
+        return count
+    }
+    
+    private func characterCountToKey(_ characterCount: [Int]) -> String {
+        var string = ""
+        
+        for count in characterCount {
+            string += "#\(count)"
+        }
+        
+        return string
+    }
+}
+```
+
+Also it's possible to use *counting sort* for an optimal solution.
