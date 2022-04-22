@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Povilas Staškus</title><description>iOS Developer</description><link>https://www.staskus.io</link><language>en</language><lastBuildDate>Fri, 22 Apr 2022 11:40:09 +0300</lastBuildDate><pubDate>Fri, 22 Apr 2022 11:40:09 +0300</pubDate><ttl>250</ttl><atom:link href="https://www.staskus.io/feed.rss" rel="self" type="application/rss+xml"/><item><guid isPermaLink="true">https://www.staskus.io/notes/Arrays%20and%20Strings</guid><title>Array and Strings</title><description></description><link>https://www.staskus.io/notes/Arrays%20and%20Strings</link><pubDate>Fri, 22 Apr 2022 11:39:37 +0300</pubDate><content:encoded><![CDATA[<h2>Hash Tables</h2><p>We can implement hash tables using the combination of arrays and linked lists.</p><ol><li>We compute hash code and % it from array length</li><li>At each array position there's a linked list to deal with collisions</li><li>When retrieving values find a linked list by a key (hash &amp; index) and then search through a linked list for a key</li></ol><p>Although the worst-case scenario due to collisions is 0(n), a good implementation that keeps collisions at a minimum is considered to be O(1)</p><h2>Resizable Arrays</h2><p>Some programming languages have only fixed-size arrays and use different types of data structures like ArrayList which expands in size dynamically. It does this by doubling its size after reaching a limit.</p><h2>Example tasks to know how to solve:</h2><h3>Two Sum</h3><p>A very popular problem with a lot of variations.</p><p>If the numbers array is already sorted, we can use 2 pointer approach, where one starts at the end and the other at the start. If they both sum to a target, we have found our solution. If our sum is smaller, we need to increase leftIndex. If our sum is larget, we need to decrease our rightIndex.</p><pre><code><span class="comment">// O(n) O(1)</span>
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Povilas Staškus</title><description>iOS Developer</description><link>https://www.staskus.io</link><language>en</language><lastBuildDate>Fri, 22 Apr 2022 15:20:07 +0300</lastBuildDate><pubDate>Fri, 22 Apr 2022 15:20:07 +0300</pubDate><ttl>250</ttl><atom:link href="https://www.staskus.io/feed.rss" rel="self" type="application/rss+xml"/><item><guid isPermaLink="true">https://www.staskus.io/notes/Arrays%20and%20Strings</guid><title>Array and Strings</title><description></description><link>https://www.staskus.io/notes/Arrays%20and%20Strings</link><pubDate>Fri, 22 Apr 2022 15:19:55 +0300</pubDate><content:encoded><![CDATA[<h2>Hash Tables</h2><p>We can implement hash tables using the combination of arrays and linked lists.</p><ol><li>We compute hash code and % it from array length</li><li>At each array position there's a linked list to deal with collisions</li><li>When retrieving values find a linked list by a key (hash &amp; index) and then search through a linked list for a key</li></ol><p>Although the worst-case scenario due to collisions is 0(n), a good implementation that keeps collisions at a minimum is considered to be O(1)</p><h2>Resizable Arrays</h2><p>Some programming languages have only fixed-size arrays and use different types of data structures like ArrayList which expands in size dynamically. It does this by doubling its size after reaching a limit.</p><h2>Example tasks to know how to solve:</h2><h3>Two Sum</h3><p>A very popular problem with a lot of variations.</p><h4>If numbers array is already sorted</h4><p>If the numbers array is already sorted, we can use 2 pointer approach, where one starts at the end and the other at the start. If they both sum to a target, we have found our solution. If our sum is smaller, we need to increase leftIndex. If our sum is larget, we need to decrease our rightIndex.</p><pre><code><span class="comment">// O(n) O(1)</span>
 <span class="keyword">func</span> twoSum(<span class="keyword">_</span> numbers: [<span class="type">Int</span>], <span class="keyword">_</span> target: <span class="type">Int</span>) -&gt; [<span class="type">Int</span>] {
     <span class="keyword">var</span> lowIndex = <span class="number">0</span>
     <span class="keyword">var</span> highIndex = numbers.<span class="property">count</span> - <span class="number">1</span>
@@ -6,12 +6,27 @@
     <span class="keyword">while</span> lowIndex &lt; <span class="call">highIndex</span> {
         <span class="keyword">let</span> sum = numbers[lowIndex] + numbers[highIndex]
         <span class="keyword">if</span> sum == target {
-            <span class="keyword">return</span> [lowIndex + <span class="number">1</span>, highIndex + <span class="number">1</span>]
+            <span class="keyword">return</span> [lowIndex, highIndex]
         } <span class="keyword">else if</span> sum &gt; target {
             highIndex -= <span class="number">1</span>
         } <span class="keyword">else</span> {
             lowIndex += <span class="number">1</span>
         }
+    }
+    
+    <span class="keyword">return</span> []
+}
+</code></pre><h4>If numbers array is not sorted</h4><ol><li>We calculate the remaining value</li><li>If it's already in the map, we return indices</li><li>Else, save the current number in the map</li></ol><pre><code><span class="keyword">func</span> twoSum(<span class="keyword">_</span> numbers: [<span class="type">Int</span>], <span class="keyword">_</span> target: <span class="type">Int</span>) -&gt; [<span class="type">Int</span>] {
+    <span class="keyword">var</span> map: [<span class="type">Int</span>: <span class="type">Int</span>] = [:]
+    
+    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;numbers.<span class="property">count</span> {
+        <span class="keyword">let</span> remaining = target - numbers[i]
+        
+        <span class="keyword">if let</span> remainingIndex = map[remaining] {
+            <span class="keyword">return</span> [remainingIndex, i]
+        }
+        
+        map[numbers[i]] = i
     }
     
     <span class="keyword">return</span> []

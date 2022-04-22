@@ -23,6 +23,8 @@ Some programming languages have only fixed-size arrays and use different types o
 
 A very popular problem with a lot of variations.
 
+#### If numbers array is already sorted
+
 If the numbers array is already sorted, we can use 2 pointer approach, where one starts at the end and the other at the start. If they both sum to a target, we have found our solution. If our sum is smaller, we need to increase leftIndex. If our sum is larget, we need to decrease our rightIndex.
 
 ```swift
@@ -34,12 +36,36 @@ func twoSum(_ numbers: [Int], _ target: Int) -> [Int] {
     while lowIndex < highIndex {
         let sum = numbers[lowIndex] + numbers[highIndex]
         if sum == target {
-            return [lowIndex + 1, highIndex + 1]
+            return [lowIndex, highIndex]
         } else if sum > target {
             highIndex -= 1
         } else {
             lowIndex += 1
         }
+    }
+    
+    return []
+}
+```
+
+#### If numbers array is not sorted
+
+1. We calculate the remaining value
+2. If it's already in the map, we return indices
+3. Else, save the current number in the map
+
+```swift
+func twoSum(_ numbers: [Int], _ target: Int) -> [Int] {
+    var map: [Int: Int] = [:]
+    
+    for i in 0..<numbers.count {
+        let remaining = target - numbers[i]
+        
+        if let remainingIndex = map[remaining] {
+            return [remainingIndex, i]
+        }
+        
+        map[numbers[i]] = i
     }
     
     return []
