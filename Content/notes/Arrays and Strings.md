@@ -19,6 +19,33 @@ Some programming languages have only fixed-size arrays and use different types o
 
 ## Example tasks to know how to solve:
 
+### Two Sum
+
+A very popular problem with a lot of variations.
+
+If the numbers array is already sorted, we can use 2 pointer approach, where one starts at the end and the other at the start. If they both sum to a target, we have found our solution. If our sum is smaller, we need to increase leftIndex. If our sum is larget, we need to decrease our rightIndex.
+
+```swift
+// O(n) O(1)
+func twoSum(_ numbers: [Int], _ target: Int) -> [Int] {
+    var lowIndex = 0
+    var highIndex = numbers.count - 1
+    
+    while lowIndex < highIndex {
+        let sum = numbers[lowIndex] + numbers[highIndex]
+        if sum == target {
+            return [lowIndex + 1, highIndex + 1]
+        } else if sum > target {
+            highIndex -= 1
+        } else {
+            lowIndex += 1
+        }
+    }
+    
+    return []
+}
+```
+
 ### Determine if String has unique characters
 
 We can use Sets or Hashmaps. If we can only use Arrays clarify the limitations of an alphabet. If it's the English alphabet we can create an array of size 26 (size 128 if including all ASCII characters) and the element's position would be *character.asciiValue - 'a'.asciiValue*.
@@ -178,3 +205,17 @@ func maxSubArray(_ nums: [Int]) -> Int {
     return maxNum
 }
 ```
+
+### Find k closest(smallest, largest) points in array
+
+Options:
+1. Sorting - O(n logn), O(1)
+2. Max heap - O(n + klogn), O(n)
+3. Binary Search - O(n), O(n)
+4. Quick Select - O(n), O(1)
+
+We strive for O(n) time complexity, and O(1) space complexity.
+
+Anytime we are tasked with finding the k (or kth) [smallest/largest/etc.] element(s), we should always consider whether the **QuickSelect** algorithm can be applied.
+
+Unlike the QuickSort algorithm, the QuickSelect algorithm roughly halves the remaining elements needed to process at each iteration, so the total number of processes will average at 2N hich results in an average time complexity of O(N). The worst case is O(n^2) though. 

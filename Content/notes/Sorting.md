@@ -177,7 +177,7 @@ Creating additional arrays (Easy implementation)
 func quickSort2(_ array: [Int]) -> [Int] {
     if array.count < 2 { return array }
 
-    let pivotIndex = array.count / 2
+    let pivotIndex = array.count + ((0 - array.count) / 2)
     let pivot = array[pivotIndex]
     var less: [Int] = []
     var greater: [Int] = []
