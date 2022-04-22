@@ -55,6 +55,7 @@ func twoSum(_ numbers: [Int], _ target: Int) -> [Int] {
 3. Else, save the current number in the map
 
 ```swift
+// O(n) O(n)
 func twoSum(_ numbers: [Int], _ target: Int) -> [Int] {
     var map: [Int: Int] = [:]
     
@@ -72,6 +73,11 @@ func twoSum(_ numbers: [Int], _ target: Int) -> [Int] {
 }
 ```
 
+### Three Sum
+
+Such task is a continuation of Two Sum. We should find ways to call Two Sum logic for elements in a Three Sum problem. Naturally, the time complexity grows to O(n^2).
+ 
+ 
 ### Determine if String has unique characters
 
 We can use Sets or Hashmaps. If we can only use Arrays clarify the limitations of an alphabet. If it's the English alphabet we can create an array of size 26 (size 128 if including all ASCII characters) and the element's position would be *character.asciiValue - 'a'.asciiValue*.
