@@ -516,6 +516,94 @@ func lowestCommonAncestor(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> 
 }
 ```
 
+### Implement Trie (prefix tree)
+
+This data structure is used to implement autocomplete, spell checker, IP routing, T9 predictive text, solve word games, and many more. 
+
+Trie is a rooted tree that has:
+- Maximum of X links to children (X could be for example 26, the number of lowercase letters in an English alphabet)
+- A boolean field that specifies if the node is the end or not
+
+Main functions of a trie:
+1. Insert word (Time complexity O(m), Space complexity O(m)). Where m - length of the word
+2. Search word (Time complexity O(m), Space complexity O(1))
+3. Search prefix (Same as word, but we don't check if the last letter is the end)
+
+Implementation:
+
+A TrieNode. A node that holds a list of its links. We could use HashTable or Array of fixed size.
+```swift
+class TrieNode {
+    var links: [Character: TrieNode] = [:]
+    var isEnd = false
+    
+    func getNode(_ char: Character) -> TrieNode? {
+        return links[char]
+    }
+    
+    @discardableResult
+    func createNode(_ char: Character) -> TrieNode {
+        let node = TrieNode()
+        links[char] = node
+        return node
+    }
+}
+```
+
+A Trie.
+
+To insert, we just start with the root and keep adding links.
+To search, we start with the root, and look if each node has a character as a link.
+
+```swift
+class Trie {
+    private var root = TrieNode()
+    
+    func insert(_ word: String) {
+        var currentNode = root
+        
+        for letter in word {
+            if let node = currentNode.getNode(letter) {
+                currentNode = node
+            } else {
+                currentNode = currentNode.createNode(letter)
+            }
+        }
+        
+        currentNode.isEnd = true
+    }
+    
+    func search(_ word: String) -> Bool {
+        guard let node = findEndNode(word) else {
+            return false
+        }
+        
+        return node.isEnd
+    }
+    
+    func startsWith(_ prefix: String) -> Bool {
+        return findEndNode(prefix) != nil
+    }
+
+    // MARK: - Private
+    
+    private func findEndNode(_ word: String) -> TrieNode? {
+        var currentNode = root
+        for letter in word {
+            if let node = currentNode.getNode(letter) {
+                currentNode = node
+            } else {
+                return nil
+            }
+        }
+        
+        return currentNode
+    }
+}
+
+
+```
+
 # Additional Information
 
 ## Spanning Tree
