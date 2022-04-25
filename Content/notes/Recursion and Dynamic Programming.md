@@ -148,3 +148,70 @@ var combinations = Array(repeating: 0, count: amount + 1)
         
         return combinations[amount]
 ```
+
+### Coin Change
+
+Given the array of coins, return the fewest number of coins that you need to make up that amount.
+
+### Dynamic Programming - top down approach
+
+Use memoization and recursion:
+
+```swift
+// Dynamic programming - top down approach
+// Time: O(S*n) where S is the amount and n is denomination count
+// Space complexity O(s) for memo
+func coinChange(_ coins: [Int], _ amount: Int) -> Int {
+    var memo: [Int: Int] = [:]
+    return coinsChange(coins, amount, &memo)
+}
+
+private func coinsChange(_ coins: [Int], _ remaining: Int, _ memo: inout [Int: Int]) -> Int {
+    if remaining < 0 { return -1 }
+    if remaining == 0 { return 0 }
+    
+    if let previouslyCalculatedCount = memo[remaining] {
+        return previouslyCalculatedCount
+    }
+    
+    var minValue = Int.max
+    
+    for coin in coins {
+        let result = coinsChange(coins, remaining - coin, &memo)
+        if result >= 0 && result < minValue {
+            minValue = result + 1
+        }
+    }
+    
+    memo[remaining] = minValue == Int.max ? -1 : minValue
+    return memo[remaining]!
+}
+```
+
+### Dynamic Programming - Bottom up approach
+
+The key is understanding this line `counts[currentAmount] = min(counts[currentAmount], counts[currentAmount - coins[coinIndex]] + 1)`
+
+If we get a number not equal to max in `counts[currentAmount - coins[coinIndex]]` it means that we already calculated a minimum amount and we can just add one coin `coin[coinIndex]` .
+
+```swift
+// Dynamic programming - bottom up approach
+
+func coinChange(_ coins: [Int], _ amount: Int) -> Int {
+    guard amount > 0 else { return 0 }
+    
+    let max = amount + 1
+    var counts: [Int] = Array(repeating: max, count: amount + 1)
+    counts[0] = 0
+    
+    for currentAmount in 1...amount {
+        for coinIndex in 0..<coins.count {
+            if coins[coinIndex] <= currentAmount {
+                counts[currentAmount] = min(counts[currentAmount], counts[currentAmount - coins[coinIndex]] + 1)
+            }
+        }
+    }
+    
+    return counts[amount] == max ? -1 : counts[amount]
+}
+```

@@ -1,4 +1,126 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Povilas Staškus</title><description>iOS Developer</description><link>https://www.staskus.io</link><language>en</language><lastBuildDate>Mon, 25 Apr 2022 17:45:37 +0300</lastBuildDate><pubDate>Mon, 25 Apr 2022 17:45:37 +0300</pubDate><ttl>250</ttl><atom:link href="https://www.staskus.io/feed.rss" rel="self" type="application/rss+xml"/><item><guid isPermaLink="true">https://www.staskus.io/notes/Trees%20and%20Graphs</guid><title>Trees and Graphs</title><description></description><link>https://www.staskus.io/notes/Trees%20and%20Graphs</link><pubDate>Mon, 25 Apr 2022 17:45:18 +0300</pubDate><content:encoded><![CDATA[<h1>Trees</h1><p><strong>Tree</strong> - a data structure composed of nodes. Each tree has a root node, each child has zero or more child nodes and doesn't have cycles.</p><p><strong>Leaf Node</strong> - a node with no children.</p><h2>Binary trees</h2><p><strong>Binary Tree</strong> - each node has up to two children.</p><p><strong>Binary Search Tree</strong> - when <em>every</em> node is specifically ordered.</p><p><strong>Complete Binary Tree</strong> - every level is filled except the last level. Last level filling from left to right.</p><p><strong>Full Binary Tree</strong> - each node has either zero or two children</p><p><strong>Perfect Binary Tree</strong> - full, complete and all nodes at the same level.</p><h3>Traversal</h3><h4>In-Order</h4><p>First visit the left branch, then the current node then the right branch.</p><pre><code><span class="keyword">func</span> traverseInOrder(<span class="keyword">_</span> node: <span class="type">Node</span>?) {
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Povilas Staškus</title><description>iOS Developer</description><link>https://www.staskus.io</link><language>en</language><lastBuildDate>Mon, 25 Apr 2022 18:56:54 +0300</lastBuildDate><pubDate>Mon, 25 Apr 2022 18:56:54 +0300</pubDate><ttl>250</ttl><atom:link href="https://www.staskus.io/feed.rss" rel="self" type="application/rss+xml"/><item><guid isPermaLink="true">https://www.staskus.io/notes/Recursion%20and%20Dynamic%20Programming</guid><title>Recursion and Dynamic Programming</title><description></description><link>https://www.staskus.io/notes/Recursion%20and%20Dynamic%20Programming</link><pubDate>Mon, 25 Apr 2022 18:56:48 +0300</pubDate><content:encoded><![CDATA[<p>Hints for problems that are good candidates for recursion: <em> Compute the nth element to... </em> Write code to list the first n... * Implement a method to compute all...</p><p>Approaches: <em> Bottom-Up: Start by solving the most simple case </em> Top-Down: Start with more complex and think about how to split them into subproblems * Half-and-Half: Dividing the data set in half to solve the problem and then merging together the results</p><p>Recursive problems are space-intensive and take at least O(n) of memory. The same problems can be solved iteratively although it's usually more complex.</p><h2>Example problems</h2><h3>Tribonacci Number</h3><img src="https://www.staskus.io/images/notes/b8daa97dce2af0a8feb01d20e075456e68904da809bc44e9afb26ac5a82ca17e.png" alt="LeetCode.com"/><p>Such a problem can also be solved iteratively. When we use memoization we can notice that we only need to know the last 3 numbers. Instead of saving all the numbers in the dictionary, we can only save the last 3 in the variable:</p><pre><code><span class="comment">// Time - O(n), Space - 0(1)</span>
+<span class="keyword">func</span> tribonacci(<span class="keyword">_</span> n: <span class="type">Int</span>) -&gt; <span class="type">Int</span> {
+    <span class="keyword">var</span> memo0 = <span class="number">0</span>
+    <span class="keyword">var</span> memo1 = <span class="number">1</span>
+    <span class="keyword">var</span> memo2 = <span class="number">1</span>
+    
+    <span class="keyword">guard</span> n &gt; <span class="number">0</span> <span class="keyword">else</span> { <span class="keyword">return</span> <span class="number">0</span> }
+    <span class="keyword">guard</span> n &gt; <span class="number">2</span> <span class="keyword">else</span> { <span class="keyword">return</span> <span class="number">1</span> }
+    
+    <span class="keyword">var</span> temp = <span class="number">0</span>
+    
+    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">3</span>...n {
+        temp = memo0 + memo1 + memo2
+        memo0 = memo1
+        memo1 = memo2
+        memo2 = temp
+    }
+    
+    <span class="keyword">return</span> temp
+}
+</code></pre><p>We can also save time instead of space by adding the results into an array before returning the value. This is only applicable if we know the upper bound. Let's say we know that n will be a maximum 40, then we can precompute those 40 values and whenever anyone asks for tribonacci we just return a result.</p><pre><code><span class="comment">// Time - O(1), Space - O(n)</span> 
+<span class="keyword">func</span> tribonacci(<span class="keyword">_</span> n: <span class="type">Int</span>) -&gt; <span class="type">Int</span> {
+    <span class="keyword">guard</span> n &gt; <span class="number">0</span> <span class="keyword">else</span> { <span class="keyword">return</span> <span class="number">0</span> }
+    <span class="keyword">guard</span> n &gt; <span class="number">2</span> <span class="keyword">else</span> { <span class="keyword">return</span> <span class="number">1</span> }
+    
+    <span class="keyword">var</span> nums: [<span class="type">Int</span>] = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>]
+    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">3</span>...n {
+        nums.<span class="call">append</span>(nums[i-<span class="number">1</span>] + nums[i-<span class="number">2</span>] + nums[i-<span class="number">3</span>])
+    } 
+
+    <span class="keyword">return</span> nums[n]
+}
+</code></pre><h3>Unique Paths with Obstacles in Grid</h3><p>When starting from (0,0) how many unique paths there are to reach (n-1, n-1) if the path does not encounter obstacles?</p><p>We can use the grid itself as a way to convey information. We first set values of the first column and the first row. If they aren't any obstacles the value is 1, if there're the value is 0. Then we can iterate from the rest of the grid and the value of the cell are the sum of two values from the left and the top. The result at the (n-1, n-1) is the number of unique paths.</p><p>O(M×N), O(1)</p><h3>Divide 2 integers only using addition and subtraction</h3><p>This brute force solution is to do the iteration and sum divisor until we get a number larger than the dividend. This is not efficient.</p><p>The more efficient solution is to use <strong>exponential search</strong> which in spirit is similar to a binary search.</p><h3>Unique permutations with duplicate input</h3><p>If we are given an array of numbers with possible duplications and we need to provide all the possible permutations, we need to start by creating a frequency table of each number (character). This way if we get [1, 1, 1, 1, 1] don't crate duplicating permutations.</p><p>O(n!)</p><h3>Generate Parenthesis</h3><p>Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.</p><p>This requires a <em>backtracking</em> recursive algorithm. With this concrete issue, the hard part is the calculation of time complexity.</p><p>It's better to know that this is a backtracking algorithm, that has generally a performance O(2^n). In this concrete scenario, we have less complexity, as we don't need to explore all the permutations of parenthesis due to the relationship of closed/opened parenthesis.</p><pre><code><span class="keyword">private var</span> max = <span class="number">0</span>
+
+<span class="keyword">func</span> generateParenthesis(<span class="keyword">_</span> n: <span class="type">Int</span>) -&gt; [<span class="type">String</span>] {****
+    max = n
+    <span class="keyword">var</span> result: [<span class="type">String</span>] = []
+    <span class="call">backtrack</span>(&amp;result, <span class="number">0</span>, <span class="number">0</span>)
+    <span class="keyword">return</span> result
+}
+
+<span class="keyword">private func</span> backtrack(<span class="keyword">_</span> result: <span class="keyword">inout</span> [<span class="type">String</span>],
+                        <span class="keyword">_</span> opening: <span class="type">Int</span>,
+                        <span class="keyword">_</span> closing: <span class="type">Int</span>,
+                        <span class="keyword">_</span> current: <span class="type">String</span> = <span class="string">""</span>) {
+                    
+    <span class="keyword">if</span> current.<span class="property">count</span> == max * <span class="number">2</span> {
+        result.<span class="call">append</span>(current)
+        <span class="keyword">return</span>
+    }
+    
+    <span class="keyword">if</span> opening &lt; max {
+        <span class="keyword">var</span> current = current
+        current.<span class="call">append</span>(<span class="string">"("</span>)
+        <span class="call">backtrack</span>(&amp;result, opening + <span class="number">1</span>, closing, current)
+    }
+    
+    <span class="keyword">if</span> closing &lt; opening {
+        <span class="keyword">var</span> current = current
+        current.<span class="call">append</span>(<span class="string">")"</span>)
+        <span class="call">backtrack</span>(&amp;result, opening, closing + <span class="number">1</span>, current)
+    }
+}
+</code></pre><h3>Coin Change</h3><p>Given the set of coins (1, 2, 5) in how many ways we can combine it to a given sum (100).</p><p>The trick for a quick solution is this algorithm.</p><p>We calculate the number of combinations for a given amount by adding to it already calculates combinations for x-coin amount <code>combinations[x] += combinations[x - coin]</code>.</p><pre><code><span class="keyword">var</span> combinations = <span class="type">Array</span>(repeating: <span class="number">0</span>, count: amount + <span class="number">1</span>)
+        combinations[<span class="number">0</span>] = <span class="number">1</span> <span class="comment">// algo requires it</span>
+        
+        <span class="keyword">for</span> coin <span class="keyword">in</span> coins {
+            <span class="keyword">if</span> coin &lt;= amount {
+                <span class="keyword">for</span> x <span class="keyword">in</span> coin..&lt;amount+<span class="number">1</span> {
+                    combinations[x] += combinations[x - coin]
+                }
+            }
+        }
+        
+        <span class="keyword">return</span> combinations[amount]
+</code></pre><h3>Coin Change</h3><p>Given the array of coins, return the fewest number of coins that you need to make up that amount.</p><h3>Dynamic Programming - top down approach</h3><p>Use memoization and recursion:</p><pre><code><span class="comment">// Dynamic programming - top down approach
+// Time: O(S*n) where S is the amount and n is denomination count
+// Space complexity O(s) for memo</span>
+<span class="keyword">func</span> coinChange(<span class="keyword">_</span> coins: [<span class="type">Int</span>], <span class="keyword">_</span> amount: <span class="type">Int</span>) -&gt; <span class="type">Int</span> {
+    <span class="keyword">var</span> memo: [<span class="type">Int</span>: <span class="type">Int</span>] = [:]
+    <span class="keyword">return</span> <span class="call">coinsChange</span>(coins, amount, &amp;memo)
+}
+
+<span class="keyword">private func</span> coinsChange(<span class="keyword">_</span> coins: [<span class="type">Int</span>], <span class="keyword">_</span> remaining: <span class="type">Int</span>, <span class="keyword">_</span> memo: <span class="keyword">inout</span> [<span class="type">Int</span>: <span class="type">Int</span>]) -&gt; <span class="type">Int</span> {
+    <span class="keyword">if</span> remaining &lt; <span class="number">0</span> { <span class="keyword">return</span> -<span class="number">1</span> }
+    <span class="keyword">if</span> remaining == <span class="number">0</span> { <span class="keyword">return</span> <span class="number">0</span> }
+    
+    <span class="keyword">if let</span> previouslyCalculatedCount = memo[remaining] {
+        <span class="keyword">return</span> previouslyCalculatedCount
+    }
+    
+    <span class="keyword">var</span> minValue = <span class="type">Int</span>.<span class="property">max</span>
+    
+    <span class="keyword">for</span> coin <span class="keyword">in</span> coins {
+        <span class="keyword">let</span> result = <span class="call">coinsChange</span>(coins, remaining - coin, &amp;memo)
+        <span class="keyword">if</span> result &gt;= <span class="number">0</span> &amp;&amp; result &lt; minValue {
+            minValue = result + <span class="number">1</span>
+        }
+    }
+    
+    memo[remaining] = minValue == <span class="type">Int</span>.<span class="property">max</span> ? -<span class="number">1</span> : minValue
+    <span class="keyword">return</span> memo[remaining]!
+}
+</code></pre><h3>Dynamic Programming - Bottom up approach</h3><p>The key is understanding this line <code>counts[currentAmount] = min(counts[currentAmount], counts[currentAmount - coins[coinIndex]] + 1)</code></p><p>If we get a number not equal to max in <code>counts[currentAmount - coins[coinIndex]]</code> it means that we already calculated a minimum amount and we can just add one coin <code>coin[coinIndex]</code> .</p><pre><code><span class="comment">// Dynamic programming - bottom up approach</span>
+
+<span class="keyword">func</span> coinChange(<span class="keyword">_</span> coins: [<span class="type">Int</span>], <span class="keyword">_</span> amount: <span class="type">Int</span>) -&gt; <span class="type">Int</span> {
+    <span class="keyword">guard</span> amount &gt; <span class="number">0</span> <span class="keyword">else</span> { <span class="keyword">return</span> <span class="number">0</span> }
+    
+    <span class="keyword">let</span> max = amount + <span class="number">1</span>
+    <span class="keyword">var</span> counts: [<span class="type">Int</span>] = <span class="type">Array</span>(repeating: max, count: amount + <span class="number">1</span>)
+    counts[<span class="number">0</span>] = <span class="number">0</span>
+    
+    <span class="keyword">for</span> currentAmount <span class="keyword">in</span> <span class="number">1</span>...amount {
+        <span class="keyword">for</span> coinIndex <span class="keyword">in</span> <span class="number">0</span>..&lt;coins.<span class="property">count</span> {
+            <span class="keyword">if</span> coins[coinIndex] &lt;= currentAmount {
+                counts[currentAmount] = <span class="call">min</span>(counts[currentAmount], counts[currentAmount - coins[coinIndex]] + <span class="number">1</span>)
+            }
+        }
+    }
+    
+    <span class="keyword">return</span> counts[amount] == max ? -<span class="number">1</span> : counts[amount]
+}
+</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://www.staskus.io/notes/Trees%20and%20Graphs</guid><title>Trees and Graphs</title><description></description><link>https://www.staskus.io/notes/Trees%20and%20Graphs</link><pubDate>Mon, 25 Apr 2022 17:45:18 +0300</pubDate><content:encoded><![CDATA[<h1>Trees</h1><p><strong>Tree</strong> - a data structure composed of nodes. Each tree has a root node, each child has zero or more child nodes and doesn't have cycles.</p><p><strong>Leaf Node</strong> - a node with no children.</p><h2>Binary trees</h2><p><strong>Binary Tree</strong> - each node has up to two children.</p><p><strong>Binary Search Tree</strong> - when <em>every</em> node is specifically ordered.</p><p><strong>Complete Binary Tree</strong> - every level is filled except the last level. Last level filling from left to right.</p><p><strong>Full Binary Tree</strong> - each node has either zero or two children</p><p><strong>Perfect Binary Tree</strong> - full, complete and all nodes at the same level.</p><h3>Traversal</h3><h4>In-Order</h4><p>First visit the left branch, then the current node then the right branch.</p><pre><code><span class="keyword">func</span> traverseInOrder(<span class="keyword">_</span> node: <span class="type">Node</span>?) {
     <span class="keyword">if let</span> node = node {
         <span class="call">traverseInOrder</span>(node?.<span class="property">left</span>)
         <span class="call">visit</span>(node) <span class="comment">// for example just print</span>
@@ -761,81 +883,6 @@
 <span class="keyword">private func</span> position(for letter: <span class="type">Character</span>) -&gt; <span class="type">Int</span> {
     <span class="keyword">return</span> <span class="type">Int</span>(letter.<span class="property">asciiValue</span>! - <span class="type">Character</span>(<span class="string">"A"</span>).<span class="property">asciiValue</span>!)
 }
-</code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://www.staskus.io/notes/Recursion%20and%20Dynamic%20Programming</guid><title>Recursion and Dynamic Programming</title><description></description><link>https://www.staskus.io/notes/Recursion%20and%20Dynamic%20Programming</link><pubDate>Fri, 8 Apr 2022 10:40:47 +0300</pubDate><content:encoded><![CDATA[<p>Hints for problems that are good candidates for recursion: <em> Compute the nth element to... </em> Write code to list the first n... * Implement a method to compute all...</p><p>Approaches: <em> Bottom-Up: Start by solving the most simple case </em> Top-Down: Start with more complex and think about how to split them into subproblems * Half-and-Half: Dividing the data set in half to solve the problem and then merging together the results</p><p>Recursive problems are space-intensive and take at least O(n) of memory. The same problems can be solved iteratively although it's usually more complex.</p><h2>Example problems</h2><h3>Tribonacci Number</h3><img src="https://www.staskus.io/images/notes/b8daa97dce2af0a8feb01d20e075456e68904da809bc44e9afb26ac5a82ca17e.png" alt="LeetCode.com"/><p>Such a problem can also be solved iteratively. When we use memoization we can notice that we only need to know the last 3 numbers. Instead of saving all the numbers in the dictionary, we can only save the last 3 in the variable:</p><pre><code><span class="comment">// Time - O(n), Space - 0(1)</span>
-<span class="keyword">func</span> tribonacci(<span class="keyword">_</span> n: <span class="type">Int</span>) -&gt; <span class="type">Int</span> {
-    <span class="keyword">var</span> memo0 = <span class="number">0</span>
-    <span class="keyword">var</span> memo1 = <span class="number">1</span>
-    <span class="keyword">var</span> memo2 = <span class="number">1</span>
-    
-    <span class="keyword">guard</span> n &gt; <span class="number">0</span> <span class="keyword">else</span> { <span class="keyword">return</span> <span class="number">0</span> }
-    <span class="keyword">guard</span> n &gt; <span class="number">2</span> <span class="keyword">else</span> { <span class="keyword">return</span> <span class="number">1</span> }
-    
-    <span class="keyword">var</span> temp = <span class="number">0</span>
-    
-    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">3</span>...n {
-        temp = memo0 + memo1 + memo2
-        memo0 = memo1
-        memo1 = memo2
-        memo2 = temp
-    }
-    
-    <span class="keyword">return</span> temp
-}
-</code></pre><p>We can also save time instead of space by adding the results into an array before returning the value. This is only applicable if we know the upper bound. Let's say we know that n will be a maximum 40, then we can precompute those 40 values and whenever anyone asks for tribonacci we just return a result.</p><pre><code><span class="comment">// Time - O(1), Space - O(n)</span> 
-<span class="keyword">func</span> tribonacci(<span class="keyword">_</span> n: <span class="type">Int</span>) -&gt; <span class="type">Int</span> {
-    <span class="keyword">guard</span> n &gt; <span class="number">0</span> <span class="keyword">else</span> { <span class="keyword">return</span> <span class="number">0</span> }
-    <span class="keyword">guard</span> n &gt; <span class="number">2</span> <span class="keyword">else</span> { <span class="keyword">return</span> <span class="number">1</span> }
-    
-    <span class="keyword">var</span> nums: [<span class="type">Int</span>] = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>]
-    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">3</span>...n {
-        nums.<span class="call">append</span>(nums[i-<span class="number">1</span>] + nums[i-<span class="number">2</span>] + nums[i-<span class="number">3</span>])
-    } 
-
-    <span class="keyword">return</span> nums[n]
-}
-</code></pre><h3>Unique Paths with Obstacles in Grid</h3><p>When starting from (0,0) how many unique paths there are to reach (n-1, n-1) if the path does not encounter obstacles?</p><p>We can use the grid itself as a way to convey information. We first set values of the first column and the first row. If they aren't any obstacles the value is 1, if there're the value is 0. Then we can iterate from the rest of the grid and the value of the cell are the sum of two values from the left and the top. The result at the (n-1, n-1) is the number of unique paths.</p><p>O(M×N), O(1)</p><h3>Divide 2 integers only using addition and subtraction</h3><p>This brute force solution is to do the iteration and sum divisor until we get a number larger than the dividend. This is not efficient.</p><p>The more efficient solution is to use <strong>exponential search</strong> which in spirit is similar to a binary search.</p><h3>Unique permutations with duplicate input</h3><p>If we are given an array of numbers with possible duplications and we need to provide all the possible permutations, we need to start by creating a frequency table of each number (character). This way if we get [1, 1, 1, 1, 1] don't crate duplicating permutations.</p><p>O(n!)</p><h3>Generate Parenthesis</h3><p>Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.</p><p>This requires a <em>backtracking</em> recursive algorithm. With this concrete issue, the hard part is the calculation of time complexity.</p><p>It's better to know that this is a backtracking algorithm, that has generally a performance O(2^n). In this concrete scenario, we have less complexity, as we don't need to explore all the permutations of parenthesis due to the relationship of closed/opened parenthesis.</p><pre><code><span class="keyword">private var</span> max = <span class="number">0</span>
-
-<span class="keyword">func</span> generateParenthesis(<span class="keyword">_</span> n: <span class="type">Int</span>) -&gt; [<span class="type">String</span>] {****
-    max = n
-    <span class="keyword">var</span> result: [<span class="type">String</span>] = []
-    <span class="call">backtrack</span>(&amp;result, <span class="number">0</span>, <span class="number">0</span>)
-    <span class="keyword">return</span> result
-}
-
-<span class="keyword">private func</span> backtrack(<span class="keyword">_</span> result: <span class="keyword">inout</span> [<span class="type">String</span>],
-                        <span class="keyword">_</span> opening: <span class="type">Int</span>,
-                        <span class="keyword">_</span> closing: <span class="type">Int</span>,
-                        <span class="keyword">_</span> current: <span class="type">String</span> = <span class="string">""</span>) {
-                    
-    <span class="keyword">if</span> current.<span class="property">count</span> == max * <span class="number">2</span> {
-        result.<span class="call">append</span>(current)
-        <span class="keyword">return</span>
-    }
-    
-    <span class="keyword">if</span> opening &lt; max {
-        <span class="keyword">var</span> current = current
-        current.<span class="call">append</span>(<span class="string">"("</span>)
-        <span class="call">backtrack</span>(&amp;result, opening + <span class="number">1</span>, closing, current)
-    }
-    
-    <span class="keyword">if</span> closing &lt; opening {
-        <span class="keyword">var</span> current = current
-        current.<span class="call">append</span>(<span class="string">")"</span>)
-        <span class="call">backtrack</span>(&amp;result, opening, closing + <span class="number">1</span>, current)
-    }
-}
-</code></pre><h3>Coin Change</h3><p>Given the set of coins (1, 2, 5) in how many ways we can combine it to a given sum (100).</p><p>The trick for a quick solution is this algorithm.</p><p>We calculate the number of combinations for a given amount by adding to it already calculates combinations for x-coin amount <code>combinations[x] += combinations[x - coin]</code>.</p><pre><code><span class="keyword">var</span> combinations = <span class="type">Array</span>(repeating: <span class="number">0</span>, count: amount + <span class="number">1</span>)
-        combinations[<span class="number">0</span>] = <span class="number">1</span> <span class="comment">// algo requires it</span>
-        
-        <span class="keyword">for</span> coin <span class="keyword">in</span> coins {
-            <span class="keyword">if</span> coin &lt;= amount {
-                <span class="keyword">for</span> x <span class="keyword">in</span> coin..&lt;amount+<span class="number">1</span> {
-                    combinations[x] += combinations[x - coin]
-                }
-            }
-        }
-        
-        <span class="keyword">return</span> combinations[amount]
 </code></pre>]]></content:encoded></item><item><guid isPermaLink="true">https://www.staskus.io/notes/Object%20Oriented%20Design</guid><title>Object-Oriented Design</title><description></description><link>https://www.staskus.io/notes/Object%20Oriented%20Design</link><pubDate>Fri, 8 Apr 2022 10:39:33 +0300</pubDate><content:encoded><![CDATA[<p>When designing a system it's important to know how to:</p><ol><li>Handle Ambiguity. Ask questions about who, what, where, when, who, and why to design a system for a clear purpose.</li><li>Define the Core Objects (Person, Table, Meal, etc)</li><li>Define Relationships</li><li>Investigate Actions</li></ol>]]></content:encoded></item><item><guid isPermaLink="true">https://www.staskus.io/notes/System%20Design%20and%20Scalability</guid><title>System Design and Scalability</title><description></description><link>https://www.staskus.io/notes/System%20Design%20and%20Scalability</link><pubDate>Wed, 6 Apr 2022 09:04:22 +0300</pubDate><content:encoded><![CDATA[]]></content:encoded></item><item><guid isPermaLink="true">https://www.staskus.io/notes/Math%20and%20Logic%20Puzzles</guid><title>Math and Logic Puzzles</title><description></description><link>https://www.staskus.io/notes/Math%20and%20Logic%20Puzzles</link><pubDate>Thu, 31 Mar 2022 09:54:42 +0300</pubDate><content:encoded><![CDATA[<h2>Popular tasks</h2><h3>Generate a list of prime numbers</h3><pre><code><span class="comment">// The Sieve of Eeratosthenes is a way to generate a list of primes by recognizing that all non-prime numbers are divisible by a prime number
 
 // The idea is to cross of numbers that are divisible by the next available prime
