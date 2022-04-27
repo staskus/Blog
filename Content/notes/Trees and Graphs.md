@@ -600,8 +600,64 @@ class Trie {
         return currentNode
     }
 }
+```
 
+### Number of Islands in a Grid
 
+Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), return the number of islands.
+
+```swift
+Input: grid = [
+  ["1","1","0","0","0"],
+  ["1","1","0","0","0"],
+  ["0","0","1","0","0"],
+  ["0","0","0","1","1"]
+]
+Output: 3
+```
+
+We need to look at it as a graph problem and solve either with:
+1. DFS
+2. BFS
+3. Union Find
+
+DFS Solution:
+
+```swift
+func numIslands(_ grid: [[Character]]) -> Int {
+    var numberOfIslands = 0
+    var grid = grid
+    
+    for row in 0..<grid.count {
+        for col in 0..<grid[row].count {
+            if grid[row][col] == "1" {
+                markIslandAsVisited(&grid, row, col)
+                numberOfIslands += 1
+            }
+        }
+    }
+    
+    return numberOfIslands
+}
+
+@discardableResult
+private func markIslandAsVisited(_ grid: inout [[Character]], _ row: Int, _ col: Int) {
+    guard row >= 0, row < grid.count, col >= 0 , col < grid[0].count else {
+        return
+    }
+    
+    guard grid[row][col] == "1" else {
+        return
+    } 
+    
+    grid[row][col] = "0"
+    
+    [(row - 1, col), (row, col - 1), (row + 1, col), (row, col + 1)].forEach { newRow, newCol in 
+        markIslandAsVisited(&grid, newRow, newCol)
+    }
+    
+    return
+}
 ```
 
 # Additional Information
