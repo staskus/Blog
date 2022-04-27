@@ -660,6 +660,52 @@ private func markIslandAsVisited(_ grid: inout [[Character]], _ row: Int, _ col:
 }
 ```
 
+### Combination Sum
+
+Given array of candidates and a target sum, return a list of unique combinations of candidates that sum to target.
+
+We use backtracking algorithm.
+
+Time complexity - **O(N^((t/m)+1))**, where t- target value and m - minimal value.
+
+This is from theory that the maximum number of nodes in N-ary tree of T/M height is O(N^((t/m)+1))
+
+If 8 - target, and 2 - minimum then O(N^4+1).
+
+Space - O(t/m)
+
+```swift
+    func combinationSum(_ candidates: [Int], _ target: Int) -> [[Int]] {
+        // unique = skip if there are 2 same numbers, leetcode already ensures it
+        
+        var combinations: [[Int]] = []
+        
+        combinationSum(candidates, target, [], &combinations)
+        
+        return combinations
+    }
+    
+    private func combinationSum(_ candidates: [Int], 
+                                _ remaining: Int, 
+                                _ currentCombination: [Int], 
+                                _ combinations: inout [[Int]]) {
+        print(remaining)
+        guard remaining >= 0 else { return }
+        
+        if remaining == 0 {
+            combinations.append(currentCombination)
+            return
+        }
+        
+        for i in 0..<candidates.count {
+            combinationSum(Array(candidates[i..<candidates.count]), 
+                           remaining - candidates[i], 
+                           currentCombination + [candidates[i]], 
+                           &combinations)
+        }
+    }
+```
+
 # Additional Information
 
 ## Spanning Tree
