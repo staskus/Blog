@@ -3,18 +3,28 @@ title: Recursion and Dynamic Programming
 excerpt: Algorithms
 ---
 
+## Recursion
+
 Hints for problems that are good candidates for recursion:
 * Compute the nth element to...
 * Write code to list the first n...
 * Implement a method to compute all...
+
+Recursive problems are space-intensive and take at least O(n) of memory. The same problems can be solved iteratively although it's usually more complex.
+
+## Dynamic Programming
+
+Dynamic programming is useful when trying to optimize something **given a constraint**. We can use DP when the problem can be broken into subproblems and they don't depend on each other.
+
+1. Every DP solution involes a grid
+2. The values in the grid cells are what we try to optimize
+3. Each cell is a subproblem
 
 Approaches:
 * Bottom-Up: Start by solving the most simple case
 * Top-Down: Start with more complex and think about how to split them into subproblems
 * Half-and-Half: Dividing the data set in half to solve the problem and then merging together the results
 
-
-Recursive problems are space-intensive and take at least O(n) of memory. The same problems can be solved iteratively although it's usually more complex.
 
 ## Example problems
 
