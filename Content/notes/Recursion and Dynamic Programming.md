@@ -215,3 +215,67 @@ func coinChange(_ coins: [Int], _ amount: Int) -> Int {
     return counts[amount] == max ? -1 : counts[amount]
 }
 ```
+
+### Optimal Set Of Camping
+
+Given list of items:
+```swift
+let items = [
+    Item(name: "Water", weight: 3, value: 10), 
+    Item(name: "Book", weight: 1, value: 3), 
+    Item(name: "Food", weight: 2, value: 9),
+    Item(name: "Jacket", weight: 2, value: 5), 
+    Item(name: "Camera", weight: 1, value: 6), 
+]
+```
+
+and a bag limit of `capacity`. Find which items to take to maximize the total value.
+
+```swift
+struct Item {
+    let name: String
+    let weight: Int
+    let value: Int
+}
+
+func optimalSetOfItems(_ capacity: Int, _ items: [Item]) -> [Item] {
+
+    // We need to keep both total values and all items corresponding to the total value
+    // We increase the capacity by one, so we wouldn't need to handle a case where we look back at dp table
+    var dpItems: [[[Item]]] = Array(repeating: Array(repeating: [], count: capacity + 1), count: items.count + 1)
+    var dpValues: [[Int]] = Array(repeating: Array(repeating: 0, count: capacity + 1), count: items.count + 1)
+
+    for itemIndex in 1...items.count {
+
+        // A key to dynamic programming, we iterate through all capacities
+        for currentCapacity in 1...capacity {
+                let item = items[itemIndex - 1]
+
+                // Skip if an item is heavier than the current capacity
+                if item.weight <= currentCapacity {
+                    
+                    // We already know the best possible value from all the items up to [itemIndex - 1]
+                    let totalPreviousValue = dpValues[itemIndex - 1][currentCapacity]
+
+                    // Take current item value
+                    // We already know the best possible value for the remaining weight. We calculated it for the previous item
+                    // Sum those 2 values
+                    let totalPotentialValue = dpValues[itemIndex - 1][currentCapacity - item.weight] + item.value
+
+                    // Check if our new value is larger than the total for the previous item
+                    if totalPreviousValue > totalPotentialValue {
+                        // If previous value is larger, set the same value and same items
+                        dpItems[itemIndex][currentCapacity] = dpItems[itemIndex - 1][currentCapacity]
+                        dpValues[itemIndex][currentCapacity] =  totalPreviousValue
+                    } else {
+                        // Else set new set of items and the new value
+                        dpItems[itemIndex][currentCapacity] = dpItems[itemIndex - 1][currentCapacity - item.weight] + [item]
+                        dpValues[itemIndex][currentCapacity] = totalPotentialValue
+                    }
+            }
+        }  
+    }
+
+    return dpItems[items.count][capacity]
+}
+```
