@@ -14,12 +14,14 @@ struct Blog: Website {
         case posts
         case about
         case notes
+        case archive
         case afterWork
          
         var name: String {
             switch self {
             case .posts: return "Posts"
             case .notes: return "Notes"
+            case .archive: return "Archive"
             case .about: return "About"
             case .afterWork: return "After work"
             }
