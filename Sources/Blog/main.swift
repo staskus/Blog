@@ -4,9 +4,9 @@ import Plot
 import SplashPublishPlugin
 
 try Blog().publish(using: [
+    .installPlugin(.splash(withClassPrefix: "")),
     .addMarkdownFiles(),
     .copyResources(),
-    .installPlugin(.splash(withClassPrefix: "")),
     .generateHTML(withTheme: .blog),
     .generateRSSFeed(including: [.posts]),
     .generateSiteMap(),

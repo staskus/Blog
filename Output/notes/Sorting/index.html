@@ -1,223 +1,223 @@
-<!DOCTYPE html><html lang="en"><head><title>Povilas Staškus - iOS Developer</title><meta name="twitter:title" content="Povilas Staškus - iOS Developer"/><meta name="og:title" content="Povilas Staškus - iOS Developer"/><meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous"/><link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css"/><link rel="stylesheet" href="/Pure/styles.css"/><link rel="stylesheet" href="/all.css"/></head><body><div id="layout" class="pure-g"><div><div class="pure-menu pure-menu-horizontal pure-u-1-1 top-header"><a class="pure-menu-heading" href="/">staskus.io</a><ul class="pure-menu-list"><li class="pure-menu-item"><a class="pure-menu-link" href="/about">About</a></li><li class="pure-menu-item"><a class="pure-menu-link" href="/archive">Archive</a></li><li class="pure-menu-item"><a class="pure-menu-link" href="/afterWork">After work</a></li></ul></div></div><div class="sidebar pure-u-1 pure-u-md-1-4"><div class="header"><div id="layout" class="pure-g"><div class="author__avatar"><img src="https://avatars0.githubusercontent.com/u/4062343?s=460&v=4"/></div><div class="pure-u-md-1-1 pure-u-3-4"><h1 class="brand-title">Povilas Staškus</h1><h3 class="brand-tagline">iOS Developer</h3></div></div><div id="layout" class="pure-g"><div class="pure-u-md-1-1"><a href="https://en.wikipedia.org/wiki/Vilnius"><i class="fas fa-map-marker-alt l-box social-icon"></i><a class="social-media" href="https://en.wikipedia.org/wiki/Vilnius">Vilnius, Lithuania</a></a></div><div class="pure-u-md-1-1"><a href="mailto:povilas@staskus.io"><i class="fas fa-envelope-open-text l-box social-icon"></i><a class="social-media" href="mailto:povilas@staskus.io">Email</a></a></div><div class="pure-u-md-1-1"><a href="https://www.linkedin.com/in/povilas-staškus-6b10528b"><i class="fab fa-linkedin l-box social-icon"></i><a class="social-media" href="https://www.linkedin.com/in/povilas-staškus-6b10528b">LinkedIn</a></a></div><div class="pure-u-md-1-1"><a href="https://github.com/staskus"><i class="fab fa-github-square l-box social-icon"></i><a class="social-media" href="https://github.com/staskus">GitHub</a></a></div><div class="pure-u-md-1-1"><a href="https://twitter.com/PovilasStaskus"><i class="fab fa-twitter-square l-box social-icon"></i><a class="social-media" href="https://twitter.com/PovilasStaskus">Twitter</a></a></div></div></div></div><div class="content pure-u-1 pure-u-md-3-5 pure-u-xl-6-10"><h2 class="post-title"><a href="/notes/Sorting">Sorting</a></h2><p class="post-meta">Last modified: 2022 April 21</p><div class="post-description"><div><h1>Sorting Algorithms</h1><h2>Bubble Sort</h2><p>Time: O(n$^2$), Memory: O(1)</p><ol><li>Go through the array</li><li>Swap 2 elements</li><li>Continue until the array is sorted</li></ol><h2>Selection Sort</h2><p>Time: O(n$^2$), Memory O(1)</p><ol><li>Look through the array</li><li>Find the smallest element and move it to the front</li><li>Repeat</li></ol><h2>Insertion Sort</h2><p>Insertion sort is fast if the array is already sorted or the dataset is really small.</p><p>Time: O(n$^2$)</p><pre><code class="language-swift">// http://raywenderlich.github.io/swift-algorithm-club/Insertion%20Sort/
+<!DOCTYPE html><html lang="en"><head><title>Povilas Staškus - iOS Developer</title><meta name="twitter:title" content="Povilas Staškus - iOS Developer"/><meta name="og:title" content="Povilas Staškus - iOS Developer"/><meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous"/><link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css"/><link rel="stylesheet" href="/Pure/styles.css"/><link rel="stylesheet" href="/all.css"/></head><body><div id="layout" class="pure-g"><div><div class="pure-menu pure-menu-horizontal pure-u-1-1 top-header"><a class="pure-menu-heading" href="/">staskus.io</a><ul class="pure-menu-list"><li class="pure-menu-item"><a class="pure-menu-link" href="/about">About</a></li><li class="pure-menu-item"><a class="pure-menu-link" href="/archive">Archive</a></li><li class="pure-menu-item"><a class="pure-menu-link" href="/afterWork">After work</a></li></ul></div></div><div class="sidebar pure-u-1 pure-u-md-1-4"><div class="header"><div id="layout" class="pure-g"><div class="author__avatar"><img src="https://avatars0.githubusercontent.com/u/4062343?s=460&v=4"/></div><div class="pure-u-md-1-1 pure-u-3-4"><h1 class="brand-title">Povilas Staškus</h1><h3 class="brand-tagline">iOS Developer</h3></div></div><div id="layout" class="pure-g"><div class="pure-u-md-1-1"><a href="https://en.wikipedia.org/wiki/Vilnius"><i class="fas fa-map-marker-alt l-box social-icon"></i><a class="social-media" href="https://en.wikipedia.org/wiki/Vilnius">Vilnius, Lithuania</a></a></div><div class="pure-u-md-1-1"><a href="mailto:povilas@staskus.io"><i class="fas fa-envelope-open-text l-box social-icon"></i><a class="social-media" href="mailto:povilas@staskus.io">Email</a></a></div><div class="pure-u-md-1-1"><a href="https://www.linkedin.com/in/povilas-staškus-6b10528b"><i class="fab fa-linkedin l-box social-icon"></i><a class="social-media" href="https://www.linkedin.com/in/povilas-staškus-6b10528b">LinkedIn</a></a></div><div class="pure-u-md-1-1"><a href="https://github.com/staskus"><i class="fab fa-github-square l-box social-icon"></i><a class="social-media" href="https://github.com/staskus">GitHub</a></a></div><div class="pure-u-md-1-1"><a href="https://twitter.com/PovilasStaskus"><i class="fab fa-twitter-square l-box social-icon"></i><a class="social-media" href="https://twitter.com/PovilasStaskus">Twitter</a></a></div></div></div></div><div class="content pure-u-1 pure-u-md-3-5 pure-u-xl-6-10"><h2 class="post-title"><a href="/notes/Sorting">Sorting</a></h2><p class="post-meta">Last modified: 2022 April 21</p><div class="post-description"><div><h1>Sorting Algorithms</h1><h2>Bubble Sort</h2><p>Time: O(n$^2$), Memory: O(1)</p><ol><li>Go through the array</li><li>Swap 2 elements</li><li>Continue until the array is sorted</li></ol><h2>Selection Sort</h2><p>Time: O(n$^2$), Memory O(1)</p><ol><li>Look through the array</li><li>Find the smallest element and move it to the front</li><li>Repeat</li></ol><h2>Insertion Sort</h2><p>Insertion sort is fast if the array is already sorted or the dataset is really small.</p><p>Time: O(n$^2$)</p><pre><code><span class="comment">// http://raywenderlich.github.io/swift-algorithm-club/Insertion%20Sort/</span>
 
-func insertionSort(_ array: [Int]) -&gt; [Int] {
-  var a = array
-  for x in 1..&lt;a.count {
-    var y = x
-    let temp = a[y]
-    while y &gt; 0 &amp;&amp; temp &lt; a[y - 1] {
-      a[y] = a[y - 1]                // 1
-      y -= 1
+<span class="keyword">func</span> insertionSort(<span class="keyword">_</span> array: [<span class="type">Int</span>]) -&gt; [<span class="type">Int</span>] {
+  <span class="keyword">var</span> a = array
+  <span class="keyword">for</span> x <span class="keyword">in</span> <span class="number">1</span>..&lt;a.<span class="property">count</span> {
+    <span class="keyword">var</span> y = x
+    <span class="keyword">let</span> temp = a[y]
+    <span class="keyword">while</span> y &gt; <span class="number">0</span> &amp;&amp; temp &lt; a[y - <span class="number">1</span>] {
+      a[y] = a[y - <span class="number">1</span>]                <span class="comment">// 1</span>
+      y -= <span class="number">1</span>
     }
-    a[y] = temp                      // 2
+    a[y] = temp                      <span class="comment">// 2</span>
   }
-  return a
+  <span class="keyword">return</span> a
 }
-</code></pre><h2>Merge Sort</h2><p>Time: O(n log(n)), Memory: O(n)</p><ol><li>Divide the array in half until the array is the size of 1</li><li>Merge them back together in a sorted way</li></ol><p>Merge sort is more efficient and works faster than quicksort in the case of larger array sizes or datasets.</p><img src="/images/notes/7e695531912858f96e685ace9f097d2692be7ebcd2c4e9808388f7a07f171669.png" alt="De-Coding Technical Interview Process - Emma Bostian"/><pre><code class="language-swift">func mergeSort(_ array: [Int]) -&gt; [Int] {
-    guard array.count &gt; 1 else { return array }
+</code></pre><h2>Merge Sort</h2><p>Time: O(n log(n)), Memory: O(n)</p><ol><li>Divide the array in half until the array is the size of 1</li><li>Merge them back together in a sorted way</li></ol><p>Merge sort is more efficient and works faster than quicksort in the case of larger array sizes or datasets.</p><img src="/images/notes/7e695531912858f96e685ace9f097d2692be7ebcd2c4e9808388f7a07f171669.png" alt="De-Coding Technical Interview Process - Emma Bostian"/><pre><code><span class="keyword">func</span> mergeSort(<span class="keyword">_</span> array: [<span class="type">Int</span>]) -&gt; [<span class="type">Int</span>] {
+    <span class="keyword">guard</span> array.<span class="property">count</span> &gt; <span class="number">1</span> <span class="keyword">else</span> { <span class="keyword">return</span> array }
     
-    let middleIndex = array.count / 2
+    <span class="keyword">let</span> middleIndex = array.<span class="property">count</span> / <span class="number">2</span>
 
-    let leftSide = mergeSort(Array(array[0..&lt;middleIndex]))
-    let rightSide = mergeSort(Array(array[middleIndex...]))
+    <span class="keyword">let</span> leftSide = <span class="call">mergeSort</span>(<span class="type">Array</span>(array[<span class="number">0</span>..&lt;middleIndex]))
+    <span class="keyword">let</span> rightSide = <span class="call">mergeSort</span>(<span class="type">Array</span>(array[middleIndex...]))
 
-    return merge(leftSide, rightSide)
+    <span class="keyword">return</span> <span class="call">merge</span>(leftSide, rightSide)
 }
 
-func merge(_ leftArray: [Int], _ rightArray: [Int]) -&gt; [Int] {
-    var leftIndex = 0
-    var rightIndex = 0
+<span class="keyword">func</span> merge(<span class="keyword">_</span> leftArray: [<span class="type">Int</span>], <span class="keyword">_</span> rightArray: [<span class="type">Int</span>]) -&gt; [<span class="type">Int</span>] {
+    <span class="keyword">var</span> leftIndex = <span class="number">0</span>
+    <span class="keyword">var</span> rightIndex = <span class="number">0</span>
 
-    var orderedArray: [Int] = []
+    <span class="keyword">var</span> orderedArray: [<span class="type">Int</span>] = []
 
-    // Append one by one in a sorted way
-    // Because we start merging from one element arrays, we are guaranteed that elements will be sorted
+    <span class="comment">// Append one by one in a sorted way
+    // Because we start merging from one element arrays, we are guaranteed that elements will be sorted</span>
 
-    while leftIndex &lt; leftArray.count &amp;&amp; rightIndex &lt; rightArray.count {
-        if leftArray[leftIndex] &lt; rightArray[rightIndex] {
-            orderedArray.append(leftArray[leftIndex])
-            leftIndex += 1
-        } else if leftArray[leftIndex] &gt; rightArray[rightIndex] {
-            orderedArray.append(rightArray[rightIndex])
-            rightIndex += 1
-        } else {
-            orderedArray.append(leftArray[leftIndex])
-            leftIndex += 1
-            orderedArray.append(rightArray[rightIndex])
-            rightIndex += 1
+    <span class="keyword">while</span> leftIndex &lt; leftArray.<span class="property">count</span> &amp;&amp; rightIndex &lt; rightArray.<span class="property">count</span> {
+        <span class="keyword">if</span> leftArray[leftIndex] &lt; rightArray[rightIndex] {
+            orderedArray.<span class="call">append</span>(leftArray[leftIndex])
+            leftIndex += <span class="number">1</span>
+        } <span class="keyword">else if</span> leftArray[leftIndex] &gt; rightArray[rightIndex] {
+            orderedArray.<span class="call">append</span>(rightArray[rightIndex])
+            rightIndex += <span class="number">1</span>
+        } <span class="keyword">else</span> {
+            orderedArray.<span class="call">append</span>(leftArray[leftIndex])
+            leftIndex += <span class="number">1</span>
+            orderedArray.<span class="call">append</span>(rightArray[rightIndex])
+            rightIndex += <span class="number">1</span>
         }
     }
 
-    // If the left is larger, add the remaining left array elements
+    <span class="comment">// If the left is larger, add the remaining left array elements</span>
 
-    while leftIndex &lt; leftArray.count {
-        orderedArray.append(leftArray[leftIndex])
-        leftIndex += 1
+    <span class="keyword">while</span> leftIndex &lt; leftArray.<span class="call">count</span> {
+        orderedArray.<span class="call">append</span>(leftArray[leftIndex])
+        leftIndex += <span class="number">1</span>
     }
 
-    // If the right is larger, add the remaining right array elements
+    <span class="comment">// If the right is larger, add the remaining right array elements</span>
 
-    while rightIndex &lt; rightArray.count {
-        orderedArray.append(rightArray[rightIndex])
-        rightIndex += 1
+    <span class="keyword">while</span> rightIndex &lt; rightArray.<span class="call">count</span> {
+        orderedArray.<span class="call">append</span>(rightArray[rightIndex])
+        rightIndex += <span class="number">1</span>
     }
 
-    return orderedArray
+    <span class="keyword">return</span> orderedArray
 }
-</code></pre><h2>Quick Sort</h2><p>Time: average - O(n log(n)), worst - O(n$^2$). Memory: O(log(n))</p><ol><li>Pick a random element (pivot). There're theories on which element is better to pick. Else, just pick a mid element.</li><li>Split an array into three parts: less than the pivot, equal to the pivot, larger than the pivot</li><li>Merge them back together</li></ol><p>Quicksort is more efficient and works faster than merge sort in case of smaller array sizes or datasets.</p><img src="/images/notes/fa7d4a6f8a071d1f4a6f1e3e9572c148813a06ed4f917a948a40f932f719b073.png" alt="http://raywenderlich.github.io/swift-algorithm-club/Quicksort/"/><img src="/images/notes/80f6b547b2282e1625e834be09bfa310ff0bb1f97819d40ace9eb9b28633f2e3.png" alt="De-Coding Technical Interview Process - Emma Bostian"/><p>In-place:</p><pre><code class="language-swift">func quickSort(_ array: inout [Int]) {
-    quickSort(&amp;array, 0, array.count - 1)
-}
-
-func quickSort(_ array: inout [Int], _ left: Int, _ right: Int) {
-    let index = partition(&amp;array, left, right)
-
-    if left &lt; index - 1 {
-        quickSort(&amp;array, left, index - 1)
-    }
-
-    if right &gt; index {
-        quickSort(&amp;array, index, right)
-    }
+</code></pre><h2>Quick Sort</h2><p>Time: average - O(n log(n)), worst - O(n$^2$). Memory: O(log(n))</p><ol><li>Pick a random element (pivot). There're theories on which element is better to pick. Else, just pick a mid element.</li><li>Split an array into three parts: less than the pivot, equal to the pivot, larger than the pivot</li><li>Merge them back together</li></ol><p>Quicksort is more efficient and works faster than merge sort in case of smaller array sizes or datasets.</p><img src="/images/notes/fa7d4a6f8a071d1f4a6f1e3e9572c148813a06ed4f917a948a40f932f719b073.png" alt="http://raywenderlich.github.io/swift-algorithm-club/Quicksort/"/><img src="/images/notes/80f6b547b2282e1625e834be09bfa310ff0bb1f97819d40ace9eb9b28633f2e3.png" alt="De-Coding Technical Interview Process - Emma Bostian"/><p>In-place:</p><pre><code><span class="keyword">func</span> quickSort(<span class="keyword">_</span> array: <span class="keyword">inout</span> [<span class="type">Int</span>]) {
+    <span class="call">quickSort</span>(&amp;array, <span class="number">0</span>, array.<span class="property">count</span> - <span class="number">1</span>)
 }
 
-func partition(_ array: inout [Int], _ left: Int, _ right: Int) -&gt; Int {
-    let pivot = array[(left + right) / 2]
+<span class="keyword">func</span> quickSort(<span class="keyword">_</span> array: <span class="keyword">inout</span> [<span class="type">Int</span>], <span class="keyword">_</span> left: <span class="type">Int</span>, <span class="keyword">_</span> right: <span class="type">Int</span>) {
+    <span class="keyword">let</span> index = <span class="call">partition</span>(&amp;array, left, right)
 
-    var left = left
-    var right = right
+    <span class="keyword">if</span> left &lt; index - <span class="number">1</span> {
+        <span class="call">quickSort</span>(&amp;array, left, index - <span class="number">1</span>)
+    }
 
-    while left &lt;= right {
-        while array[left] &lt; pivot {
-            left += 1
+    <span class="keyword">if</span> right &gt; index {
+        <span class="call">quickSort</span>(&amp;array, index, right)
+    }
+}
+
+<span class="keyword">func</span> partition(<span class="keyword">_</span> array: <span class="keyword">inout</span> [<span class="type">Int</span>], <span class="keyword">_</span> left: <span class="type">Int</span>, <span class="keyword">_</span> right: <span class="type">Int</span>) -&gt; <span class="type">Int</span> {
+    <span class="keyword">let</span> pivot = array[(left + right) / <span class="number">2</span>]
+
+    <span class="keyword">var</span> left = left
+    <span class="keyword">var</span> right = right
+
+    <span class="keyword">while</span> left &lt;= <span class="call">right</span> {
+        <span class="keyword">while</span> array[left] &lt; <span class="call">pivot</span> {
+            left += <span class="number">1</span>
         }
 
-        while array[right] &gt; pivot {
-            right -= 1
+        <span class="keyword">while</span> array[right] &gt; <span class="call">pivot</span> {
+            right -= <span class="number">1</span>
         }
 
-        if left &lt;= right {
-            array.swapAt(left, right)
-            left += 1
-            right -= 1
-        }
-    }
-
-    return left
-}
-</code></pre><p>Creating additional arrays (Easy implementation)</p><pre><code class="language-swift">// Naive implementation. Creating a new array for every partition.
-// Might be acceptable, better know this one than not know at all
-
-func quickSort2(_ array: [Int]) -&gt; [Int] {
-    if array.count &lt; 2 { return array }
-
-    let pivotIndex = array.count + ((0 - array.count) / 2)
-    let pivot = array[pivotIndex]
-    var less: [Int] = []
-    var greater: [Int] = []
-
-    for i in 0..&lt;array.count {
-        if i != pivotIndex {
-            array[i] &gt; pivot ? greater.append(array[i]) : less.append(array[i])
+        <span class="keyword">if</span> left &lt;= right {
+            array.<span class="call">swapAt</span>(left, right)
+            left += <span class="number">1</span>
+            right -= <span class="number">1</span>
         }
     }
 
-    return quickSort2(less) + [pivot] + quickSort2(greater)
+    <span class="keyword">return</span> left
 }
-</code></pre><h2>Heap Sort</h2><p>Time: O(n log(n))</p><h2>Counting Sort</h2><p>Time Complexity: O(n+k) where n is the number of elements in input array and k is the range of input. Space: O(n+k)</p><p>It can be used to sort strings where the range of characters is clearly limited.</p><ol><li>Create an array representing counts of each character (ASCII / lowercase English)</li><li>Store a count of each character</li><li>Build a new string</li></ol><pre><code class="language-swift">func countingSort(_ array: [Int])-&gt; [Int] {
-    guard array.count &gt; 0 else {return []}
+</code></pre><p>Creating additional arrays (Easy implementation)</p><pre><code><span class="comment">// Naive implementation. Creating a new array for every partition.
+// Might be acceptable, better know this one than not know at all</span>
 
-    // Step 1
-    // Create an array to store the count of each element
-    let maxElement = array.max() ?? 0
+<span class="keyword">func</span> quickSort2(<span class="keyword">_</span> array: [<span class="type">Int</span>]) -&gt; [<span class="type">Int</span>] {
+    <span class="keyword">if</span> array.<span class="property">count</span> &lt; <span class="number">2</span> { <span class="keyword">return</span> array }
 
-    var countArray = [Int](repeating: 0, count: Int(maxElement + 1))
-    for element in array {
-        countArray[element] += 1
+    <span class="keyword">let</span> pivotIndex = array.<span class="property">count</span> + ((<span class="number">0</span> - array.<span class="property">count</span>) / <span class="number">2</span>)
+    <span class="keyword">let</span> pivot = array[pivotIndex]
+    <span class="keyword">var</span> less: [<span class="type">Int</span>] = []
+    <span class="keyword">var</span> greater: [<span class="type">Int</span>] = []
+
+    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;array.<span class="property">count</span> {
+        <span class="keyword">if</span> i != pivotIndex {
+            array[i] &gt; pivot ? greater.<span class="call">append</span>(array[i]) : less.<span class="call">append</span>(array[i])
+        }
     }
 
-    // Step 2
-    // Set each value to be the sum of the previous two values
-    for index in 1 ..&lt; countArray.count {
-        let sum = countArray[index] + countArray[index - 1]
+    <span class="keyword">return</span> <span class="call">quickSort2</span>(less) + [pivot] + <span class="call">quickSort2</span>(greater)
+}
+</code></pre><h2>Heap Sort</h2><p>Time: O(n log(n))</p><h2>Counting Sort</h2><p>Time Complexity: O(n+k) where n is the number of elements in input array and k is the range of input. Space: O(n+k)</p><p>It can be used to sort strings where the range of characters is clearly limited.</p><ol><li>Create an array representing counts of each character (ASCII / lowercase English)</li><li>Store a count of each character</li><li>Build a new string</li></ol><pre><code><span class="keyword">func</span> countingSort(<span class="keyword">_</span> array: [<span class="type">Int</span>])-&gt; [<span class="type">Int</span>] {
+    <span class="keyword">guard</span> array.<span class="property">count</span> &gt; <span class="number">0</span> <span class="keyword">else</span> {<span class="keyword">return</span> []}
+
+    <span class="comment">// Step 1
+    // Create an array to store the count of each element</span>
+    <span class="keyword">let</span> maxElement = array.<span class="call">max</span>() ?? <span class="number">0</span>
+
+    <span class="keyword">var</span> countArray = [<span class="type">Int</span>](repeating: <span class="number">0</span>, count: <span class="type">Int</span>(maxElement + <span class="number">1</span>))
+    <span class="keyword">for</span> element <span class="keyword">in</span> array {
+        countArray[element] += <span class="number">1</span>
+    }
+
+    <span class="comment">// Step 2
+    // Set each value to be the sum of the previous two values</span>
+    <span class="keyword">for</span> index <span class="keyword">in</span> <span class="number">1</span> ..&lt; countArray.<span class="property">count</span> {
+        <span class="keyword">let</span> sum = countArray[index] + countArray[index - <span class="number">1</span>]
         countArray[index] = sum
     }
 
-    // Step 3
+    <span class="comment">// Step 3
     // Place the element in the final array as per the number of elements before it
     // Loop through the array in reverse to keep the stability of the new sorted array
-    // (For Example: 7 is at index 3 and 6, thus in sortedArray the position of 7 at index 3 should be before 7 at index 6
-    var sortedArray = [Int](repeating: 0, count: array.count)
-    for index in stride(from: array.count - 1, through: 0, by: -1) {
-        let element = array[index]
-        countArray[element] -= 1
+    // (For Example: 7 is at index 3 and 6, thus in sortedArray the position of 7 at index 3 should be before 7 at index 6</span>
+    <span class="keyword">var</span> sortedArray = [<span class="type">Int</span>](repeating: <span class="number">0</span>, count: array.<span class="property">count</span>)
+    <span class="keyword">for</span> index <span class="keyword">in</span> stride(from: array.<span class="property">count</span> - <span class="number">1</span>, through: <span class="number">0</span>, by: -<span class="number">1</span>) {
+        <span class="keyword">let</span> element = array[index]
+        countArray[element] -= <span class="number">1</span>
         sortedArray[countArray[element]] = element
     }
-    return sortedArray
+    <span class="keyword">return</span> sortedArray
 }
-</code></pre><h2>Radix Sort</h2><p>Time: O(kn) where k - number of passes of the sorting algorithm</p><p>This sort is usually used for integers as we iterate through each digit of the number grouping numbers by digit.</p><h3>Example Tasks</h3><h3>Merge Sorted Array</h3><p>Given 2 sorted arrays, merge them in place. Prerequisite: the second array is the size of the final array with preappended zeros at the end.</p><pre><code class="language-swift">// O(n + m), O(1)
-func merge(_ nums1: inout [Int], _ m: Int, _ nums2: [Int], _ n: Int) {
-    var p1 = m - 1
-    var p2 = n - 1
+</code></pre><h2>Radix Sort</h2><p>Time: O(kn) where k - number of passes of the sorting algorithm</p><p>This sort is usually used for integers as we iterate through each digit of the number grouping numbers by digit.</p><h3>Example Tasks</h3><h3>Merge Sorted Array</h3><p>Given 2 sorted arrays, merge them in place. Prerequisite: the second array is the size of the final array with preappended zeros at the end.</p><pre><code><span class="comment">// O(n + m), O(1)</span>
+<span class="keyword">func</span> merge(<span class="keyword">_</span> nums1: <span class="keyword">inout</span> [<span class="type">Int</span>], <span class="keyword">_</span> m: <span class="type">Int</span>, <span class="keyword">_</span> nums2: [<span class="type">Int</span>], <span class="keyword">_</span> n: <span class="type">Int</span>) {
+    <span class="keyword">var</span> p1 = m - <span class="number">1</span>
+    <span class="keyword">var</span> p2 = n - <span class="number">1</span>
     
-    for p in stride(from: nums1.count - 1, through: 0, by: -1) {
-        if p2 &lt; 0 {
-            break
+    <span class="keyword">for</span> p <span class="keyword">in</span> stride(from: nums1.<span class="property">count</span> - <span class="number">1</span>, through: <span class="number">0</span>, by: -<span class="number">1</span>) {
+        <span class="keyword">if</span> p2 &lt; <span class="number">0</span> {
+            <span class="keyword">break</span>
         }
         
-        if p1 &gt;= 0, nums1[p1] &gt; nums2[p2] {          
+        <span class="keyword">if</span> p1 &gt;= <span class="number">0</span>, nums1[p1] &gt; nums2[p2] {          
             nums1[p] = nums1[p1]
-            p1 -= 1
-        } else {
+            p1 -= <span class="number">1</span>
+        } <span class="keyword">else</span> {
             nums1[p] = nums2[p2]
-            p2 -= 1
+            p2 -= <span class="number">1</span>
         }
     }
 }
-</code></pre><h2>Group Anagrams</h2><p>The easiest way to group array of anagrams into array of anagram arrays is to use a <em>hashmap</em> and key as sorted string. However, the time complexity is not ideal.</p><pre><code class="language-swift">// Time Complexity:  O ( N K log ⁡ K ) O(NKlogK), where  N N is the length of strs, and  K K is the maximum length of a string in strs. The outer loop has complexity  O ( N ) O(N) as we iterate through each string. Then, we sort each string in  O ( K log ⁡ K ) O(KlogK) time
-// O(NK)
-func groupAnagrams(_ strs: [String]) -&gt; [[String]] {
-    var groupedAnagrams: [String: [String]] = [:]
+</code></pre><h2>Group Anagrams</h2><p>The easiest way to group array of anagrams into array of anagram arrays is to use a <em>hashmap</em> and key as sorted string. However, the time complexity is not ideal.</p><pre><code><span class="comment">// Time Complexity:  O ( N K log ⁡ K ) O(NKlogK), where  N N is the length of strs, and  K K is the maximum length of a string in strs. The outer loop has complexity  O ( N ) O(N) as we iterate through each string. Then, we sort each string in  O ( K log ⁡ K ) O(KlogK) time
+// O(NK)</span>
+<span class="keyword">func</span> groupAnagrams(<span class="keyword">_</span> strs: [<span class="type">String</span>]) -&gt; [[<span class="type">String</span>]] {
+    <span class="keyword">var</span> groupedAnagrams: [<span class="type">String</span>: [<span class="type">String</span>]] = [:]
     
-    for string in strs {
-        groupedAnagrams[String(string.sorted()), default: []].append(string)
+    <span class="keyword">for</span> string <span class="keyword">in</span> strs {
+        groupedAnagrams[<span class="type">String</span>(string.<span class="call">sorted</span>()), default: []].<span class="call">append</span>(string)
     }
     
-    return Array(groupedAnagrams.values)
+    <span class="keyword">return</span> <span class="type">Array</span>(groupedAnagrams.<span class="property">values</span>)
 }   
-</code></pre><p>If the problem only uses only a specific set of characters (ASCII), we can create a key out of character counts. The inner loop is faster than sorting a string (K vs KlogK)</p><pre><code class="language-swift">    func groupAnagrams(_ strs: [String]) -&gt; [[String]] {
-        var groupedAnagrams: [String: [String]] = [:]
+</code></pre><p>If the problem only uses only a specific set of characters (ASCII), we can create a key out of character counts. The inner loop is faster than sorting a string (K vs KlogK)</p><pre><code>     <span class="keyword">func</span> groupAnagrams(<span class="keyword">_</span> strs: [<span class="type">String</span>]) -&gt; [[<span class="type">String</span>]] {
+        <span class="keyword">var</span> groupedAnagrams: [<span class="type">String</span>: [<span class="type">String</span>]] = [:]
         
-        for string in strs {
-            let characterCount = stringToCharacterCount(string)
-            let key = characterCountToKey(characterCount)
-            groupedAnagrams[key, default: []].append(string)
+        <span class="keyword">for</span> string <span class="keyword">in</span> strs {
+            <span class="keyword">let</span> characterCount = <span class="call">stringToCharacterCount</span>(string)
+            <span class="keyword">let</span> key = <span class="call">characterCountToKey</span>(characterCount)
+            groupedAnagrams[key, default: []].<span class="call">append</span>(string)
         }
         
-        return Array(groupedAnagrams.values)
+        <span class="keyword">return</span> <span class="type">Array</span>(groupedAnagrams.<span class="property">values</span>)
     }
     
-    private func stringToCharacterCount(_ string: String) -&gt; [Int] {
-        var count: [Int] = Array(repeating: 0, count: 26)
+    <span class="keyword">private func</span> stringToCharacterCount(<span class="keyword">_</span> string: <span class="type">String</span>) -&gt; [<span class="type">Int</span>] {
+        <span class="keyword">var</span> count: [<span class="type">Int</span>] = <span class="type">Array</span>(repeating: <span class="number">0</span>, count: <span class="number">26</span>)
         
-        var characterToNumber: (Character) -&gt; Int = {
-            Int($0.asciiValue!) - Int(Character("a").asciiValue!)
+        <span class="keyword">var</span> characterToNumber: (<span class="type">Character</span>) -&gt; <span class="type">Int</span> = {
+            <span class="type">Int</span>($0.<span class="property">asciiValue</span>!) - <span class="type">Int</span>(<span class="type">Character</span>(<span class="string">"a"</span>).<span class="property">asciiValue</span>!)
         }
         
-        for character in Array(string) {
-            count[characterToNumber(character)] += 1
+        <span class="keyword">for</span> character <span class="keyword">in</span> <span class="type">Array</span>(string) {
+            count[<span class="call">characterToNumber</span>(character)] += <span class="number">1</span>
         }
         
-        return count
+        <span class="keyword">return</span> count
     }
     
-    private func characterCountToKey(_ characterCount: [Int]) -&gt; String {
-        var string = ""
+    <span class="keyword">private func</span> characterCountToKey(<span class="keyword">_</span> characterCount: [<span class="type">Int</span>]) -&gt; <span class="type">String</span> {
+        <span class="keyword">var</span> string = <span class="string">""</span>
         
-        for count in characterCount {
-            string += "#\(count)"
+        <span class="keyword">for</span> count <span class="keyword">in</span> characterCount {
+            string += <span class="string">"#\(count)"</span>
         }
         
-        return string
+        <span class="keyword">return</span> string
     }
 }
 </code></pre><p>Also it's possible to use <em>counting sort</em> for an optimal solution.</p></div></div></div><div class="footer pure-u-1"><div class="pure-u-1">© 2022 Povilas Staškus</div><div class="pure-u-1">Generated using <a href="https://github.com/johnsundell/publish">Publish</a></div><div class="pure-u-1"><a href="/feed.rss">RSS feed</a></div></div></div></body></html>
