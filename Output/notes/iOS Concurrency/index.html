@@ -1,0 +1,245 @@
+<!DOCTYPE html><html lang="en"><head><title>Povilas Staškus - iOS Developer</title><meta name="twitter:title" content="Povilas Staškus - iOS Developer"/><meta name="og:title" content="Povilas Staškus - iOS Developer"/><meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous"/><link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css"/><link rel="stylesheet" href="/Pure/styles.css"/><link rel="stylesheet" href="/all.css"/></head><body><div id="layout" class="pure-g"><div><div class="pure-menu pure-menu-horizontal pure-u-1-1 top-header"><a class="pure-menu-heading" href="/">staskus.io</a><ul class="pure-menu-list"><li class="pure-menu-item"><a class="pure-menu-link" href="/about">About</a></li><li class="pure-menu-item"><a class="pure-menu-link" href="/archive">Archive</a></li><li class="pure-menu-item"><a class="pure-menu-link" href="/afterWork">After work</a></li></ul></div></div><div class="sidebar pure-u-1 pure-u-md-1-4"><div class="header"><div id="layout" class="pure-g"><div class="author__avatar"><img src="https://avatars0.githubusercontent.com/u/4062343?s=460&v=4"/></div><div class="pure-u-md-1-1 pure-u-3-4"><h1 class="brand-title">Povilas Staškus</h1><h3 class="brand-tagline">iOS Developer</h3></div></div><div id="layout" class="pure-g"><div class="pure-u-md-1-1"><a href="https://en.wikipedia.org/wiki/Vilnius"><i class="fas fa-map-marker-alt l-box social-icon"></i><a class="social-media" href="https://en.wikipedia.org/wiki/Vilnius">Vilnius, Lithuania</a></a></div><div class="pure-u-md-1-1"><a href="mailto:povilas@staskus.io"><i class="fas fa-envelope-open-text l-box social-icon"></i><a class="social-media" href="mailto:povilas@staskus.io">Email</a></a></div><div class="pure-u-md-1-1"><a href="https://www.linkedin.com/in/povilas-staškus-6b10528b"><i class="fab fa-linkedin l-box social-icon"></i><a class="social-media" href="https://www.linkedin.com/in/povilas-staškus-6b10528b">LinkedIn</a></a></div><div class="pure-u-md-1-1"><a href="https://github.com/staskus"><i class="fab fa-github-square l-box social-icon"></i><a class="social-media" href="https://github.com/staskus">GitHub</a></a></div><div class="pure-u-md-1-1"><a href="https://twitter.com/PovilasStaskus"><i class="fab fa-twitter-square l-box social-icon"></i><a class="social-media" href="https://twitter.com/PovilasStaskus">Twitter</a></a></div></div></div></div><div class="content pure-u-1 pure-u-md-3-5 pure-u-xl-6-10"><h2 class="post-title"><a href="/notes/iOS Concurrency">Concurrency</a></h2><p class="post-meta">Last modified: 2022 May 11</p><div class="post-description"><div><h1>Grand Central Dispatch</h1><h2>Serial Queues</h2><p>Serial queues only have a single thread and only allow a single task to be executes at any given time.</p><p><strong>The main queue</strong> is a default serial queue responsible for the UI. When we create <strong>DispatchQueue</strong> it is created as serial by default unless we specify <code>.concurrent</code> in the initializer.</p><h2>Concurrent Queues</h2><p>A concurrent queue, on the other hand, is able to utilize as many threads as the system has resources for. Threads will be created and released as necessary on a concurrent queue.</p><p>There are 4 global concurrency dispatch queues that we can use, so we wouldn't need to manage our own: 1. userInteractive 2. userInitiated 3. utility 4. background</p><h2>Sync vs Async</h2><p>Async doesn't mean concurrent. It's possible to submit async and sync tasks to both serial and concurrent queues.</p><p><strong>Sync</strong> - queue on which the task is run must wait for the task to complete. <strong>Async</strong> - queue on which the task is run doesn't need to wait for the task to complete.</p><p><em>Sync and Async</em> describes the <strong>source</strong> of the task. <em>Serial and Concurrent</em> describes the <strong>destination</strong> of the task.</p><h2>DispatchWorkItem</h2><p>Normally, we can dispatch a new task to the queue by simply using <code>.sync {}</code> or <code>.async {}</code> block calls.</p><p>However, using <code>DispatchWorkItem</code> allows to manage the task: cancel or get notified when it finishes.</p><pre><code class="language-swift">let queue = DispatchQueue(label: "com.ps.app")
+queue.async {
+    print("With the block")
+}
+</code></pre><pre><code class="language-swift">let queue = DispatchQueue(label: "com.ps.app")
+let workItem = DispatchWorkItem {
+    print("With the dispatch work item")
+}
+queue.async(execute: workItem)
+</code></pre><pre><code class="language-swift">let queue = DispatchQueue(label: "com.ps.app")
+let loadImagesItem = DispatchWorkItem { }
+let updateUIItem = DispatchWorkItem { }
+loadImagesItem.notify(
+    queue: DispatchQueue.main,
+    execute: updateUIItem
+)
+queue.async(execute: loadImagesItem)
+</code></pre><h2>Groups</h2><p><code>DispatchGroup</code> allows to manage a grop of tasks.</p><p>We <strong>associate</strong> a queue and task (block, item) with the <strong>group</strong>. Using <code>notify</code> block can be notified when the given task finishes.</p><pre><code class="language-swift">let group = DispatchGroup()
+queue1.async(group: group) { }
+queue1.async(group: group) { }
+queue2.async(group: group) { }
+
+group.notify(queue: DispatchQueue.main) { [weak self] in
+    print("All the work has been completed")
+}
+</code></pre><p>We can also use groups to manage different asynchronous methods using <code>group.enter()</code> and <code>group.leave()</code>. It's recommended to use <code>defer</code> call so we wouldn't forget to call <code>group.leave()</code>.</p><pre><code class="language-swift">group.enter()
+loadImages {
+    defer { group.leave() }
+    print("Images loaded")
+}
+
+group.enter()
+loadAvatars {
+    defer { group.leave() }
+}
+
+// We know when both images and avatars are loaded
+group.notify(..) {}
+</code></pre><h2>Semaphores</h2><p>Semaphores allows to limit the number of concurrent tasks.</p><p>3 main concepts: - <code>DispatchSemaphore(value: 4)</code> - define number of concurrent tasks - <code>.wait()</code> - pause execution if we have more concurrent tasks running - <code>.signal()</code> - notify that the concurrent task is done</p><pre><code class="language-swift">let semaphore = DispatchSemaphore(value: 4)
+
+func loadImages() {
+    for url in urls {
+        semaphore.wait()
+        loadImage(url) {
+            defer { semaphore.signal() }
+        }
+    }
+}
+</code></pre><p>We can combine both groups and semaphores.</p><h1>Operations</h1><p>We use operation when we want to reuse and combine tasks.</p><p>Operations have these states: - isReady - isExecuting - isCancelled - isFinished</p><p>We create a task by sublassing an <code>Operation</code>. We need to override <code>main()</code> method.</p><p>If we have another task as dependency, we could take its values from <code>dependencies</code> array.</p><pre><code class="language-swift">final class ImageProcessor: Operation {
+  var onImageProcessed: ((UIImage?) -&gt; Void)?
+
+  var outputImage: UIImage?
+  private let inputImage: UIImage?
+
+  init(image: UIImage? = nil) {
+    inputImage = image
+    super.init()
+  }
+
+  override func main() {
+    var imageToProcess: UIImage
+    
+    if let inputImage = inputImage {
+      // We use image passed through initializer
+      imageToProcess = inputImage
+    } else {
+      // We use image passed automatically from previous task. For example image loading task
+      let dependencyImage: UIImage? = dependencies
+        .compactMap { ($0 as? ImageDataProvider)?.image }
+        .first
+      
+      if let dependencyImage = dependencyImage {
+        imageToProcess = dependencyImage
+      } else {
+        return
+      }
+    }
+
+    guard !isCancelled else { return }
+
+    /* Long task to process image */
+    
+    outputImage = UIImage(cgImage: processedImage)
+    
+    if let onImageProcessed = onImageProcessed {
+      DispatchQueue.main.async { [weak self] in
+        onImageProcessed(self?.outputImage)
+      }
+    }
+  }
+}
+</code></pre><h2>Async Operation</h2><p>If we want to have async operation inside an operation we need to use such subclass:</p><pre><code class="language-swift">import Foundation
+
+class AsyncOperation: Operation {
+  // Create state management
+  enum State: String {
+    case ready, executing, finished
+
+    fileprivate var keyPath: String {
+      return "is\(rawValue.capitalized)"
+    }
+  }
+
+  var state = State.ready {
+    willSet {
+      willChangeValue(forKey: newValue.keyPath)
+      willChangeValue(forKey: state.keyPath)
+    }
+    didSet {
+      didChangeValue(forKey: oldValue.keyPath)
+      didChangeValue(forKey: state.keyPath)
+    }
+  }
+
+  // Override properties
+  override var isReady: Bool {
+    return super.isReady &amp;&amp; state == .ready
+  }
+
+  override var isExecuting: Bool {
+    return state == .executing
+  }
+
+  override var isFinished: Bool {
+    return state == .finished
+  }
+
+  override var isAsynchronous: Bool {
+    return true
+  }
+
+  // Override start
+  override func start() {
+    if isCancelled {
+      state = .finished
+      return
+    }
+
+    main()
+    state = .executing
+  }
+}
+</code></pre><p>and then use it by sublassing <code>AsyncOperation</code>. For example for image downloading:</p><pre><code class="language-swift">final class NetworkImageOperation: AsyncOperation {
+  var image: UIImage?
+
+  private let url: URL
+  private let completionHandler: ((Data?, URLResponse?, Error?) -&gt; Void)?
+  private var task: URLSessionDataTask?
+
+  init(url: URL, completionHandler: ((Data?, URLResponse?, Error?) -&gt; Void)? = nil) {
+    self.url = url
+    self.completionHandler = completionHandler
+
+    super.init()
+  }
+
+  convenience init?(string: String, completionHandler: ((Data?, URLResponse?, Error?) -&gt; Void)? = nil) {
+    guard let url = URL(string: string) else { return nil }
+    self.init(url: url, completionHandler: completionHandler)
+  }
+
+  override func main() {
+    task = URLSession.shared.dataTask(with: url) { [weak self]
+      data, response, error in
+
+      guard let self = self else { return }
+
+      defer { self.state = .finished }
+
+      guard !self.isCancelled else { return }
+
+      if let completionHandler = self.completionHandler {
+        completionHandler(data, response, error)
+        return
+      }
+
+      guard error == nil, let data = data else { return }
+
+      self.image = UIImage(data: data)
+    }
+
+    task?.resume()
+  }
+
+  override func cancel() {
+    super.cancel()
+    task?.cancel()
+  }
+}
+</code></pre><h2>Dependencies between operations</h2><p>We can make operations to depend on each other by using <code>addOperation</code>. We can get result from one operation inside another operation by accessing <code>dependencies</code> variable inside <code>main()</code>.</p><pre><code class="language-swift">let downloadOperation = NetworkImageOperation(url: urls[indexPath.row])
+let imageProcessOperation = ImageProcessOperation()
+imageProcessOperation.addDependency(downloadOperation)
+
+imageProcessOperation.onImageProcessed = { image in
+    guard let cell = tableView.cellForRow(at: indexPath)
+    as? PhotoCell else {
+        return
+    }
+    
+    cell.isLoading = false
+    cell.display(image: image)
+}
+
+queue.addOperation(downloadOperation)
+queue.addOperation(imageProcessOperation)
+</code></pre><h2>Block Operation</h2><p>A task in a block operation runs concurrently.</p><pre><code class="language-swift">BlockOperation {}
+</code></pre><h1>Problems</h1><h2>Race Conditions</h2><p>If multiple threads are trying write to the same shared variable we get <strong>race conditions</strong>.</p><h3>Serial queue</h3><p>Serial queues can be used to control the access of the variable.</p><pre><code class="language-swift">private let threadSafeCountQueue = DispatchQueue(label: "com.ps.app")
+private var _count = 0
+public var count: Int {
+  get {
+    return threadSafeCountQueue.sync { _count }
+} set {
+    threadSafeCountQueue.sync {
+      _count = newValue
+    }
+} }
+</code></pre><h3>Thread barrier</h3><p>If getters and setters require more complex knowledge, it's recommended to use <strong>dispatch barrier</strong> solution instead of locks. It handles all the complexity behind a simple <code>.barrier</code> flag.</p><pre><code class="language-swift">private let threadSafeCountQueue = DispatchQueue(label: "com.ps.app", attributes: .concurrent)
+private var _count = 0
+public var count: Int {
+  get {
+    return threadSafeCountQueue.sync { _count }
+} set {
+    threadSafeCountQueue.async(flags: .barrier) { [unowned self] in
+        self._count = newValue
+      }
+    }
+}
+</code></pre><h2>Deadlock</h2><p>When two tasks depend on each other to finish we get a <strong>deaclock</strong>.</p><p>On Swift deadlocks usually occur when using explicit locking mechanisms such as <strong>semaphores</strong> or calling <strong>sync on the main thread</strong>.</p><h1>Core Data + Concurrency</h1><p><code>NSManagedObjectContext</code> is not thread safe. Use <code>perform</code> or <code>performAndWait</code> as the closure is executed on the same queue a<strong>s the queue that created the context</strong>.</p><h2>Saving a lot of data</h2><p>On initial load of data use <code>performBackgroundTask</code>. Notice a context that is get from the closure.</p><pre><code class="language-swift">persistentContainer.performBackgroundTask { context in
+    for json in jsonDataFromServer {
+        let obj = MyEntity(context: context)
+        obj.populate(from: json)
+    }
+    do {
+        try context.save()
+    } catch {
+        fatalError("Failed to save context")
+  }
+}
+</code></pre><h2>Fetching data asynchronously</h2><p>Use <code>NSAsynchronousFetchRequest</code> to fetch data asynchronously. An asynchronous fetch request must be run in <strong>a private background queue</strong>.</p><h2>Using NSManagedObject</h2><p><code>NSManagedObject</code> cannot be shared between threads but it can be accessed from different threads using <code>objectId</code></p><pre><code class="language-swift">let objectId = someEntity.objectID
+DispatchQueue.main.async { [weak self] in
+  guard let self = self else { return }
+  let myEntity = self.managedObjectContext.object(with: objectId)
+  self.nameLabel.text = myEntity.name
+}
+</code></pre><h2>Debug issues</h2><p>Use <code>-com.apple.CoreData.ConcurrencyDebug</code> flag in debug to discover Core Data concurrency issues at runtime.</p></div></div></div><div class="footer pure-u-1"><div class="pure-u-1">© 2022 Povilas Staškus</div><div class="pure-u-1">Generated using <a href="https://github.com/johnsundell/publish">Publish</a></div><div class="pure-u-1"><a href="/feed.rss">RSS feed</a></div></div></div></body></html>
