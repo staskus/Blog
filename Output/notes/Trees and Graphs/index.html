@@ -1,390 +1,390 @@
-<!DOCTYPE html><html lang="en"><head><title>Povilas Staškus - iOS Developer</title><meta name="twitter:title" content="Povilas Staškus - iOS Developer"/><meta name="og:title" content="Povilas Staškus - iOS Developer"/><meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous"/><link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css"/><link rel="stylesheet" href="/Pure/styles.css"/><link rel="stylesheet" href="/all.css"/></head><body><div id="layout" class="pure-g"><div><div class="pure-menu pure-menu-horizontal pure-u-1-1 top-header"><a class="pure-menu-heading" href="/">staskus.io</a><ul class="pure-menu-list"><li class="pure-menu-item"><a class="pure-menu-link" href="/about">About</a></li><li class="pure-menu-item"><a class="pure-menu-link" href="/archive">Archive</a></li><li class="pure-menu-item"><a class="pure-menu-link" href="/afterWork">After work</a></li></ul></div></div><div class="sidebar pure-u-1 pure-u-md-1-4"><div class="header"><div id="layout" class="pure-g"><div class="author__avatar"><img src="https://avatars0.githubusercontent.com/u/4062343?s=460&v=4"/></div><div class="pure-u-md-1-1 pure-u-3-4"><h1 class="brand-title">Povilas Staškus</h1><h3 class="brand-tagline">iOS Developer</h3></div></div><div id="layout" class="pure-g"><div class="pure-u-md-1-1"><a href="https://en.wikipedia.org/wiki/Vilnius"><i class="fas fa-map-marker-alt l-box social-icon"></i><a class="social-media" href="https://en.wikipedia.org/wiki/Vilnius">Vilnius, Lithuania</a></a></div><div class="pure-u-md-1-1"><a href="mailto:povilas@staskus.io"><i class="fas fa-envelope-open-text l-box social-icon"></i><a class="social-media" href="mailto:povilas@staskus.io">Email</a></a></div><div class="pure-u-md-1-1"><a href="https://www.linkedin.com/in/povilas-staškus-6b10528b"><i class="fab fa-linkedin l-box social-icon"></i><a class="social-media" href="https://www.linkedin.com/in/povilas-staškus-6b10528b">LinkedIn</a></a></div><div class="pure-u-md-1-1"><a href="https://github.com/staskus"><i class="fab fa-github-square l-box social-icon"></i><a class="social-media" href="https://github.com/staskus">GitHub</a></a></div><div class="pure-u-md-1-1"><a href="https://twitter.com/PovilasStaskus"><i class="fab fa-twitter-square l-box social-icon"></i><a class="social-media" href="https://twitter.com/PovilasStaskus">Twitter</a></a></div></div></div></div><div class="content pure-u-1 pure-u-md-3-5 pure-u-xl-6-10"><h2 class="post-title"><a href="/notes/Trees and Graphs">Trees and Graphs</a></h2><p class="post-meta">Last modified: 2022 April 27</p><div class="post-description"><div><h1>Trees</h1><p><strong>Tree</strong> - a data structure composed of nodes. Each tree has a root node, each child has zero or more child nodes and doesn't have cycles.</p><p><strong>Leaf Node</strong> - a node with no children.</p><h2>Binary trees</h2><p><strong>Binary Tree</strong> - each node has up to two children.</p><p><strong>Binary Search Tree</strong> - when <em>every</em> node is specifically ordered.</p><p><strong>Complete Binary Tree</strong> - every level is filled except the last level. Last level filling from left to right.</p><p><strong>Full Binary Tree</strong> - each node has either zero or two children</p><p><strong>Perfect Binary Tree</strong> - full, complete and all nodes at the same level.</p><h3>Traversal</h3><h4>In-Order</h4><p>First visit the left branch, then the current node then the right branch.</p><pre><code><span class="keyword">func</span> traverseInOrder(<span class="keyword">_</span> node: <span class="type">Node</span>?) {
-    <span class="keyword">if let</span> node = node {
-        <span class="call">traverseInOrder</span>(node?.<span class="property">left</span>)
-        <span class="call">visit</span>(node) <span class="comment">// for example just print</span>
-        <span class="call">traverseInOrder</span>(node?.<span class="property">right</span>)
+<!DOCTYPE html><html lang="en"><head><title>Povilas Staškus - iOS Developer</title><meta name="twitter:title" content="Povilas Staškus - iOS Developer"/><meta name="og:title" content="Povilas Staškus - iOS Developer"/><meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous"/><link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css"/><link rel="stylesheet" href="/Pure/styles.css"/><link rel="stylesheet" href="/all.css"/></head><body><div id="layout" class="pure-g"><div><div class="pure-menu pure-menu-horizontal pure-u-1-1 top-header"><a class="pure-menu-heading" href="/">staskus.io</a><ul class="pure-menu-list"><li class="pure-menu-item"><a class="pure-menu-link" href="/about">About</a></li><li class="pure-menu-item"><a class="pure-menu-link" href="/archive">Archive</a></li><li class="pure-menu-item"><a class="pure-menu-link" href="/afterWork">After work</a></li></ul></div></div><div class="sidebar pure-u-1 pure-u-md-1-4"><div class="header"><div id="layout" class="pure-g"><div class="author__avatar"><img src="https://avatars0.githubusercontent.com/u/4062343?s=460&v=4"/></div><div class="pure-u-md-1-1 pure-u-3-4"><h1 class="brand-title">Povilas Staškus</h1><h3 class="brand-tagline">iOS Developer</h3></div></div><div id="layout" class="pure-g"><div class="pure-u-md-1-1"><a href="https://en.wikipedia.org/wiki/Vilnius"><i class="fas fa-map-marker-alt l-box social-icon"></i><a class="social-media" href="https://en.wikipedia.org/wiki/Vilnius">Vilnius, Lithuania</a></a></div><div class="pure-u-md-1-1"><a href="mailto:povilas@staskus.io"><i class="fas fa-envelope-open-text l-box social-icon"></i><a class="social-media" href="mailto:povilas@staskus.io">Email</a></a></div><div class="pure-u-md-1-1"><a href="https://www.linkedin.com/in/povilas-staškus-6b10528b"><i class="fab fa-linkedin l-box social-icon"></i><a class="social-media" href="https://www.linkedin.com/in/povilas-staškus-6b10528b">LinkedIn</a></a></div><div class="pure-u-md-1-1"><a href="https://github.com/staskus"><i class="fab fa-github-square l-box social-icon"></i><a class="social-media" href="https://github.com/staskus">GitHub</a></a></div><div class="pure-u-md-1-1"><a href="https://twitter.com/PovilasStaskus"><i class="fab fa-twitter-square l-box social-icon"></i><a class="social-media" href="https://twitter.com/PovilasStaskus">Twitter</a></a></div></div></div></div><div class="content pure-u-1 pure-u-md-3-5 pure-u-xl-6-10"><h2 class="post-title"><a href="/notes/Trees and Graphs">Trees and Graphs</a></h2><p class="post-meta">Last modified: 2022 April 27</p><div class="post-description"><div><h1>Trees</h1><p><strong>Tree</strong> - a data structure composed of nodes. Each tree has a root node, each child has zero or more child nodes and doesn't have cycles.</p><p><strong>Leaf Node</strong> - a node with no children.</p><h2>Binary trees</h2><p><strong>Binary Tree</strong> - each node has up to two children.</p><p><strong>Binary Search Tree</strong> - when <em>every</em> node is specifically ordered.</p><p><strong>Complete Binary Tree</strong> - every level is filled except the last level. Last level filling from left to right.</p><p><strong>Full Binary Tree</strong> - each node has either zero or two children</p><p><strong>Perfect Binary Tree</strong> - full, complete and all nodes at the same level.</p><h3>Traversal</h3><h4>In-Order</h4><p>First visit the left branch, then the current node then the right branch.</p><pre><code class="language-swift">func traverseInOrder(_ node: Node?) {
+    if let node = node {
+        traverseInOrder(node?.left)
+        visit(node) // for example just print
+        traverseInOrder(node?.right)
     }
 }
-</code></pre><h4>Pre-Order</h4><p>First visit the current node, then the others.</p><pre><code><span class="keyword">func</span> traversePreOrder(<span class="keyword">_</span> node: <span class="type">Node</span>?) {
-    <span class="keyword">if let</span> node = node {
-        <span class="call">visit</span>(node)
-        <span class="call">traversePreOrder</span>(node?.<span class="property">left</span>)
-        <span class="call">traversePreOrder</span>(node?.<span class="property">right</span>)
+</code></pre><h4>Pre-Order</h4><p>First visit the current node, then the others.</p><pre><code class="language-swift">func traversePreOrder(_ node: Node?) {
+    if let node = node {
+        visit(node)
+        traversePreOrder(node?.left)
+        traversePreOrder(node?.right)
     }
 }
-</code></pre><h4>Post-Order</h4><p>First visit left and right branches, then the current node.</p><pre><code><span class="keyword">func</span> traversePostOrder(<span class="keyword">_</span> node: <span class="type">Node</span>?) {
-    <span class="keyword">if let</span> node = node {
-        <span class="call">traversePostOrder</span>(node?.<span class="property">left</span>)
-        <span class="call">traversePostOrder</span>(node?.<span class="property">right</span>)
-        <span class="call">visit</span>(node)
+</code></pre><h4>Post-Order</h4><p>First visit left and right branches, then the current node.</p><pre><code class="language-swift">func traversePostOrder(_ node: Node?) {
+    if let node = node {
+        traversePostOrder(node?.left)
+        traversePostOrder(node?.right)
+        visit(node)
     }
 }
-</code></pre><h2>Balancing</h2><p><strong>Balanced tree</strong> - doesn't mean that right and left sides are of the same size. It means that its balance might allow for specific effective operations such as O(log n) insert and find.</p><h2>Binary Heaps</h2><p><strong>Min-heap</strong> - is a complete binary tree where each node is smaller than its children. The root is the minimum element in the tree.</p><h3>Insert</h3><p>We insert at the rightmost empty spot and then go up by swapping with the parent until it's smaller than its parent.</p><p>O(log n)</p><h3>Get Minimum Element</h3><p>It's always at the top.</p><h3>Remove Minimum Element</h3><ol><li>Remove the top element</li><li>Replace it with the bottommost-rightmost element</li><li>Go from the top to the bottom swapping it with the children until it reaches its place</li></ol><p>O(log n)</p><h2>Trie (Prefix Tree)</h2><p>An n-ary tree where characters are stored at each node. * node indicates a complete word. Each node can have children the number of the size of the alphabet.</p><p>Usage: <em> Storing the entire language for quick prefix lookups. </em> Lists of valid words</p><h1>Graphs</h1><p>A graph is a collection of nodes with edges between some of them.</p><p><strong>Connected graph</strong> - if there's a path between every pair of vertices.</p><p><strong>Acyclic graph</strong> - a graph without cycles</p><h2>Adjacency List</h2><p>A way to represent a graph</p><pre><code><span class="keyword">class</span> Graph {
-    <span class="keyword">var</span> nodes: [<span class="type">Node</span>]
+</code></pre><h2>Balancing</h2><p><strong>Balanced tree</strong> - doesn't mean that right and left sides are of the same size. It means that its balance might allow for specific effective operations such as O(log n) insert and find.</p><h2>Binary Heaps</h2><p><strong>Min-heap</strong> - is a complete binary tree where each node is smaller than its children. The root is the minimum element in the tree.</p><h3>Insert</h3><p>We insert at the rightmost empty spot and then go up by swapping with the parent until it's smaller than its parent.</p><p>O(log n)</p><h3>Get Minimum Element</h3><p>It's always at the top.</p><h3>Remove Minimum Element</h3><ol><li>Remove the top element</li><li>Replace it with the bottommost-rightmost element</li><li>Go from the top to the bottom swapping it with the children until it reaches its place</li></ol><p>O(log n)</p><h2>Trie (Prefix Tree)</h2><p>An n-ary tree where characters are stored at each node. * node indicates a complete word. Each node can have children the number of the size of the alphabet.</p><p>Usage: <em> Storing the entire language for quick prefix lookups. </em> Lists of valid words</p><h1>Graphs</h1><p>A graph is a collection of nodes with edges between some of them.</p><p><strong>Connected graph</strong> - if there's a path between every pair of vertices.</p><p><strong>Acyclic graph</strong> - a graph without cycles</p><h2>Adjacency List</h2><p>A way to represent a graph</p><pre><code class="language-swift">class Graph {
+    var nodes: [Node]
 }
 
-<span class="keyword">class</span> Node {
-    <span class="keyword">var</span> val: <span class="type">Int</span>
-    <span class="keyword">var</span> children: [<span class="type">Node</span>]
+class Node {
+    var val: Int
+    var children: [Node]
 }
-</code></pre><h2>Adjacency Matrix</h2><pre><code>matrix[i][j] == <span class="keyword">true</span> <span class="comment">// represents that there's an edge between i and j nodes</span>
-</code></pre><h2>Search</h2><h3>Depth-first search (DFS)</h3><p>Explore each branch completely before moving to the next branch, meaning going deep first.</p><p>DFS is to visit every node in the graph.</p><p>To implement we can use recursion or a stack (which recursion uses underneath).</p><pre><code>     <span class="keyword">func</span> searchDFS(<span class="keyword">_</span> root: <span class="type">Node</span>?) {
-        <span class="keyword">guard let</span> root = root <span class="keyword">else</span> { <span class="keyword">return</span> }
+</code></pre><h2>Adjacency Matrix</h2><pre><code class="language-swift">matrix[i][j] == true // represents that there's an edge between i and j nodes
+</code></pre><h2>Search</h2><h3>Depth-first search (DFS)</h3><p>Explore each branch completely before moving to the next branch, meaning going deep first.</p><p>DFS is to visit every node in the graph.</p><p>To implement we can use recursion or a stack (which recursion uses underneath).</p><pre><code class="language-swift">    func searchDFS(_ root: Node?) {
+        guard let root = root else { return }
 
-        <span class="call">visit</span>(root)
-        root.<span class="property">visited</span> = <span class="keyword">true
+        visit(root)
+        root.visited = true
 
-        for</span> node <span class="keyword">in</span> root.<span class="property">children</span> {
-            <span class="keyword">if</span> !node.<span class="property">visited</span> {
-                <span class="call">seachDFS</span>(node)
+        for node in root.children {
+            if !node.visited {
+                seachDFS(node)
             }
         }
     }
-</code></pre><h3>Breadth-first search (BFS)</h3><p>Explore each neighbor before moving to the children, meaning going wide first.</p><p>BFS is used to find the shortest (or any) path between 2 nodes.</p><p>To implement we need to use a queue (FIFO) data structure to ensure we search wide first.</p><pre><code>     <span class="keyword">func</span> searchBFS(<span class="keyword">_</span> root: <span class="type">Node</span>?) {
-        <span class="keyword">guard let</span> root = root <span class="keyword">else</span> { <span class="keyword">return</span> }
+</code></pre><h3>Breadth-first search (BFS)</h3><p>Explore each neighbor before moving to the children, meaning going wide first.</p><p>BFS is used to find the shortest (or any) path between 2 nodes.</p><p>To implement we need to use a queue (FIFO) data structure to ensure we search wide first.</p><pre><code class="language-swift">    func searchBFS(_ root: Node?) {
+        guard let root = root else { return }
 
-        <span class="keyword">let</span> queue = <span class="type">Queue</span>()
-        root.<span class="property">marked</span> = <span class="keyword">true</span>
-        queue.<span class="call">enqueue</span>(root) <span class="comment">// Add to the end</span>
+        let queue = Queue()
+        root.marked = true
+        queue.enqueue(root) // Add to the end
 
-        <span class="keyword">while</span> !queue.<span class="call">isEmpty</span> {
-            <span class="keyword">let</span> node = queue.<span class="call">dequeue</span>() <span class="comment">// Take from the front</span>
-            <span class="call">visit</span>(node)
+        while !queue.isEmpty {
+            let node = queue.dequeue() // Take from the front
+            visit(node)
 
-            <span class="keyword">for</span> child <span class="keyword">in</span> node.<span class="property">children</span> {
-                <span class="keyword">if</span> !child.<span class="property">marked</span> {
-                    child.<span class="property">marked</span> = <span class="keyword">true</span>
-                    queue.<span class="call">enqueue</span>(child)
+            for child in node.children {
+                if !child.marked {
+                    child.marked = true
+                    queue.enqueue(child)
                 }
             }
         }
     }
-</code></pre><p>3 facts to know about BFS: 1. Inorder traversal of BST is an array sorted in the ascending order. 2. Successor = "after node", i.e. the next node in "In order traversal (Left -&gt; Node -&gt; Previous)", or the smallest node after the current one. 3. Predecessor = "before node", i.e. the previous node "In order traversal (Left -&gt; Node -&gt; Previous)", or the largest node before the current one.</p><h3>Bidirectional Search</h3><p>Find the shorted path between 2 nodes by performing 2 simultaneous BFS from both nodes.</p><h2>Example problems to know how to solve:</h2><h3>Convert Sorted Array to Binary Search Tree</h3><p>Keep splitting the sorted array in half so the root would be the middle element.</p><pre><code><span class="comment">// O(n) time complexity, O(logn) space complexity</span>
+</code></pre><p>3 facts to know about BFS: 1. Inorder traversal of BST is an array sorted in the ascending order. 2. Successor = "after node", i.e. the next node in "In order traversal (Left -&gt; Node -&gt; Previous)", or the smallest node after the current one. 3. Predecessor = "before node", i.e. the previous node "In order traversal (Left -&gt; Node -&gt; Previous)", or the largest node before the current one.</p><h3>Bidirectional Search</h3><p>Find the shorted path between 2 nodes by performing 2 simultaneous BFS from both nodes.</p><h2>Example problems to know how to solve:</h2><h3>Convert Sorted Array to Binary Search Tree</h3><p>Keep splitting the sorted array in half so the root would be the middle element.</p><pre><code class="language-swift">// O(n) time complexity, O(logn) space complexity
 
-<span class="keyword">class</span> Solution {
-    <span class="keyword">func</span> sortedArrayToBST(<span class="keyword">_</span> nums: [<span class="type">Int</span>]) -&gt; <span class="type">TreeNode</span>? {
-        <span class="keyword">return</span> <span class="call">createMinimalBST</span>(nums, start: <span class="number">0</span>, end: nums.<span class="property">count</span> - <span class="number">1</span>)
+class Solution {
+    func sortedArrayToBST(_ nums: [Int]) -&gt; TreeNode? {
+        return createMinimalBST(nums, start: 0, end: nums.count - 1)
     }
     
-    <span class="keyword">private func</span> createMinimalBST(<span class="keyword">_</span> nums: [<span class="type">Int</span>], start: <span class="type">Int</span>, end: <span class="type">Int</span>) -&gt; <span class="type">TreeNode</span>? {
-        <span class="keyword">guard</span> start &lt;= end <span class="keyword">else</span> { <span class="keyword">return nil</span> }
+    private func createMinimalBST(_ nums: [Int], start: Int, end: Int) -&gt; TreeNode? {
+        guard start &lt;= end else { return nil }
         
-        <span class="keyword">let</span> mid = ((start + end) / <span class="number">2</span>)
+        let mid = ((start + end) / 2)
     
-        <span class="keyword">return</span> <span class="type">TreeNode</span>(
+        return TreeNode(
             nums[mid],
-            <span class="call">createMinimalBST</span>(nums, start: start, end: mid - <span class="number">1</span>),
-            <span class="call">createMinimalBST</span>(nums, start: mid + <span class="number">1</span>, end: end)
+            createMinimalBST(nums, start: start, end: mid - 1),
+            createMinimalBST(nums, start: mid + 1, end: end)
             )
     }
 }
-</code></pre><h3>Given a binary tree, return the level order traversal of its nodes</h3><p>It can be done using a simple recursion or a BFS. BFS allows printing easier level by level. In both cases, we need to save the "level" in the queue or pass it during the recursion.</p><h3>Check if Binary Tree is balanced</h3><p>A balanced tree is defined to be a tree such that the heights of the two subtrees of any node never differ by more than one.</p><p>Calculating the height of each branch is not fully effective. We need to introduce an "early exit" the moment we find one branch not being balanced.</p><pre><code><span class="comment">// O(N) time and O(H) space because of the early exit
-// We first go as deep left as possible and then increase the height when going up. The moment we find the difference between left and right more than 1, we throw an error.</span>
-<span class="keyword">class</span> Solution {
-    <span class="keyword">enum</span> TreeError: <span class="type">Error</span> {
-        <span class="keyword">case</span> notBalanced
+</code></pre><h3>Given a binary tree, return the level order traversal of its nodes</h3><p>It can be done using a simple recursion or a BFS. BFS allows printing easier level by level. In both cases, we need to save the "level" in the queue or pass it during the recursion.</p><h3>Check if Binary Tree is balanced</h3><p>A balanced tree is defined to be a tree such that the heights of the two subtrees of any node never differ by more than one.</p><p>Calculating the height of each branch is not fully effective. We need to introduce an "early exit" the moment we find one branch not being balanced.</p><pre><code class="language-swift">// O(N) time and O(H) space because of the early exit
+// We first go as deep left as possible and then increase the height when going up. The moment we find the difference between left and right more than 1, we throw an error.
+class Solution {
+    enum TreeError: Error {
+        case notBalanced
     }
     
-    <span class="keyword">func</span> isBalanced(<span class="keyword">_</span> root: <span class="type">TreeNode</span>?) -&gt; <span class="type">Bool</span> {
-        <span class="keyword">guard let</span> root = root <span class="keyword">else</span> { <span class="keyword">return true</span> }
+    func isBalanced(_ root: TreeNode?) -&gt; Bool {
+        guard let root = root else { return true }
         
-        <span class="keyword">do</span> {
-            <span class="keyword">try</span> <span class="call">checkHeight</span>(root)
-            <span class="keyword">return true</span>
-        } <span class="keyword">catch</span> {
-            <span class="keyword">return false</span>
+        do {
+            try checkHeight(root)
+            return true
+        } catch {
+            return false
         }
     }
     
-    <span class="keyword">@discardableResult
-    private func</span> checkHeight(<span class="keyword">_</span> root: <span class="type">TreeNode</span>?) <span class="keyword">throws</span> -&gt; <span class="type">Int</span> {      
-        <span class="keyword">guard let</span> root = root <span class="keyword">else</span> { <span class="keyword">return</span> -<span class="number">1</span> }
+    @discardableResult
+    private func checkHeight(_ root: TreeNode?) throws -&gt; Int {      
+        guard let root = root else { return -1 }
 
-        <span class="keyword">let</span> left = <span class="keyword">try</span> <span class="call">checkHeight</span>(root.<span class="property">left</span>) <span class="comment">// Throwing error as an early exit</span>
-        <span class="keyword">let</span> right =  <span class="keyword">try</span> <span class="call">checkHeight</span>(root.<span class="property">right</span>)
+        let left = try checkHeight(root.left) // Throwing error as an early exit
+        let right =  try checkHeight(root.right)
         
-        <span class="keyword">if</span> (<span class="call">abs</span>(left - right) &lt; <span class="number">2</span>) {
-            <span class="keyword">return</span> <span class="call">max</span>(left, right) + <span class="number">1</span>
-        } <span class="keyword">else</span> {
-            <span class="keyword">throw</span> <span class="type">TreeError</span>.<span class="property">notBalanced</span>
+        if (abs(left - right) &lt; 2) {
+            return max(left, right) + 1
+        } else {
+            throw TreeError.notBalanced
         }
     }
 }
-</code></pre><h3>Validate Binary Search Tree</h3><pre><code><span class="type">A</span> valid <span class="type">BST</span> <span class="keyword">is</span> defined <span class="keyword">as</span> follows:
+</code></pre><h3>Validate Binary Search Tree</h3><pre><code>A valid BST is defined as follows:
 
-* <span class="type">The</span> left subtree of a node contains only nodes with keys less than the node's key.
-* <span class="type">The</span> right subtree of a node contains only nodes with keys greater than the node's key.
-* <span class="type">Both</span> the left and right subtrees must also be binary search trees.
-</code></pre><img src="/images/notes/86b326043320bbd1a5d8d05117e1187489c2d15b285e3a773dd4476c23e2dc14.png" alt="Leetcode.com"/><p>We have 2 main routes to take.</p><p>First one is more intuitive, traverse the tree recursively, passing valid ranges and then validating them against the current value:</p><pre><code><span class="comment">// O(n), O(n)</span>
-<span class="keyword">func</span> isValidBST(<span class="keyword">_</span> root: <span class="type">TreeNode</span>?) -&gt; <span class="type">Bool</span> {
-    <span class="keyword">guard let</span> root = root <span class="keyword">else</span> { <span class="keyword">return true</span> }
+* The left subtree of a node contains only nodes with keys less than the node's key.
+* The right subtree of a node contains only nodes with keys greater than the node's key.
+* Both the left and right subtrees must also be binary search trees.
+</code></pre><img src="/images/notes/86b326043320bbd1a5d8d05117e1187489c2d15b285e3a773dd4476c23e2dc14.png" alt="Leetcode.com"/><p>We have 2 main routes to take.</p><p>First one is more intuitive, traverse the tree recursively, passing valid ranges and then validating them against the current value:</p><pre><code class="language-swift">// O(n), O(n)
+func isValidBST(_ root: TreeNode?) -&gt; Bool {
+    guard let root = root else { return true }
     
-    <span class="keyword">return</span> <span class="call">isValidBST</span>(root.<span class="property">left</span>, -<span class="type">Int</span>.<span class="property">max</span>..&lt;root.<span class="property">val</span>) &amp;&amp; <span class="call">isValidBST</span>(root.<span class="property">right</span>, root.<span class="property">val</span>+<span class="number">1</span>..&lt;<span class="type">Int</span>.<span class="property">max</span>)
+    return isValidBST(root.left, -Int.max..&lt;root.val) &amp;&amp; isValidBST(root.right, root.val+1..&lt;Int.max)
 }
 
-<span class="keyword">private func</span> isValidBST(<span class="keyword">_</span> root: <span class="type">TreeNode</span>?, <span class="keyword">_</span> allowedRange: <span class="type">Range</span>&lt;<span class="type">Int</span>&gt;) -&gt; <span class="type">Bool</span> {
-    <span class="keyword">guard let</span> root = root <span class="keyword">else</span> { <span class="keyword">return true</span> }
+private func isValidBST(_ root: TreeNode?, _ allowedRange: Range&lt;Int&gt;) -&gt; Bool {
+    guard let root = root else { return true }
             
-    <span class="keyword">if</span> !allowedRange.<span class="call">contains</span>(root.<span class="property">val</span>) {
-        <span class="keyword">return false</span>
+    if !allowedRange.contains(root.val) {
+        return false
     }
     
-    <span class="keyword">return</span> <span class="call">isValidBST</span>(root.<span class="property">left</span>, allowedRange.<span class="property">lowerBound</span>..&lt;root.<span class="property">val</span>) &amp;&amp; <span class="call">isValidBST</span>(root.<span class="property">right</span>, root.<span class="property">val</span>+<span class="number">1</span>..&lt;allowedRange.<span class="property">upperBound</span>)
+    return isValidBST(root.left, allowedRange.lowerBound..&lt;root.val) &amp;&amp; isValidBST(root.right, root.val+1..&lt;allowedRange.upperBound)
 }
-</code></pre><p>Using DFS Inorder traversal is a more interesting solution. <code>Left -&gt; Node -&gt; Right</code>. Traversing like this we expect each node to have a larger value if it is a binary search tree.</p><pre><code><span class="comment">// O(n), O(n)</span>
-<span class="keyword">private var</span> previous: <span class="type">Int</span>?
+</code></pre><p>Using DFS Inorder traversal is a more interesting solution. <code>Left -&gt; Node -&gt; Right</code>. Traversing like this we expect each node to have a larger value if it is a binary search tree.</p><pre><code class="language-swift">// O(n), O(n)
+private var previous: Int?
 
-<span class="keyword">func</span> isValidBST(<span class="keyword">_</span> root: <span class="type">TreeNode</span>?) -&gt; <span class="type">Bool</span> {
-<span class="keyword">guard let</span> root = root <span class="keyword">else</span> { <span class="keyword">return true</span> }
+func isValidBST(_ root: TreeNode?) -&gt; Bool {
+guard let root = root else { return true }
     
-    <span class="comment">// Left</span>
-    <span class="keyword">if</span> !<span class="call">isValidBST</span>(root.<span class="property">left</span>) {
-        <span class="keyword">return false</span>
+    // Left
+    if !isValidBST(root.left) {
+        return false
     }
     
-    <span class="comment">// Node</span>
-    <span class="keyword">if let</span> previous = previous, previous &gt;= root.<span class="property">val</span> {
-        <span class="keyword">return false</span>
+    // Node
+    if let previous = previous, previous &gt;= root.val {
+        return false
     }
-    previous = root.<span class="property">val</span>
+    previous = root.val
     
-    <span class="comment">// Right</span>
-    <span class="keyword">if</span> !<span class="call">isValidBST</span>(root.<span class="property">right</span>) {
-        <span class="keyword">return false</span>
+    // Right
+    if !isValidBST(root.right) {
+        return false
     }
     
-    <span class="keyword">return true</span>
+    return true
 }
-</code></pre><h3>Find a successor (next node) in a binary search tree</h3><ul><li>Successor = "after node", i.e. the next node in the inorder traversal, or the smallest node after the current one.</li></ul><ul><li>Predecessor = "before node", i.e. the previous node in the inorder traversal, or the largest node before the current one.</li></ul><p>So to find a successor we either need to go: - One right node and as many left nodes as possible - If no right node exists, go up the tree until the node is the left child of the parent and return the parent</p><h3>Course Schedule</h3><p>Given the list of courses and dependency list of which courses must come before the others, return a list of course order.</p><p>This issue can be solved with DFS with some caveats. <em> We might not have one graph, there might be multiple graphs. So we might need to do multiple DFS until all nodes (courses) have been visited. </em> Once we reach the end of the graph then we add that node to the <strong>beginning</strong> of the course schedule. * If cycles are found, it's impossible to create a schedule. Cycles can be avoided by <strong>visited</strong> and <strong>visiting</strong> (or gray and black) node marking.</p><h3>Lowest Common Ancestor in a Binary Tree of 2 nodes</h3><p>The idea is to do a DFS recursive search throughout the tree. At each point we make 2 recursive calls (to the left and to the right). At the moment where <strong>both</strong> left and right branches result in a node being found, or any of the branches result in a node being found <strong>and</strong> the current node is a node we are looking for, we return a node.</p><pre><code><span class="comment">// O(n), O(n)</span>
-<span class="keyword">private func</span> findNode(from node: <span class="type">TreeNode</span>?, to p: <span class="type">TreeNode</span>, orTo q: <span class="type">TreeNode</span>) -&gt; <span class="type">Bool</span> {
-    <span class="keyword">guard let</span> node = node <span class="keyword">else</span> {
-        <span class="keyword">return false</span>
+</code></pre><h3>Find a successor (next node) in a binary search tree</h3><ul><li>Successor = "after node", i.e. the next node in the inorder traversal, or the smallest node after the current one.</li></ul><ul><li>Predecessor = "before node", i.e. the previous node in the inorder traversal, or the largest node before the current one.</li></ul><p>So to find a successor we either need to go: - One right node and as many left nodes as possible - If no right node exists, go up the tree until the node is the left child of the parent and return the parent</p><h3>Course Schedule</h3><p>Given the list of courses and dependency list of which courses must come before the others, return a list of course order.</p><p>This issue can be solved with DFS with some caveats. <em> We might not have one graph, there might be multiple graphs. So we might need to do multiple DFS until all nodes (courses) have been visited. </em> Once we reach the end of the graph then we add that node to the <strong>beginning</strong> of the course schedule. * If cycles are found, it's impossible to create a schedule. Cycles can be avoided by <strong>visited</strong> and <strong>visiting</strong> (or gray and black) node marking.</p><h3>Lowest Common Ancestor in a Binary Tree of 2 nodes</h3><p>The idea is to do a DFS recursive search throughout the tree. At each point we make 2 recursive calls (to the left and to the right). At the moment where <strong>both</strong> left and right branches result in a node being found, or any of the branches result in a node being found <strong>and</strong> the current node is a node we are looking for, we return a node.</p><pre><code class="language-swift">// O(n), O(n)
+private func findNode(from node: TreeNode?, to p: TreeNode, orTo q: TreeNode) -&gt; Bool {
+    guard let node = node else {
+        return false
     }
     
-    <span class="keyword">let</span> left = <span class="call">findNode</span>(from: node.<span class="property">left</span>, to: p, orTo: q) ? <span class="number">1</span> : <span class="number">0</span>
-    <span class="keyword">let</span> right = <span class="call">findNode</span>(from: node.<span class="property">right</span>, to: p, orTo: q) ? <span class="number">1</span> : <span class="number">0</span>
-    <span class="keyword">let</span> current = node.<span class="property">val</span> == p.<span class="property">val</span> || node.<span class="property">val</span> == q.<span class="property">val</span> ? <span class="number">1</span> : <span class="number">0</span>
+    let left = findNode(from: node.left, to: p, orTo: q) ? 1 : 0
+    let right = findNode(from: node.right, to: p, orTo: q) ? 1 : 0
+    let current = node.val == p.val || node.val == q.val ? 1 : 0
     
-    <span class="comment">// If any two are correct</span>
-    <span class="keyword">if</span> left + right + current &gt;= <span class="number">2</span> {
+    // If any two are correct
+    if left + right + current &gt;= 2 {
         ancestor = node
     }
     
-    <span class="keyword">return</span> left + right + current &gt; <span class="number">0</span>
+    return left + right + current &gt; 0
 }
-</code></pre><h3>Number of Ways to Reorder Array to Get Same BST</h3><p>How many times we can reorder the same given array to get the same BST.</p><p>The intuition: <em> The first array element needs to be the same to have the same root </em> Smaller elements need to keep the same relative position to other small elements * Larger elements need to keep the same relative position to other large elements</p><p>The solution: <em> Divide and conquer. Keep splitting given array into 2 arrays with larger numbers than the first one and smaller numbers than the first one. Calculate the number of combination for each array </em> Combinatorics nCk (to find the number of ways selecting k things out of n things) * Multiply all the results recursively</p><p>Problems in Swift: <em> No built-in way to calculate nCk </em> No built-in way to calculate using large numbers BigInt</p><p>The gist of the algorithm</p><pre><code><span class="keyword">func</span> numOfWays(<span class="keyword">_</span> nums: [<span class="type">Int</span>]) -&gt; <span class="type">Int</span> {
-    <span class="keyword">func</span> divideAndConquer(<span class="keyword">_</span> sublist: [<span class="type">Int</span>]) -&gt; <span class="type">Int</span> {
-        <span class="keyword">if</span> sublist.<span class="property">count</span> &lt;= <span class="number">2</span> {
-            <span class="keyword">return</span> <span class="number">1</span> <span class="comment">// base case</span>
+</code></pre><h3>Number of Ways to Reorder Array to Get Same BST</h3><p>How many times we can reorder the same given array to get the same BST.</p><p>The intuition: <em> The first array element needs to be the same to have the same root </em> Smaller elements need to keep the same relative position to other small elements * Larger elements need to keep the same relative position to other large elements</p><p>The solution: <em> Divide and conquer. Keep splitting given array into 2 arrays with larger numbers than the first one and smaller numbers than the first one. Calculate the number of combination for each array </em> Combinatorics nCk (to find the number of ways selecting k things out of n things) * Multiply all the results recursively</p><p>Problems in Swift: <em> No built-in way to calculate nCk </em> No built-in way to calculate using large numbers BigInt</p><p>The gist of the algorithm</p><pre><code class="language-swift">func numOfWays(_ nums: [Int]) -&gt; Int {
+    func divideAndConquer(_ sublist: [Int]) -&gt; Int {
+        if sublist.count &lt;= 2 {
+            return 1 // base case
         }
         
-        <span class="keyword">let</span> root = sublist[<span class="number">0</span>]
+        let root = sublist[0]
         
-        <span class="keyword">let</span> left = sublist.<span class="call">filter</span> { $0 &lt; root }
-        <span class="keyword">let</span> right = sublist.<span class="call">filter</span> { $0 &gt; root }
+        let left = sublist.filter { $0 &lt; root }
+        let right = sublist.filter { $0 &gt; root }
         
-        <span class="keyword">return</span> <span class="call">nCk</span>(left.<span class="property">count</span> + right.<span class="property">count</span>, left.<span class="property">count</span>) * <span class="call">divideAndConquer</span>(left) * <span class="call">divideAndConquer</span>(right)
+        return nCk(left.count + right.count, left.count) * divideAndConquer(left) * divideAndConquer(right)
     }
     
-    <span class="keyword">return</span> (<span class="call">divideAndConquer</span>(nums) - <span class="number">1</span>) <span class="comment">// With big trees the result will overflow</span>
+    return (divideAndConquer(nums) - 1) // With big trees the result will overflow
 }
 
-<span class="keyword">func</span> nCk(<span class="keyword">_</span> n: <span class="type">Int</span>, <span class="keyword">_</span> k: <span class="type">Int</span>) -&gt; <span class="type">Int</span> {
-    <span class="comment">//C (n , k) = n! / [ (n-k)! k! ]</span>
+func nCk(_ n: Int, _ k: Int) -&gt; Int {
+    //C (n , k) = n! / [ (n-k)! k! ]
     
-    <span class="keyword">if</span> (k &gt; n) { <span class="keyword">return</span> <span class="number">0</span> }
-    <span class="keyword">var</span> result = <span class="number">1</span>
-    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;<span class="call">min</span>(k, n-k) {
-        result = (result * (n - i))/(i + <span class="number">1</span>)
+    if (k &gt; n) { return 0 }
+    var result = 1
+    for i in 0..&lt;min(k, n-k) {
+        result = (result * (n - i))/(i + 1)
     }
-    <span class="keyword">return</span> result
+    return result
 }
-</code></pre><h3>Path Sum</h3><p>Given the root of a binary tree and an integer targetSum, return the number of paths where the sum of the values along the path equals targetSum.</p><p>This problem can be solved using a <strong>prefix sum</strong> technique.</p><img src="/images/notes/4b53bbaf1ca1cab5b0a3959afb3ae6aaeefd5c8bf7772fb509f1d80a00ca5492.png" alt="LeetCode.com"/><p><strong>Prefix sum</strong> technique can be used to solve problems such as: * Find a number of arrays/matrices/tree paths that sum to a target</p><p>It's easier to understand the explanation using sum of arrays:</p><pre><code><span class="keyword">class</span> Solution {
-    <span class="keyword">func</span> subarraySum(<span class="keyword">_</span> nums: [<span class="type">Int</span>], <span class="keyword">_</span> k: <span class="type">Int</span>) -&gt; <span class="type">Int</span> {
-        <span class="keyword">var</span> count = <span class="number">0</span>
-        <span class="keyword">var</span> sumCount: [<span class="type">Int</span>: <span class="type">Int</span>] = [:]
-        <span class="keyword">var</span> sum = <span class="number">0</span>
+</code></pre><h3>Path Sum</h3><p>Given the root of a binary tree and an integer targetSum, return the number of paths where the sum of the values along the path equals targetSum.</p><p>This problem can be solved using a <strong>prefix sum</strong> technique.</p><img src="/images/notes/4b53bbaf1ca1cab5b0a3959afb3ae6aaeefd5c8bf7772fb509f1d80a00ca5492.png" alt="LeetCode.com"/><p><strong>Prefix sum</strong> technique can be used to solve problems such as: * Find a number of arrays/matrices/tree paths that sum to a target</p><p>It's easier to understand the explanation using sum of arrays:</p><pre><code class="language-swift">class Solution {
+    func subarraySum(_ nums: [Int], _ k: Int) -&gt; Int {
+        var count = 0
+        var sumCount: [Int: Int] = [:]
+        var sum = 0
         
-        <span class="keyword">for</span> num <span class="keyword">in</span> nums {
+        for num in nums {
             sum += num
             
-            <span class="comment">// Special case if we find sum at the first position</span>
-            <span class="keyword">if</span> sum == k {
-                count += <span class="number">1</span>
+            // Special case if we find sum at the first position
+            if sum == k {
+                count += 1
             }
             
-            <span class="comment">// This is the most important part
+            // This is the most important part
             // Let's say we have array [10, 5, 3] and target sum 8
             // When we come to 3, the sum is 18 and 18 - target sum = 10
             // In this case we encounter sum 10 for the second time, it means that in-between we had numbers that summed up to target sum (8). 
-            // Counter-intuitive but super clever</span>
-            count += sumCount[sum - k, default: <span class="number">0</span>] 
+            // Counter-intuitive but super clever
+            count += sumCount[sum - k, default: 0] 
             
-            sumCount[sum, default: <span class="number">0</span>] += <span class="number">1</span>
+            sumCount[sum, default: 0] += 1
         }
         
-        <span class="keyword">return</span> count
+        return count
     }
 }
-</code></pre><h3>Course Schedule</h3><p>Given the number of courses and a list of prerequisites (the courses that depend on each other) determine if it's possible to create a schedule.</p><p>This task is asking to find cycles in a graph. If a cycle exists, it means the schedule cannot be formed. Perform a DFS, if we encounter a node that was already visited in the same path, the cycle exists.</p><h3>Invert Binary Tree</h3><p>To invert a binary tree we need to replace the left and right nodes at each step of the tree. We can use both recursive and iterative approaches. Time and space complexity in both cases is O(n)</p><pre><code><span class="comment">// If we use iterative approach, we can use queues
-// O(n), O(n)</span>
-<span class="keyword">func</span> invertTree(<span class="keyword">_</span> root: <span class="type">TreeNode</span>?) -&gt; <span class="type">TreeNode</span>? {
-    <span class="keyword">guard let</span> root = root <span class="keyword">else</span> { <span class="keyword">return nil</span> }
+</code></pre><h3>Course Schedule</h3><p>Given the number of courses and a list of prerequisites (the courses that depend on each other) determine if it's possible to create a schedule.</p><p>This task is asking to find cycles in a graph. If a cycle exists, it means the schedule cannot be formed. Perform a DFS, if we encounter a node that was already visited in the same path, the cycle exists.</p><h3>Invert Binary Tree</h3><p>To invert a binary tree we need to replace the left and right nodes at each step of the tree. We can use both recursive and iterative approaches. Time and space complexity in both cases is O(n)</p><pre><code class="language-swift">// If we use iterative approach, we can use queues
+// O(n), O(n)
+func invertTree(_ root: TreeNode?) -&gt; TreeNode? {
+    guard let root = root else { return nil }
     
-    <span class="keyword">let</span> right = <span class="call">invertTree</span>(root.<span class="property">right</span>)
-    <span class="keyword">let</span> left = <span class="call">invertTree</span>(root.<span class="property">left</span>)
+    let right = invertTree(root.right)
+    let left = invertTree(root.left)
     
-    root.<span class="property">left</span> = right
-    root.<span class="property">right</span> = left
+    root.left = right
+    root.right = left
 
-    <span class="keyword">return</span> root
+    return root
 }
-</code></pre><h3>Lowest Common Ancestor of a Binary Search Tree</h3><p>Because this is a binary search tree the solution can be iterative. At each point we can either go left or right depending on the p, q and root values. When p and q values are between the root, the root is our lowest common ancestor.</p><pre><code><span class="comment">// O(n) O(1)</span>
-<span class="keyword">func</span> lowestCommonAncestor(<span class="keyword">_</span> root: <span class="type">TreeNode</span>?, <span class="keyword">_</span> p: <span class="type">TreeNode</span>?, <span class="keyword">_</span> q: <span class="type">TreeNode</span>?) -&gt; <span class="type">TreeNode</span>? {
-    <span class="keyword">guard let</span> p = p, <span class="keyword">let</span> q = q <span class="keyword">else</span> { <span class="keyword">return nil</span> }
+</code></pre><h3>Lowest Common Ancestor of a Binary Search Tree</h3><p>Because this is a binary search tree the solution can be iterative. At each point we can either go left or right depending on the p, q and root values. When p and q values are between the root, the root is our lowest common ancestor.</p><pre><code class="language-swift">// O(n) O(1)
+func lowestCommonAncestor(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -&gt; TreeNode? {
+    guard let p = p, let q = q else { return nil }
     
-    <span class="keyword">var</span> root = root
+    var root = root
     
-    <span class="keyword">while</span> root != <span class="keyword">nil</span> {
-        <span class="keyword">let</span> rootVal = root!.val
-        <span class="keyword">let</span> pVal = p.<span class="property">val</span>
-        <span class="keyword">let</span> qVal = q.<span class="property">val</span>
+    while root != nil {
+        let rootVal = root!.val
+        let pVal = p.val
+        let qVal = q.val
         
-        <span class="keyword">if</span> pVal &gt; rootVal &amp;&amp; qVal &gt; rootVal {
+        if pVal &gt; rootVal &amp;&amp; qVal &gt; rootVal {
             root = root!.right
-        } <span class="keyword">else if</span> pVal &lt; rootVal &amp;&amp; qVal &lt; rootVal {
+        } else if pVal &lt; rootVal &amp;&amp; qVal &lt; rootVal {
             root = root!.left
-        } <span class="keyword">else</span> {
-            <span class="keyword">return</span> root
+        } else {
+            return root
         }
     }
     
-    <span class="keyword">return nil</span>
+    return nil
 }
-</code></pre><h3>Implement Trie (prefix tree)</h3><p>This data structure is used to implement autocomplete, spell checker, IP routing, T9 predictive text, solve word games, and many more.</p><p>Trie is a rooted tree that has: - Maximum of X links to children (X could be for example 26, the number of lowercase letters in an English alphabet) - A boolean field that specifies if the node is the end or not</p><p>Main functions of a trie: 1. Insert word (Time complexity O(m), Space complexity O(m)). Where m - length of the word 2. Search word (Time complexity O(m), Space complexity O(1)) 3. Search prefix (Same as word, but we don't check if the last letter is the end)</p><p>Implementation:</p><p>A TrieNode. A node that holds a list of its links. We could use HashTable or Array of fixed size.</p><pre><code><span class="keyword">class</span> TrieNode {
-    <span class="keyword">var</span> links: [<span class="type">Character</span>: <span class="type">TrieNode</span>] = [:]
-    <span class="keyword">var</span> isEnd = <span class="keyword">false
+</code></pre><h3>Implement Trie (prefix tree)</h3><p>This data structure is used to implement autocomplete, spell checker, IP routing, T9 predictive text, solve word games, and many more.</p><p>Trie is a rooted tree that has: - Maximum of X links to children (X could be for example 26, the number of lowercase letters in an English alphabet) - A boolean field that specifies if the node is the end or not</p><p>Main functions of a trie: 1. Insert word (Time complexity O(m), Space complexity O(m)). Where m - length of the word 2. Search word (Time complexity O(m), Space complexity O(1)) 3. Search prefix (Same as word, but we don't check if the last letter is the end)</p><p>Implementation:</p><p>A TrieNode. A node that holds a list of its links. We could use HashTable or Array of fixed size.</p><pre><code class="language-swift">class TrieNode {
+    var links: [Character: TrieNode] = [:]
+    var isEnd = false
     
-    func</span> getNode(<span class="keyword">_</span> char: <span class="type">Character</span>) -&gt; <span class="type">TrieNode</span>? {
-        <span class="keyword">return</span> links[char]
+    func getNode(_ char: Character) -&gt; TrieNode? {
+        return links[char]
     }
     
-    <span class="keyword">@discardableResult
-    func</span> createNode(<span class="keyword">_</span> char: <span class="type">Character</span>) -&gt; <span class="type">TrieNode</span> {
-        <span class="keyword">let</span> node = <span class="type">TrieNode</span>()
+    @discardableResult
+    func createNode(_ char: Character) -&gt; TrieNode {
+        let node = TrieNode()
         links[char] = node
-        <span class="keyword">return</span> node
+        return node
     }
 }
-</code></pre><p>A Trie.</p><p>To insert, we just start with the root and keep adding links. To search, we start with the root, and look if each node has a character as a link.</p><pre><code><span class="keyword">class</span> Trie {
-    <span class="keyword">private var</span> root = <span class="type">TrieNode</span>()
+</code></pre><p>A Trie.</p><p>To insert, we just start with the root and keep adding links. To search, we start with the root, and look if each node has a character as a link.</p><pre><code class="language-swift">class Trie {
+    private var root = TrieNode()
     
-    <span class="keyword">func</span> insert(<span class="keyword">_</span> word: <span class="type">String</span>) {
-        <span class="keyword">var</span> currentNode = root
+    func insert(_ word: String) {
+        var currentNode = root
         
-        <span class="keyword">for</span> letter <span class="keyword">in</span> word {
-            <span class="keyword">if let</span> node = currentNode.<span class="call">getNode</span>(letter) {
+        for letter in word {
+            if let node = currentNode.getNode(letter) {
                 currentNode = node
-            } <span class="keyword">else</span> {
-                currentNode = currentNode.<span class="call">createNode</span>(letter)
+            } else {
+                currentNode = currentNode.createNode(letter)
             }
         }
         
-        currentNode.<span class="property">isEnd</span> = <span class="keyword">true</span>
+        currentNode.isEnd = true
     }
     
-    <span class="keyword">func</span> search(<span class="keyword">_</span> word: <span class="type">String</span>) -&gt; <span class="type">Bool</span> {
-        <span class="keyword">guard let</span> node = <span class="call">findEndNode</span>(word) <span class="keyword">else</span> {
-            <span class="keyword">return false</span>
+    func search(_ word: String) -&gt; Bool {
+        guard let node = findEndNode(word) else {
+            return false
         }
         
-        <span class="keyword">return</span> node.<span class="property">isEnd</span>
+        return node.isEnd
     }
     
-    <span class="keyword">func</span> startsWith(<span class="keyword">_</span> prefix: <span class="type">String</span>) -&gt; <span class="type">Bool</span> {
-        <span class="keyword">return</span> <span class="call">findEndNode</span>(prefix) != <span class="keyword">nil</span>
+    func startsWith(_ prefix: String) -&gt; Bool {
+        return findEndNode(prefix) != nil
     }
 
-    <span class="comment">// MARK: - Private</span>
+    // MARK: - Private
     
-    <span class="keyword">private func</span> findEndNode(<span class="keyword">_</span> word: <span class="type">String</span>) -&gt; <span class="type">TrieNode</span>? {
-        <span class="keyword">var</span> currentNode = root
-        <span class="keyword">for</span> letter <span class="keyword">in</span> word {
-            <span class="keyword">if let</span> node = currentNode.<span class="call">getNode</span>(letter) {
+    private func findEndNode(_ word: String) -&gt; TrieNode? {
+        var currentNode = root
+        for letter in word {
+            if let node = currentNode.getNode(letter) {
                 currentNode = node
-            } <span class="keyword">else</span> {
-                <span class="keyword">return nil</span>
+            } else {
+                return nil
             }
         }
         
-        <span class="keyword">return</span> currentNode
+        return currentNode
     }
 }
-</code></pre><h3>Number of Islands in a Grid</h3><p>Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), return the number of islands.</p><pre><code><span class="type">Input</span>: grid = [
-  [<span class="string">"1"</span>,<span class="string">"1"</span>,<span class="string">"0"</span>,<span class="string">"0"</span>,<span class="string">"0"</span>],
-  [<span class="string">"1"</span>,<span class="string">"1"</span>,<span class="string">"0"</span>,<span class="string">"0"</span>,<span class="string">"0"</span>],
-  [<span class="string">"0"</span>,<span class="string">"0"</span>,<span class="string">"1"</span>,<span class="string">"0"</span>,<span class="string">"0"</span>],
-  [<span class="string">"0"</span>,<span class="string">"0"</span>,<span class="string">"0"</span>,<span class="string">"1"</span>,<span class="string">"1"</span>]
+</code></pre><h3>Number of Islands in a Grid</h3><p>Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), return the number of islands.</p><pre><code class="language-swift">Input: grid = [
+  ["1","1","0","0","0"],
+  ["1","1","0","0","0"],
+  ["0","0","1","0","0"],
+  ["0","0","0","1","1"]
 ]
-<span class="type">Output</span>: <span class="number">3</span>
-</code></pre><p>We need to look at it as a graph problem and solve either with: 1. DFS 2. BFS 3. Union Find</p><p>DFS Solution:</p><pre><code><span class="keyword">func</span> numIslands(<span class="keyword">_</span> grid: [[<span class="type">Character</span>]]) -&gt; <span class="type">Int</span> {
-    <span class="keyword">var</span> numberOfIslands = <span class="number">0</span>
-    <span class="keyword">var</span> grid = grid
+Output: 3
+</code></pre><p>We need to look at it as a graph problem and solve either with: 1. DFS 2. BFS 3. Union Find</p><p>DFS Solution:</p><pre><code class="language-swift">func numIslands(_ grid: [[Character]]) -&gt; Int {
+    var numberOfIslands = 0
+    var grid = grid
     
-    <span class="keyword">for</span> row <span class="keyword">in</span> <span class="number">0</span>..&lt;grid.<span class="property">count</span> {
-        <span class="keyword">for</span> col <span class="keyword">in</span> <span class="number">0</span>..&lt;grid[row].count {
-            <span class="keyword">if</span> grid[row][col] == <span class="string">"1"</span> {
-                <span class="call">markIslandAsVisited</span>(&amp;grid, row, col)
-                numberOfIslands += <span class="number">1</span>
+    for row in 0..&lt;grid.count {
+        for col in 0..&lt;grid[row].count {
+            if grid[row][col] == "1" {
+                markIslandAsVisited(&amp;grid, row, col)
+                numberOfIslands += 1
             }
         }
     }
     
-    <span class="keyword">return</span> numberOfIslands
+    return numberOfIslands
 }
 
-<span class="keyword">@discardableResult
-private func</span> markIslandAsVisited(<span class="keyword">_</span> grid: <span class="keyword">inout</span> [[<span class="type">Character</span>]], <span class="keyword">_</span> row: <span class="type">Int</span>, <span class="keyword">_</span> col: <span class="type">Int</span>) {
-    <span class="keyword">guard</span> row &gt;= <span class="number">0</span>, row &lt; grid.<span class="property">count</span>, col &gt;= <span class="number">0</span> , col &lt; grid[<span class="number">0</span>].count <span class="keyword">else</span> {
-        <span class="keyword">return</span>
+@discardableResult
+private func markIslandAsVisited(_ grid: inout [[Character]], _ row: Int, _ col: Int) {
+    guard row &gt;= 0, row &lt; grid.count, col &gt;= 0 , col &lt; grid[0].count else {
+        return
     }
     
-    <span class="keyword">guard</span> grid[row][col] == <span class="string">"1"</span> <span class="keyword">else</span> {
-        <span class="keyword">return</span>
+    guard grid[row][col] == "1" else {
+        return
     } 
     
-    grid[row][col] = <span class="string">"0"</span>
+    grid[row][col] = "0"
     
-    [(row - <span class="number">1</span>, col), (row, col - <span class="number">1</span>), (row + <span class="number">1</span>, col), (row, col + <span class="number">1</span>)].<span class="call">forEach</span> { newRow, newCol <span class="keyword">in</span> 
+    [(row - 1, col), (row, col - 1), (row + 1, col), (row, col + 1)].forEach { newRow, newCol in 
         markIslandAsVisited(&amp;grid, newRow, newCol)
     }
     
-    <span class="keyword">return</span>
+    return
 }
-</code></pre><h3>Combination Sum</h3><p>Given array of candidates and a target sum, return a list of unique combinations of candidates that sum to target.</p><p>We use backtracking algorithm.</p><p>Time complexity - <strong>O(N^((t/m)+1))</strong>, where t- target value and m - minimal value.</p><p>This is from theory that the maximum number of nodes in N-ary tree of T/M height is O(N^((t/m)+1))</p><p>If 8 - target, and 2 - minimum then O(N^4+1).</p><p>Space - O(t/m)</p><pre><code>     <span class="keyword">func</span> combinationSum(<span class="keyword">_</span> candidates: [<span class="type">Int</span>], <span class="keyword">_</span> target: <span class="type">Int</span>) -&gt; [[<span class="type">Int</span>]] {
-        <span class="comment">// unique = skip if there are 2 same numbers, leetcode already ensures it</span>
+</code></pre><h3>Combination Sum</h3><p>Given array of candidates and a target sum, return a list of unique combinations of candidates that sum to target.</p><p>We use backtracking algorithm.</p><p>Time complexity - <strong>O(N^((t/m)+1))</strong>, where t- target value and m - minimal value.</p><p>This is from theory that the maximum number of nodes in N-ary tree of T/M height is O(N^((t/m)+1))</p><p>If 8 - target, and 2 - minimum then O(N^4+1).</p><p>Space - O(t/m)</p><pre><code class="language-swift">    func combinationSum(_ candidates: [Int], _ target: Int) -&gt; [[Int]] {
+        // unique = skip if there are 2 same numbers, leetcode already ensures it
         
-        <span class="keyword">var</span> combinations: [[<span class="type">Int</span>]] = []
+        var combinations: [[Int]] = []
         
-        <span class="call">combinationSum</span>(candidates, target, [], &amp;combinations)
+        combinationSum(candidates, target, [], &amp;combinations)
         
-        <span class="keyword">return</span> combinations
+        return combinations
     }
     
-    <span class="keyword">private func</span> combinationSum(<span class="keyword">_</span> candidates: [<span class="type">Int</span>], 
-                                <span class="keyword">_</span> remaining: <span class="type">Int</span>, 
-                                <span class="keyword">_</span> currentCombination: [<span class="type">Int</span>], 
-                                <span class="keyword">_</span> combinations: <span class="keyword">inout</span> [[<span class="type">Int</span>]]) {
-        <span class="call">print</span>(remaining)
-        <span class="keyword">guard</span> remaining &gt;= <span class="number">0</span> <span class="keyword">else</span> { <span class="keyword">return</span> }
+    private func combinationSum(_ candidates: [Int], 
+                                _ remaining: Int, 
+                                _ currentCombination: [Int], 
+                                _ combinations: inout [[Int]]) {
+        print(remaining)
+        guard remaining &gt;= 0 else { return }
         
-        <span class="keyword">if</span> remaining == <span class="number">0</span> {
-            combinations.<span class="call">append</span>(currentCombination)
-            <span class="keyword">return</span>
+        if remaining == 0 {
+            combinations.append(currentCombination)
+            return
         }
         
-        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;candidates.<span class="property">count</span> {
-            <span class="call">combinationSum</span>(<span class="type">Array</span>(candidates[i..&lt;candidates.<span class="property">count</span>]), 
+        for i in 0..&lt;candidates.count {
+            combinationSum(Array(candidates[i..&lt;candidates.count]), 
                            remaining - candidates[i], 
                            currentCombination + [candidates[i]], 
                            &amp;combinations)

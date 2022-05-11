@@ -3,9 +3,13 @@ import Publish
 import Plot
 import SplashPublishPlugin
 
-try Blog().publish(
-    withTheme: .blog,
-    additionalSteps: [.deploy(using: .gitHub("staskus/staskus.github.io"))],
-    plugins: [.splash(withClassPrefix: "")]
-)
+try Blog().publish(using: [
+    .addMarkdownFiles(),
+    .copyResources(),
+    .installPlugin(.splash(withClassPrefix: "")),
+    .generateHTML(withTheme: .blog),
+    .generateRSSFeed(including: [.posts]),
+    .generateSiteMap(),
+    .deploy(using: .gitHub("staskus/staskus.github.io")),
+])
 
