@@ -20,7 +20,7 @@ Main features:
 
 Asset inspection is also an asynchronous process. We only get what we ask for.
 
-We load values by providing keys to a loading method:
+We load values by providing keys to a loading method.
 
 ```swift
 let url: URL = // A URL to a local or remote media resource.

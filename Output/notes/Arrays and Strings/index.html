@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="en"><head><title>Povilas Staškus - iOS Developer</title><meta name="twitter:title" content="Povilas Staškus - iOS Developer"/><meta name="og:title" content="Povilas Staškus - iOS Developer"/><meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous"/><link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css"/><link rel="stylesheet" href="/Pure/styles.css"/><link rel="stylesheet" href="/all.css"/></head><body><div id="layout" class="pure-g"><div><div class="pure-menu pure-menu-horizontal pure-u-1-1 top-header"><a class="pure-menu-heading" href="/">staskus.io</a><ul class="pure-menu-list"><li class="pure-menu-item"><a class="pure-menu-link" href="/about">About</a></li><li class="pure-menu-item"><a class="pure-menu-link" href="/archive">Archive</a></li><li class="pure-menu-item"><a class="pure-menu-link" href="/afterWork">After work</a></li></ul></div></div><div class="sidebar pure-u-1 pure-u-md-1-4"><div class="header"><div id="layout" class="pure-g"><div class="author__avatar"><img src="https://avatars0.githubusercontent.com/u/4062343?s=460&v=4"/></div><div class="pure-u-md-1-1 pure-u-3-4"><h1 class="brand-title">Povilas Staškus</h1><h3 class="brand-tagline">iOS Developer</h3></div></div><div id="layout" class="pure-g"><div class="pure-u-md-1-1"><a href="https://en.wikipedia.org/wiki/Vilnius"><i class="fas fa-map-marker-alt l-box social-icon"></i><a class="social-media" href="https://en.wikipedia.org/wiki/Vilnius">Vilnius, Lithuania</a></a></div><div class="pure-u-md-1-1"><a href="mailto:povilas@staskus.io"><i class="fas fa-envelope-open-text l-box social-icon"></i><a class="social-media" href="mailto:povilas@staskus.io">Email</a></a></div><div class="pure-u-md-1-1"><a href="https://www.linkedin.com/in/povilas-staškus-6b10528b"><i class="fab fa-linkedin l-box social-icon"></i><a class="social-media" href="https://www.linkedin.com/in/povilas-staškus-6b10528b">LinkedIn</a></a></div><div class="pure-u-md-1-1"><a href="https://github.com/staskus"><i class="fab fa-github-square l-box social-icon"></i><a class="social-media" href="https://github.com/staskus">GitHub</a></a></div><div class="pure-u-md-1-1"><a href="https://twitter.com/PovilasStaskus"><i class="fab fa-twitter-square l-box social-icon"></i><a class="social-media" href="https://twitter.com/PovilasStaskus">Twitter</a></a></div></div></div></div><div class="content pure-u-1 pure-u-md-3-5 pure-u-xl-6-10"><h2 class="post-title"><a href="/notes/Arrays and Strings">Array and Strings</a></h2><p class="post-meta">Last modified: 2022 April 22</p><div class="post-description"><div><h2>Hash Tables</h2><p>We can implement hash tables using the combination of arrays and linked lists.</p><ol><li>We compute hash code and % it from array length</li><li>At each array position there's a linked list to deal with collisions</li><li>When retrieving values find a linked list by a key (hash &amp; index) and then search through a linked list for a key</li></ol><p>Although the worst-case scenario due to collisions is 0(n), a good implementation that keeps collisions at a minimum is considered to be O(1)</p><h2>Resizable Arrays</h2><p>Some programming languages have only fixed-size arrays and use different types of data structures like ArrayList which expands in size dynamically. It does this by doubling its size after reaching a limit.</p><h2>Example tasks to know how to solve:</h2><h3>Two Sum</h3><p>A very popular problem with a lot of variations.</p><h4>If numbers array is already sorted</h4><p>If the numbers array is already sorted, we can use 2 pointer approach, where one starts at the end and the other at the start. If they both sum to a target, we have found our solution. If our sum is smaller, we need to increase leftIndex. If our sum is larget, we need to decrease our rightIndex.</p><pre><code><span class="comment">// O(n) O(1)</span>
+<span class="keyword">func</span> twoSum(<span class="keyword">_</span> numbers: [<span class="type">Int</span>], <span class="keyword">_</span> target: <span class="type">Int</span>) -&gt; [<span class="type">Int</span>] {
+    <span class="keyword">var</span> lowIndex = <span class="number">0</span>
+    <span class="keyword">var</span> highIndex = numbers.<span class="property">count</span> - <span class="number">1</span>
+    
+    <span class="keyword">while</span> lowIndex &lt; <span class="call">highIndex</span> {
+        <span class="keyword">let</span> sum = numbers[lowIndex] + numbers[highIndex]
+        <span class="keyword">if</span> sum == target {
+            <span class="keyword">return</span> [lowIndex, highIndex]
+        } <span class="keyword">else if</span> sum &gt; target {
+            highIndex -= <span class="number">1</span>
+        } <span class="keyword">else</span> {
+            lowIndex += <span class="number">1</span>
+        }
+    }
+    
+    <span class="keyword">return</span> []
+}
+</code></pre><h4>If numbers array is not sorted</h4><ol><li>We calculate the remaining value</li><li>If it's already in the map, we return indices</li><li>Else, save the current number in the map</li></ol><pre><code><span class="comment">// O(n) O(n)</span>
+<span class="keyword">func</span> twoSum(<span class="keyword">_</span> numbers: [<span class="type">Int</span>], <span class="keyword">_</span> target: <span class="type">Int</span>) -&gt; [<span class="type">Int</span>] {
+    <span class="keyword">var</span> map: [<span class="type">Int</span>: <span class="type">Int</span>] = [:]
+    
+    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;numbers.<span class="property">count</span> {
+        <span class="keyword">let</span> remaining = target - numbers[i]
+        
+        <span class="keyword">if let</span> remainingIndex = map[remaining] {
+            <span class="keyword">return</span> [remainingIndex, i]
+        }
+        
+        map[numbers[i]] = i
+    }
+    
+    <span class="keyword">return</span> []
+}
+</code></pre><h3>Three Sum</h3><p>Such task is a continuation of Two Sum. We should find ways to call Two Sum logic for elements in a Three Sum problem. Naturally, the time complexity grows to O(n^2).<br>### Determine if String has unique characters</p><p>We can use Sets or Hashmaps. If we can only use Arrays clarify the limitations of an alphabet. If it's the English alphabet we can create an array of size 26 (size 128 if including all ASCII characters) and the element's position would be <em>character.asciiValue - 'a'.asciiValue</em>.</p><h3>Given two strings decide if one is a permutation of the other</h3><p>We can sort and check if they are equal with time complexity O(nlogn) and space complexity O(1).</p><p>We can use hashtables with time complexity O(n) and space complexity O(n).</p><p>If the alphabet has limitations (as explained before) we can use fixed-size arrays with a space complexity of O(1).</p><h3>Check if a string is a permutation of a palindrome</h3><p>In such a task is important to nail down what exactly is a palindrome. It has no more than one odd number-letter count. We can again use fixed-size arrays to make letter counts.</p><h3>Check if 2 strings are one edit (insert, remove, replace) away</h3><p>It's important to exit early from clear invalid cases. Then go through a long string and return false if found more than one difference.</p><h3>Compressing the string into its letter counts without using extra space</h3><p>What is helpful is using a concept of a <em>read pointer</em> and a <em>write pointer</em>. While we make calculations going together with <em>read pointer</em>, <em>write pointer</em> can execute changes on the string without making some positioning calculations.</p><h3>Rotate Matrix without using extra space</h3><p><strong>A very popular problem</strong></p><p>Having drawn examples helps with finding the patterns of how matrices work.</p><p>2 main options for solving: <em> Transpose (flip diagonally) and Reflect (left to right / top to bottom) </em> Rotate squares inside a matrix (Which I choose as it uses twice as less iterations)</p><p>Each matrix has n/2 (where n is a number of elements in a row) squares. We need to iterate through all the squares and swap elements at the corners of those squares.</p><img src="/images/notes/f53df9570974ef456f0347b2fe8bb8e09876c4c0c4910f51a3fb2bfb42ffc5fb.png" alt="<a href="https://www.enjoyalgorithms.com/blog/rotate-a-matrix-by-90-degrees-in-an-anticlockwise-direction">picture 1</a>"/><p>After exchanging the upper layer, we move into inner layer circles (in larger matrices)</p><p>Example of turning the matrix 90 degrees</p><pre><code><span class="keyword">let</span> n = matrix.<span class="property">count</span>
+        <span class="keyword">for</span> layer <span class="keyword">in</span> <span class="number">0</span>..&lt;n/<span class="number">2</span> {
+    <span class="comment">// Going through elements in the layer. The deeper the layer, the less the elements</span>
+    <span class="keyword">for</span> pos <span class="keyword">in</span> layer..&lt;n-<span class="number">1</span>-layer {
+        <span class="keyword">let</span> temp = matrix[layer][pos]
+        matrix[layer][pos] = matrix[n-<span class="number">1</span>-pos][layer]
+        matrix[n-<span class="number">1</span>-pos][layer] = matrix[n-<span class="number">1</span>-layer][n-<span class="number">1</span>-pos]
+        matrix[n-<span class="number">1</span>-layer][n-<span class="number">1</span>-pos] = matrix[pos][n-<span class="number">1</span>-layer]
+        matrix[pos][n-<span class="number">1</span>-layer] = temp
+    }
+}
+</code></pre><h3>Zero Matrix</h3><p>If the element is 0, its entire row and column should be zero.</p><p>In such a task optimal solution is using constant space, meaning changing matrix in place. The challenge is coming up with the flag to notify which rows and columns need to be turned to zeros. Usually, we can set flags at the beginning of rows and columns and iterate through the matrix 2 times.</p><h3>Best Time to Buy and Sell Stock</h3><p>Given the array of values, find the smallest value to buy and the largest to sell.</p><p>We can use 2 pointers approach. If the price of the left pointer is larger than a price of a right pointer, we move with the left pointer forward. Else, we calculate a possible sell price.</p><pre><code><span class="keyword">class</span> Solution {
+    <span class="comment">// TimeComplexity O(n)
+    // SpaceComplexity 0(1)</span>
+    <span class="keyword">func</span> maxProfit(<span class="keyword">_</span> prices: [<span class="type">Int</span>]) -&gt; <span class="type">Int</span> {
+        <span class="comment">// 2 pointer approach
+        // If right finds smaller, left moves to the right</span>
+        
+        <span class="keyword">var</span> leftPtr = <span class="number">0</span>
+        <span class="keyword">var</span> rightPtr = <span class="number">0</span>
+        <span class="keyword">var</span> maxValue = <span class="number">0</span>
+        
+        <span class="keyword">while</span> rightPtr &lt; prices.<span class="call">count</span> {
+            <span class="keyword">if</span> prices[leftPtr] &gt;= prices[rightPtr] {
+                leftPtr = rightPtr
+            } <span class="keyword">else</span> {
+                maxValue = <span class="call">max</span>(maxValue, prices[rightPtr] - prices[leftPtr])
+            }
+        
+            rightPtr += <span class="number">1</span>  
+        }
+        
+        <span class="keyword">return</span> maxValue
+    }
+}
+</code></pre><h3>Valid Palindrome</h3><p>A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.</p><p>"A man, a plan, a canal: Panama" is a palindrome in this case.</p><p>There are 2 main approaches: <em> Filter the original, create a reverse string, compare reversed with the original (O(n), O(n)) </em> 2 pointer approach. One from left to right, the other from right to left, skip non-alphanumeric characters. (O(n), O(1))</p><pre><code><span class="keyword">func</span> isPalindrome(<span class="keyword">_</span> s: <span class="type">String</span>) -&gt; <span class="type">Bool</span> {
+    <span class="keyword">let</span> letters = <span class="type">Array</span>(s)
+    <span class="keyword">var</span> leftIndex = <span class="number">0</span>
+    <span class="keyword">var</span> rightIndex = letters.<span class="property">count</span> - <span class="number">1</span>
+    
+    <span class="keyword">while</span> leftIndex &lt; <span class="call">rightIndex</span> {
+        <span class="keyword">let</span> leftLetter = <span class="type">Character</span>(letters[leftIndex].<span class="call">lowercased</span>())
+        <span class="keyword">let</span> rightLetter = <span class="type">Character</span>(letters[rightIndex].<span class="call">lowercased</span>())
+        
+        <span class="keyword">if</span> !leftLetter.<span class="property">isNumber</span> &amp;&amp; !leftLetter.<span class="property">isLetter</span> {
+            leftIndex += <span class="number">1</span>
+            <span class="keyword">continue</span>
+        }
+        
+        <span class="keyword">if</span> !rightLetter.<span class="property">isNumber</span> &amp;&amp; !rightLetter.<span class="property">isLetter</span> {
+            rightIndex -= <span class="number">1</span>
+            <span class="keyword">continue</span>
+        }
+        
+        <span class="keyword">if</span> leftLetter != rightLetter {
+            <span class="keyword">return false</span>
+        }
+        
+        leftIndex += <span class="number">1</span>
+        rightIndex -= <span class="number">1</span>
+    }
+    
+    <span class="keyword">return true</span>
+}
+</code></pre><h3>Maximum Subarray</h3><p>Find a subarray that sums to the maximum value and return this value.</p><pre><code><span class="comment">// "Dynamic Programming, Kadane's Algorithm"
+// I came up on my own, no need to memorize.
+// The idea is that we can dismiss "maxCandidate" if adding it to the sum is still less than the sum because it contributes negatively to the total.
+
+// O(n), O(1)</span>
+<span class="keyword">func</span> maxSubArray(<span class="keyword">_</span> nums: [<span class="type">Int</span>]) -&gt; <span class="type">Int</span> {        
+    <span class="keyword">var</span> maxNum = -<span class="type">Int</span>.<span class="property">max</span>
+    <span class="keyword">var</span> maxCandidate = <span class="number">0</span>
+    
+    <span class="keyword">for</span> num <span class="keyword">in</span> nums {
+        maxCandidate = <span class="call">max</span>(num, maxCandidate + num)
+        maxNum = <span class="call">max</span>(maxCandidate, maxNum)  
+    }
+    
+    <span class="keyword">return</span> maxNum
+}
+</code></pre><h3>Find k closest(smallest, largest) points in array</h3><p>Options: 1. Sorting - O(n logn), O(1) 2. Max heap - O(n + klogn), O(n) 3. Binary Search - O(n), O(n) 4. Quick Select - O(n), O(1)</p><p>We strive for O(n) time complexity, and O(1) space complexity.</p><p>Anytime we are tasked with finding the k (or kth) [smallest/largest/etc.] element(s), we should always consider whether the <strong>QuickSelect</strong> algorithm can be applied.</p><p>Unlike the QuickSort algorithm, the QuickSelect algorithm roughly halves the remaining elements needed to process at each iteration, so the total number of processes will average at 2N hich results in an average time complexity of O(N). The worst case is O(n^2) though.</p></div></div></div><div class="footer pure-u-1"><div class="pure-u-1">© 2022 Povilas Staškus</div><div class="pure-u-1">Generated using <a href="https://github.com/johnsundell/publish">Publish</a></div><div class="pure-u-1"><a href="/feed.rss">RSS feed</a></div></div></div></body></html>
