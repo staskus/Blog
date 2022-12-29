@@ -8,7 +8,7 @@ excerpt: iOS
 #### Pipe Forward
 
 Pipe forward operator is used to chain functions together.
-    
+
 ```swift
 precedencegroup ForwardApplication {
   associativity: left
