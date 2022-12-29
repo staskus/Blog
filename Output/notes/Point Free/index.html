@@ -1,21 +1,74 @@
-<!DOCTYPE html><html lang="en"><head><title>Povilas Staškus - iOS Developer</title><meta name="twitter:title" content="Povilas Staškus - iOS Developer"/><meta name="og:title" content="Povilas Staškus - iOS Developer"/><meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous"/><link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css"/><link rel="stylesheet" href="/Pure/styles.css"/><link rel="stylesheet" href="/all.css"/></head><body><div id="layout" class="pure-g"><div><div class="pure-menu pure-menu-horizontal pure-u-1-1 top-header"><a class="pure-menu-heading" href="/">staskus.io</a><ul class="pure-menu-list"><li class="pure-menu-item"><a class="pure-menu-link" href="/about">About</a></li><li class="pure-menu-item"><a class="pure-menu-link" href="/archive">Archive</a></li><li class="pure-menu-item"><a class="pure-menu-link" href="/afterWork">After work</a></li></ul></div></div><div class="sidebar pure-u-1 pure-u-md-1-4"><div class="header"><div id="layout" class="pure-g"><div class="author__avatar"><img src="https://avatars0.githubusercontent.com/u/4062343?s=460&v=4"/></div><div class="pure-u-md-1-1 pure-u-3-4"><h1 class="brand-title">Povilas Staškus</h1><h3 class="brand-tagline">iOS Developer</h3></div></div><div id="layout" class="pure-g"><div class="pure-u-md-1-1"><a href="https://en.wikipedia.org/wiki/Vilnius"><i class="fas fa-map-marker-alt l-box social-icon"></i><a class="social-media" href="https://en.wikipedia.org/wiki/Vilnius">Vilnius, Lithuania</a></a></div><div class="pure-u-md-1-1"><a href="mailto:povilas@staskus.io"><i class="fas fa-envelope-open-text l-box social-icon"></i><a class="social-media" href="mailto:povilas@staskus.io">Email</a></a></div><div class="pure-u-md-1-1"><a href="https://www.linkedin.com/in/povilas-staškus-6b10528b"><i class="fab fa-linkedin l-box social-icon"></i><a class="social-media" href="https://www.linkedin.com/in/povilas-staškus-6b10528b">LinkedIn</a></a></div><div class="pure-u-md-1-1"><a href="https://github.com/staskus"><i class="fab fa-github-square l-box social-icon"></i><a class="social-media" href="https://github.com/staskus">GitHub</a></a></div><div class="pure-u-md-1-1"><a href="https://twitter.com/PovilasStaskus"><i class="fab fa-twitter-square l-box social-icon"></i><a class="social-media" href="https://twitter.com/PovilasStaskus">Twitter</a></a></div></div></div></div><div class="content pure-u-1 pure-u-md-3-5 pure-u-xl-6-10"><h2 class="post-title"><a href="/notes/Point Free">Point Free</a></h2><p class="post-meta">Last modified: 2022 December 28</p><div class="post-description"><div><h2>Functions</h2><h3>Pipe forward operator</h3><pre><code>precedencegroup <span class="type">ForwardApplication</span> {
+<!DOCTYPE html><html lang="en"><head><title>Povilas Staškus - iOS Developer</title><meta name="twitter:title" content="Povilas Staškus - iOS Developer"/><meta name="og:title" content="Povilas Staškus - iOS Developer"/><meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous"/><link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css"/><link rel="stylesheet" href="/Pure/styles.css"/><link rel="stylesheet" href="/all.css"/></head><body><div id="layout" class="pure-g"><div><div class="pure-menu pure-menu-horizontal pure-u-1-1 top-header"><a class="pure-menu-heading" href="/">staskus.io</a><ul class="pure-menu-list"><li class="pure-menu-item"><a class="pure-menu-link" href="/about">About</a></li><li class="pure-menu-item"><a class="pure-menu-link" href="/archive">Archive</a></li><li class="pure-menu-item"><a class="pure-menu-link" href="/afterWork">After work</a></li></ul></div></div><div class="sidebar pure-u-1 pure-u-md-1-4"><div class="header"><div id="layout" class="pure-g"><div class="author__avatar"><img src="https://avatars0.githubusercontent.com/u/4062343?s=460&v=4"/></div><div class="pure-u-md-1-1 pure-u-3-4"><h1 class="brand-title">Povilas Staškus</h1><h3 class="brand-tagline">iOS Developer</h3></div></div><div id="layout" class="pure-g"><div class="pure-u-md-1-1"><a href="https://en.wikipedia.org/wiki/Vilnius"><i class="fas fa-map-marker-alt l-box social-icon"></i><a class="social-media" href="https://en.wikipedia.org/wiki/Vilnius">Vilnius, Lithuania</a></a></div><div class="pure-u-md-1-1"><a href="mailto:povilas@staskus.io"><i class="fas fa-envelope-open-text l-box social-icon"></i><a class="social-media" href="mailto:povilas@staskus.io">Email</a></a></div><div class="pure-u-md-1-1"><a href="https://www.linkedin.com/in/povilas-staškus-6b10528b"><i class="fab fa-linkedin l-box social-icon"></i><a class="social-media" href="https://www.linkedin.com/in/povilas-staškus-6b10528b">LinkedIn</a></a></div><div class="pure-u-md-1-1"><a href="https://github.com/staskus"><i class="fab fa-github-square l-box social-icon"></i><a class="social-media" href="https://github.com/staskus">GitHub</a></a></div><div class="pure-u-md-1-1"><a href="https://twitter.com/PovilasStaskus"><i class="fab fa-twitter-square l-box social-icon"></i><a class="social-media" href="https://twitter.com/PovilasStaskus">Twitter</a></a></div></div></div></div><div class="content pure-u-1 pure-u-md-3-5 pure-u-xl-6-10"><h2 class="post-title"><a href="/notes/Point Free">Point Free</a></h2><p class="post-meta">Last modified: 2022 December 29</p><div class="post-description"><div><h2>Functions</h2><h4>Pipe Forward</h4><p>Pipe forward operator is used to chain functions together.<br><code></code>`swift precedencegroup ForwardApplication { associativity: left }</p><p>infix operator |&gt;: ForwardApplication</p><p>func |&gt; <A, B>(a: A, f: (A) -> B) -> B {
+  return f(a)
+}
+```
+
+#### Forward Composition
+
+Forward composition operator is used to compose two functions together into one function with the same input and output types.
+
+```swift
+precedencegroup ForwardComposition {
   associativity: left
+  higherThan: ForwardApplication
 }
 
-infix operator |&gt;: <span class="type">ForwardApplication</span>
+infix operator >>>: ForwardComposition
+```
 
-<span class="keyword">func</span> |&gt; &lt;A, B&gt;(a: <span class="type">A</span>, f: (<span class="type">A</span>) -&gt; <span class="type">B</span>) -&gt; <span class="type">B</span> {
-  <span class="keyword">return</span> <span class="call">f</span>(a)
-}
-</code></pre><h3>Composition</h3><pre><code>precedencegroup <span class="type">ForwardComposition</span> {
+With this operator, we can efficiently use map and filter, without having to iterate through arrays twice,
+
+```swift
+[1, 2, 3].map(incr).map(square)
+[1, 2, 3].map(incr >>> square) // More efficient
+```
+
+## Side Effects
+
+Side effects can make code harder to reason about and produce unexpected results. One of the ways to avoid side effects is to use pure functions. Pure functions are functions that do not have any side effects and always return the same result for the same input. However, it's not always possible to write pure functions. For example, we can't write a pure function that prints to the console. What we can do is to separate the side effect from the pure function. We can do this by returning a tuple of the side effect and the pure function.
+
+#### Effectful Composition
+
+Effectful composition operator is used to compose two functions together into one function with the same input and output types. The difference between this operator and the forward composition operator is that this operator is used to compose two functions that return a tuple of the side effect and the pure function.
+
+```swift
+precedencegroup EffectfulComposition {
   associativity: left
-  higherThan: <span class="type">ForwardApplication</span>
+  higherThan: ForwardApplication
 }
 
-infix operator &gt;&gt;&gt;: <span class="type">ForwardComposition</span>
-</code></pre><h3>Real world examples</h3><p>With these two operators, we can efficiently use map and filter, without having to iterate through arrays twice,</p><pre><code>
+infix operator >=>: EffectfulComposition
 
-[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].<span class="call">map</span>(incr).<span class="call">map</span>(square) <span class="comment">// Less efficient</span>
-[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].<span class="call">map</span>(incr &gt;&gt;&gt; square) <span class="comment">// efficient</span>
+func >=> <A, B, C>(
+  _ f: @escaping (A) -> (B, [String]),
+  _ g: @escaping (B) -> (C, [String])
+  ) -> (A) -> (C, [String]) {
 
-</code></pre></div></div></div><div class="footer pure-u-1"><div class="pure-u-1">© 2022 Povilas Staškus</div><div class="pure-u-1">Generated using <a href="https://github.com/johnsundell/publish">Publish</a></div><div class="pure-u-1"><a href="/feed.rss">RSS feed</a></div></div></div></body></html>
+  return { a in
+    let (b, logs) = f(a)
+    let (c, moreLogs) = g(b)
+    return (c, logs + moreLogs)
+  }
+}
+```
+
+#### Single Type Composition
+
+Single type composition operator is used to compose two functions together into one function with the same input and output types. The difference between this operator and the forward composition operator is that this operator is used to compose two functions that return the same type.
+
+```swift
+precedencegroup SingleTypeComposition {
+  associativity: left
+  higherThan: ForwardApplication
+}
+
+infix operator <>: SingleTypeComposition
+
+func <> <A>(
+  f: @escaping (A) -> A,
+  g: @escaping (A) -> A)
+  -> ((A) -> A) {
+
+  return f >>> g
+}
+```</p></div></div></div><div class="footer pure-u-1"><div class="pure-u-1">© 2022 Povilas Staškus</div><div class="pure-u-1">Generated using <a href="https://github.com/johnsundell/publish">Publish</a></div><div class="pure-u-1"><a href="/feed.rss">RSS feed</a></div></div></div></body></html>
