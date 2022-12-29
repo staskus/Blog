@@ -34,7 +34,7 @@ precedencegroup ForwardComposition {
 infix operator >>>: ForwardComposition
 ```
 
-With this operator, we can efficiently use map and filter, without having to iterate through arrays twice,
+With this operator, we can efficiently use map and filter, without having to iterate through arrays twice.
 
 ```swift
 [1, 2, 3].map(incr).map(square)
