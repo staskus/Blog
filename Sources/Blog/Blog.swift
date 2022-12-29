@@ -38,7 +38,7 @@ struct Blog: Website {
     var url = URL(string: "https://www.staskus.io")!
     var title = "staskus.io"
     var name = "Povilas Staškus"
-    var description = "iOS Developer"
+    var description = "Senior iOS Engineer @Automattic"
     var language: Language { .english }
     var imagePath: Path? { nil }
     var socialMediaLinks: [SocialMediaLink] { [.location, .email, .linkedIn, .github, .twitter] }
