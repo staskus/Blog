@@ -90,3 +90,28 @@ func <> <A>(
   return f >>> g
 }
 ```
+
+#### Backwards Composition
+
+To work with complicated, deeply nested data structures we need a backwards composition operator. The conterintuitive fact is that setters compose backwards and there's an essential universal proof that this is the correct way these setters compose.
+
+
+```swift
+precedencegroup BackwardsComposition {
+  associativity: left
+}
+
+infix operator <<<: BackwardsComposition
+
+func <<< <A, B, C>(g: @escaping (B) -> C, f: @escaping (A) -> B) -> (A) -> C {
+  return { x in
+    g(f(x))
+  }
+}
+```
+
+```swift
+((1, true), "Swift")
+  |> (first <<< first)(incr)
+// ((2, true), "Swift")
+```
