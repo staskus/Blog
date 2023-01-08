@@ -115,3 +115,40 @@ func <<< <A, B, C>(g: @escaping (B) -> C, f: @escaping (A) -> B) -> (A) -> C {
   |> (first <<< first)(incr)
 // ((2, true), "Swift")
 ```
+
+#### Props
+
+Props allow to change a specific property of a struct without having to create a new instance of the struct. Swift allows to use the key path feature to access the property efficiently.
+
+```swift
+func prop<Root, Value>(_ kp: WritableKeyPath<Root, Value>)
+  -> (@escaping (Value) -> Value)
+  -> (Root)
+  -> Root {
+
+  return { update in
+    { root in
+      var copy = root
+      copy[keyPath: kp] = update(copy[keyPath: kp])
+      return copy
+    }
+  }
+}
+```
+
+```swift
+prop(\User.name)
+// ((String) -> (String)) -> (User) -> User
+```
+
+## Statement vs Expression
+
+A statement is a unit of code that performs an action. An expression is a unit of code that evaluates to a value.
+
+```swift
+// A statement example
+let a = 1
+
+// An expression exampe
+let b = 1 + 1
+```
