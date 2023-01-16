@@ -152,3 +152,21 @@ let a = 1
 // An expression exampe
 let b = 1 + 1
 ```
+
+## Algebraic Data Types
+
+Algebraic data types are data structures that are built using two basic constructors: product and sum. Product constructor is used to combine two data structures into one. Sum constructor is used to combine two data structures into one, but only one of the data structures can be used at a time.
+
+### `enum` type represents a sum type (OR, +)
+
+An enum with 3 cases, has 1 + 1 + 1 = 3 possible states.
+
+### `struct` type represents a product type (AND, *)
+
+A struct with 3 bools, has 2 * 2 * 2 = 8 possible states
+
+### `pure function` type represent an exponential type (^)
+
+A^B = (B) -> A
+
+We need to have these algebraic types in mind when designing our APIs. We need to make sure that we structure our code in a way so it would have the least amount of possible combinations of states thefore limiting the complexity.
