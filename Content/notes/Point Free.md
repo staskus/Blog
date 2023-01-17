@@ -157,16 +157,87 @@ let b = 1 + 1
 
 Algebraic data types are data structures that are built using two basic constructors: product and sum. Product constructor is used to combine two data structures into one. Sum constructor is used to combine two data structures into one, but only one of the data structures can be used at a time.
 
-### `enum` type represents a sum type (OR, +)
+- `enum` type represents a sum type (OR, +)
 
 An enum with 3 cases, has 1 + 1 + 1 = 3 possible states.
 
-### `struct` type represents a product type (AND, *)
+- `struct` type represents a product type (AND, *)
 
 A struct with 3 bools, has 2 * 2 * 2 = 8 possible states
 
-### `pure function` type represent an exponential type (^)
+- `pure function` type represent an exponential type (^)
 
 A^B = (B) -> A
 
 We need to have these algebraic types in mind when designing our APIs. We need to make sure that we structure our code in a way so it would have the least amount of possible combinations of states thefore limiting the complexity.
+
+### Composition without operators
+
+#### Pipe replacement
+
+```swift
+func with<A, B>(_ a: A, _ f: (A) -> B) -> B {
+  return f(a)
+}
+
+2 |> incr // Operator
+
+with(2, incr) // Function
+```
+
+#### Forward composition replacement
+
+```swift
+func pipe<A, B, C>(_ f: @escaping (A) -> B, _ g: @escaping (B) -> C) -> (A) -> C {
+  return { g(f($0)) }
+}
+
+2 |> incr >>> square // Operator
+
+with(2, pipe(incr, square))) // Function
+```
+
+#### Effectful composition replacement
+
+```swift
+func chain<A, B, C>(
+  _ f: @escaping (A) -> (B, [String]),
+  _ g: @escaping (B) -> (C, [String])
+  ) -> ((A) -> (C, [String])) {
+
+  return { a in
+    let (b, logs) = f(a)
+    let (c, moreLogs) = g(b)
+    return (c, logs + moreLogs)
+  }
+}
+
+2 |> computeAndPrint >=> computeAndPrint // Operator
+
+with(2, chain(computeAndPrint, computeAndPrint)) // Function
+```
+
+#### Single type composition replacement
+
+```swift
+func concat<A: AnyObject>(
+  _ f1: @escaping (A) -> Void,
+  _ f2: @escaping (A) -> Void,
+  _ fs: ((A) -> Void)...
+  )
+  -> (A) -> Void {
+
+    return { a in
+      f1(a)
+      f2(a)
+      fs.forEach { f in f(a) }
+    }
+}
+
+let filledButtonStyle = concat(
+  baseButtonStyle,
+  roundedButtonStyle, {
+    $0.backgroundColor = .black
+    $0.tintColor = .white
+})
+```
