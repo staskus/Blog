@@ -21,7 +21,7 @@ Focus on the business goals, the metrics should derive from the top.
 - Use guardrails: business metrics designed to indirectly measure business value and provide alerts about any potentially misleading or erroneous results and analysis
 - Iterate on metrics
 - Making too many changes at the same time
-- Using metrics that are outside of your control
+- Using metrics that are in your control
 
 As example, to lose weight focus on calories/day and workouts/week, not on weight.
 
