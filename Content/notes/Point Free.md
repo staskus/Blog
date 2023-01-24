@@ -241,3 +241,62 @@ let filledButtonStyle = concat(
     $0.tintColor = .white
 })
 ```
+
+## Coding and Decoding
+
+In order to have type safety without having to write a lot of boilerplate code, we can use `RawRepresentable` protocol to create a wrapper around a primitive type.
+
+```swift
+struct User {
+  let email: Email
+}
+
+struct Email: Decodable, RawRepresentable {
+  let rawValue: String
+}
+```
+
+To streamline this process we could use a generic `Tagged` struct.
+
+```swift
+struct Tagged<Tag, RawValue> {
+  let rawValue: RawValue
+}
+
+extension Tagged: Decodable where RawValue: Decodable {
+  init(from decoder: Decoder) throws {
+    let container = try decoder.singleValueContainer()
+    self.init(rawValue: try container.decode(RawValue.self))
+  }
+}
+
+static func == (lhs: Tagged, rhs: Tagged) -> Bool {
+    return lhs.rawValue == rhs.rawValue
+  }
+}
+```
+
+The same `Email ` type can be rewritten as:
+
+```swift
+enum Emailtag {}
+typealias Email = Tagged<EmailTag, String>
+```
+
+It also allows to distinguish between different ID types so they wouldn't be compared by accident:
+
+```swift
+struct User: Decodable {
+  typealias Id = Tagged<User, Int>
+
+  let id: Id
+}
+
+struct Subscription: Decodable {
+  typealias Id = Tagged<Subscription, Int>
+
+  let id: Id
+  let ownerId: User.Id
+}
+```
+
