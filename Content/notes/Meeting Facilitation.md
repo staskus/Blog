@@ -39,3 +39,25 @@ Human beings respond to the context in which they are in. If you put people in t
 - Checkin
 - Agreements
 
+## Team Alignment
+
+### Why alignment is important?
+
+- Alignment reduces wasted effort
+- Alignment helps create impact
+
+The cost of alignment scales with number of people.
+
+### Team chartering
+
+The process and outcome facilitate and improve alignment.
+
+Components of a team charter:
+- Mission and objectives
+- Roles and responsibilities
+- Budget and resources
+- Work processes
+- Performance assessment
+- Communication norms
+- Rules and conflict resolution
+- Signatures
