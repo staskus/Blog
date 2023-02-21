@@ -300,3 +300,7 @@ struct Subscription: Decodable {
 }
 ```
 
+### Contravariance
+
+Contravariance is a type system feature that allows to use a more generic type in place of a more specific type.
+

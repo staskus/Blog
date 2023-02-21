@@ -61,3 +61,12 @@ Components of a team charter:
 - Communication norms
 - Rules and conflict resolution
 - Signatures
+
+## Psychological Safety
+
+- Low Standards & High Psy Safety: Comfort Zone 😴
+- Low Standards & Low Psy Safety: Apathy Zone 😑
+- High Standards & High Psy Safety: Learnings & High Performance Zone ⭐️
+- High Standards & Low Psy Safety: Anxiety Zone 😱
+
+*From Amy Edmondson - The Fearless Organization, p. 18*
