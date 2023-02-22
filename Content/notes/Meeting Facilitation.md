@@ -70,3 +70,35 @@ Components of a team charter:
 - High Standards & Low Psy Safety: Anxiety Zone 😱
 
 *From Amy Edmondson - The Fearless Organization, p. 18*
+
+## Decision Making
+
+### Ways to make decisions
+
+Communicate the decision making process to the team upfront.
+
+- Expert/autocratic 
+- Consultative
+- Democratic w. Veto
+- Democratic
+- Consensus
+
+### Value sliders
+
+Each team member can put themselves on the slider for:
+
+- Fast vs Stable
+- Prototype vs Reusable
+- No Interface vs User Friendly
+- Manual vs Automated
+- Specific Product vs General
+
+### Confidence slider
+
+Ask how confident do you feel in the decision we reached? Allow people to put their names on the slider bertween:
+
+- Very uncertain
+- Very confident
+
+### High Impact, High Effort, Low Impact, Low Effort table
+
