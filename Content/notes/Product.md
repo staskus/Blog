@@ -48,3 +48,20 @@ Use feature requests to investigate gaps in the product. Do not act on them dire
 Before starting the work on any feature request, make sure you can formulate this sentence:
 
 > If we **add feature X** it **solves problem Y** for **customer group Z** which helps with **roadmap goal V** by **increasing value by Q**.
+
+### Build trap
+
+> “The build trap: companies end up in the build trap when they misunderstand value. Instead of associating value with the outcomes they want to create for their businesses and customers, they measure value by the number of things they produce… most companies I encounter are stuck in output mode, and their entire organization is optimized to increase the output. Their processes are driven by deadlines and by checking off as many features on a list as possible. Teams are rewarded and incentivized to build more.”
+
+This is a problem that engineering led cultures and tech projects suffer from eventually. The symptoms are building first and figuring out the value later, seeing user research, roadmapping, and business strategy as a waste of time. Sometimes it happens because organizations default to measuring sucess by what's easy to measure, such as number of features shipped.
+
+#### Product Kata
+
+[Product Kata is a set of steps that help you to build a product that people want to use:](https://melissaperri.com/blog/2015/07/22/the-product-kata)
+
+1. Company Goal, Producct KPI, future state
+2. What are users doing now?
+3. What's the first little goal?
+4. User Research, Product Experiments
+
+> A great product somehow manages to make something made by 10, 100, or 1000 people feel like it was made by one person who was brilliant, thoughtful and consistent in all the right ways. Good movies and music does it. So do great cities.
