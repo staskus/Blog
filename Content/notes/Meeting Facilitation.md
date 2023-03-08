@@ -182,3 +182,5 @@ Now what? Brings you to action, even when you cannot predict or control what wil
 
 And, every Now what? leads you to the next What?
 It challenges your habitual ways of knowing and acting, so it requires practice. 
+
+> “One of the most challenging things a group can learn in a dialogue is to hold the tension that arises and not react to it.  Typically, when faced with this kind of cross-current in the conversational ecology, people begin to “vote” on which person or perspective they feel is “right.” This relieves the tension for them, but, ironically, intensifies it for the rest of the group, since this reduces the space in which a new understanding can emerge.”
