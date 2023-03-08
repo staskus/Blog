@@ -163,7 +163,22 @@ Team members have to be in sync on what stage they are in. In one team member is
   - Who, what, when
   - Feedback
 
+If the stage is not set, you get **Brownian Motion** (random movement of particles) no common focus
+If the data is not gathered, everyone will be working from his/her own set of facts and opinion.
+If insights are not generated, you get **habitual thinking**
+If you don't decide what to do, you don't understand **what is the point?**
+If you don't close the retrospective, you **lose an opportunity **to improve
+
 ### The prime directive
 
 > Regardless of what we discover, **we** understand and truly believe that everyone did the best job they could, given what they knew at the time, their skills and abilities, the resources available, and the situation at hand.
 > - Norman Kerth
+
+### Adaptive action
+
+What? Opens your eyes to current reality, to challenge your expectations and assumptions.
+So what? Invites you to make meaning in new and creative ways.
+Now what? Brings you to action, even when you cannot predict or control what will happen.
+
+And, every Now what? leads you to the next What?
+It challenges your habitual ways of knowing and acting, so it requires practice. 
