@@ -184,3 +184,20 @@ And, every Now what? leads you to the next What?
 It challenges your habitual ways of knowing and acting, so it requires practice. 
 
 > “One of the most challenging things a group can learn in a dialogue is to hold the tension that arises and not react to it.  Typically, when faced with this kind of cross-current in the conversational ecology, people begin to “vote” on which person or perspective they feel is “right.” This relieves the tension for them, but, ironically, intensifies it for the rest of the group, since this reduces the space in which a new understanding can emerge.”
+
+## Facilitating big groups
+
+Preparation is more important than usual when facilitatign big groups.
+
+It's a good idea to create a [Facilitation Guide](https://docs.google.com/document/d/1GO6fKUPFM_V74u_zYvRGEj7lXhQwC3acDS-9dQYld7I/edit?usp=sharing).
+
+### Lean Coffee
+
+Lean Coffee is a meeting format that encourages participants to drive the agenda by collaboratively deciding what topics to discuss and for how long. It is a great way to get a large group of people to focus on the topics that are most important to them.
+
+- Everyone brings up a topic they want to discuss
+- Optionally voting which topics we speak about if there're a lot of topics
+- If the group is very large go into breakout rooms
+- Create a table with 3 columns: To discuss, discussing, discussed
+- We start discussing the topics, everyone says their opinion
+- After 7 minute we vote to stay on the topic or move onto the next topic (just show thumbs up or down)
