@@ -147,21 +147,11 @@ It's also possible to do a **Circle of control**. Ask people to write down what 
 
 Team members have to be in sync on what stage they are in. In one team member is in brainstorming stage, and another in planning - then it's hard to decide what to do.
 
-- Set the stage (How can you create a learning atmosphere?)
-    - POWER statement
-    - Check in question
-    - Reading/silent time
-- Gather data
-    - Ask to suspend "conclusions" long enough to see new possibilities?
-- Generate insights (So what?)
-    -  Collective meaning making: What themes/patterns/insights do you now have access to?
-    - Zoom out to see the patterns
-- Decide what to do (Now what?):
-     - Of all the possible options, what is our next wisest action?
-- Close the retrospective
-    - Walk the walk
-    - Who, what, when
-    - Feedback
+- Set the stage (How can you create a learning atmosphere?) (POWER statement, Check in question, Reading/silent time)
+- Gather data (Ask to suspend "conclusions" long enough to see new possibilities?)
+- Generate insights (So what?) (Collective meaning making: What themes/patterns/insights do you now have access to?, Zoom out to see the patterns)
+- Decide what to do (Now what?) (Of all the possible options, what is our next wisest action?)
+- Close the retrospective (Walk the walk, Who, what, when, Feedback)
 
 If the stage is not set, you get **Brownian Motion** (random movement of particles) no common focus
 If the data is not gathered, everyone will be working from his/her own set of facts and opinion.
