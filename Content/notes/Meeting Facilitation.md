@@ -191,3 +191,14 @@ Lean Coffee is a meeting format that encourages participants to drive the agenda
 - Create a table with 3 columns: To discuss, discussing, discussed
 - We start discussing the topics, everyone says their opinion
 - After 7 minute we vote to stay on the topic or move onto the next topic (just show thumbs up or down)
+
+## Relience of the facilitator
+
+By jumping into the conversation, the facilitator is risking taking away the opportunity for the group to learn from each other.
+
+> Any long-term solution must strengthen the ability of the system to shoulder its own burdens.
+> - Donella Meadows
+
+## Open Space Techniques
+
+Open Space meeting is a meeting format that encourages participants to drive the agenda by collaboratively deciding what topics to discuss and for how long. It is a great way to get a large group of people to focus on the topics that are most important to them.
