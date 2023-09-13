@@ -77,3 +77,11 @@ Involve right people at the right time.
 Biggest predictor of strategic failure? Not involving right people at the right time.
 
 Take time to map out a project and make sure you are including the right people at the right time. 
+
+## Resources
+
+How to Measure Anything: Finding the Value of Intangibles in Business 
+
+Measure What Matters: How Google, Bono, and the Gates Foundation Rock the World with OKRs
+
+Dorie Clark, LinkedIn Learning, Strategic Thinking
