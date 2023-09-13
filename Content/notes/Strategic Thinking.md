@@ -11,7 +11,7 @@ Dorie Clark (teaches for Duke University's Fuqua School of Business, and is the 
 
 The difference is the ability to do that under pressure. Train yourself and your team to pause at the right moments.
 
-# 5 strategic checks
+## 5 strategic checks
 
 ## Gap Check
 
