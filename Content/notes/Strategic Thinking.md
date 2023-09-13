@@ -11,9 +11,9 @@ Dorie Clark (teaches for Duke University's Fuqua School of Business, and the aut
 
 The difference is the ability to do that under pressure. Train yourself and your team to pause at the righr moments.
 
-## 5 strategic checks
+# 5 strategic checks
 
-### Gap Check
+## Gap Check
 
 Put numbers on it (current vs goal).
 
@@ -30,7 +30,7 @@ LEADING INDICATOR QUESTIONS
 
 **Lag Indicators:** Measure past performance. E.g., quarterly revenue reflects past actions.
 
-### Lens Check
+## Lens Check
 
 Diagnose using the 3 Lenses Model.
 
@@ -38,7 +38,7 @@ A "lens check" usually refers to examining a situation, strategy, or issue from 
 
 Lens check is helpful for giving feedback.
 
-#### 3 Lenses Model
+### 3 Lenses Model
 
 For example, there's an issue in filling a role in a company.
 
@@ -46,7 +46,7 @@ For example, there's an issue in filling a role in a company.
 - Manager issue, expectation, feedback, accountability issue?
 - Organizational issue, is it a value, role models, systems, constraints issue?
 
-### Link Up Check
+## Link Up Check
 
 Confirm alignment and effectiveness.
 
@@ -59,7 +59,7 @@ Pick any task you or your team are working on and link it up to the end game. As
 Our overall strategy to increase revenue, is to first get as many quick-wins as possible.
 We're going to reuse the flows that web developers already made from within the app, rather than rebuilding.
 
-### UC (Unintended consequences) Check
+## UC (Unintended consequences) Check
 
 Mitigate unintended consequences.
 
@@ -70,7 +70,7 @@ Great strategic thinkers think long-term. Help yourself and others do this by as
 Pre-mortem:
 - What might cause this project to fail?
 
-### Inclusive Planning Check
+## Inclusive Planning Check
 
 Involve right people at the right time.
 
@@ -78,7 +78,7 @@ Biggest predictor of strategic failure? Not involving right people at the right 
 
 Take time to map out a project and make sure you are including the right people at the right time. 
 
-## Resources
+# Resources
 
 How to Measure Anything: Finding the Value of Intangibles in Business 
 
