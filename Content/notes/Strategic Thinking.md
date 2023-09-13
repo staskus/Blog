@@ -15,6 +15,8 @@ The difference is the ability to do that under pressure. Train yourself and your
 
 ### Gap Check
 
+Put numbers on it (current vs goal).
+
 “What’s the gap between the current state and desired state? How can we make it measurable?” 
 
 Gap analysis in strategic thinking involves evaluating the current state of a situation against a desired future state to identify discrepancies or "gaps." This allows organizations to focus their resources on bridging these gaps through targeted actions.
@@ -30,6 +32,8 @@ LEADING INDICATOR QUESTIONS
 
 ### Lens Check
 
+Diagnose using the 3 Lenses Model.
+
 A "lens check" usually refers to examining a situation, strategy, or issue from various perspectives to gain a comprehensive understanding. The term can be metaphorical, representing different viewpoints like financial, ethical, or customer-focused lenses.
 
 Lens check is helpful for giving feedback.
@@ -44,6 +48,8 @@ For example, there's an issue in filling a role in a company.
 
 ### Link Up Check
 
+Confirm alignment and effectiveness.
+
 Pick any task you or your team are working on and link it up to the end game. Ask: “What does this link up to?” Double check for alignment, effectiveness, and increase motivation by understanding how daily work connects to the big picture. 
 
 - What is the ultimate goal / link-up?
@@ -55,6 +61,8 @@ We're going to reuse the flows that web developers already made from within the 
 
 ### UC (Unintended consequences) Check
 
+Mitigate unintended consequences.
+
 Deliberate risk management.
 
 Great strategic thinkers think long-term. Help yourself and others do this by asking, “What unintended consequences do we need to look out for?” and “What might cause this plan to fail?” 
@@ -64,7 +72,8 @@ Pre-mortem:
 
 ### Inclusive Planning Check
 
-Biggest predictor of strategic failure?
-- Not involving right people at the right time.
+Involve right people at the right time.
+
+Biggest predictor of strategic failure? Not involving right people at the right time.
 
 Take time to map out a project and make sure you are including the right people at the right time. 
