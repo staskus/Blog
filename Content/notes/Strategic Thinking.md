@@ -17,18 +17,54 @@ The difference is the ability to do that under pressure. Train yourself and your
 
 “What’s the gap between the current state and desired state? How can we make it measurable?” 
 
+Gap analysis in strategic thinking involves evaluating the current state of a situation against a desired future state to identify discrepancies or "gaps." This allows organizations to focus their resources on bridging these gaps through targeted actions.
+
+**Lead Indicators**: Predict future outcomes. E.g., customer inquiries can indicate future sales.
+
+LEADING INDICATOR QUESTIONS
+* What processes can I employ to achieve this goal to higher levels of success?
+* What skills can the team improve to better achieve the desired outcome?
+* What steps can be taken to speed up product development or process improvement?
+
+**Lag Indicators:** Measure past performance. E.g., quarterly revenue reflects past actions.
+
 ### Lens Check
 
- Pick a problem or recurring tension and evaluate it via the 3 Lenses Model by asking, “What other factors may be contributing to this?”
+A "lens check" usually refers to examining a situation, strategy, or issue from various perspectives to gain a comprehensive understanding. The term can be metaphorical, representing different viewpoints like financial, ethical, or customer-focused lenses.
+
+Lens check is helpful for giving feedback.
+
+#### 3 Lenses Model
+
+For example, there's an issue in filling a role in a company.
+
+- Person issue, is it skill or will issue?
+- Manager issue, expectation, feedback, accountability issue?
+- Organizational issue, is it a value, role models, systems, constraints issue?
 
 ### Link Up Check
 
 Pick any task you or your team are working on and link it up to the end game. Ask: “What does this link up to?” Double check for alignment, effectiveness, and increase motivation by understanding how daily work connects to the big picture. 
 
-### UC Check
+- What is the ultimate goal / link-up?
+- What is the overall strategy for achieving it?
+- What is an important tactic we'll use?
+
+Our overall strategy to increase revenue, is to first get as many quick-wins as possible.
+We're going to reuse the flows that web developers already made from within the app, rather than rebuilding.
+
+### UC (Unintended consequences) Check
+
+Deliberate risk management.
 
 Great strategic thinkers think long-term. Help yourself and others do this by asking, “What unintended consequences do we need to look out for?” and “What might cause this plan to fail?” 
 
+Pre-mortem:
+- What might cause this project to fail?
+
 ### Inclusive Planning Check
+
+Biggest predictor of strategic failure?
+- Not involving right people at the right time.
 
 Take time to map out a project and make sure you are including the right people at the right time. 
