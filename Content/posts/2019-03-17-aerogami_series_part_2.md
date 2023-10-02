@@ -7,7 +7,7 @@ excerpt: We'll continue creating an application by overviewing how to properly s
 
 In this part of the series we'll overview how to properly setup the application.
 
-# Creating Frameworks
+## Creating Frameworks
 
 As we talked in the [previous part](/posts/2019-03-11-aerogami_series_part_1), we'll begin the creation of the project by creating 3 separate frameworks inside our XCode project (`TravelKit`, `TravelDataKit`, `TravelFeatureKit`). An article on [raywenderlich.com](https://www.raywenderlich.com/5109-creating-a-framework-for-ios) has a thorough explanation of the whole process.
 
@@ -15,7 +15,7 @@ After creating frameworks, project navigator should look something like in the p
 
 <img src="/images/aerogami-tutorial/part2/project_frameworks.png" alt="Frameworks in the Project Navigator" width="300"/>
 
-# Setting up CocoaPods
+## Setting up CocoaPods
 
 We'll be using [CocoaPods](https://cocoapods.org) for managing dependencies in our project. Although setting up CocoaPods is fairly straightforward, there can be some difficulties when having local frameworks involved. The configuration is defined in `Podfile` which is located in the root folder of the project.
 
@@ -77,7 +77,7 @@ end
 
 The full [Podfile](https://github.com/staskus/aerogami-ios/blob/master/Podfile) can be found on `GitHub` as the rest of the project.
 
-# Dependency Injection
+## Dependency Injection
 
 I prefer to think early about the way dependencies will be managed inside the application. Although dependency injection can be achieved without 3rd party libraries, for this project we'll use [Swinject](https://github.com/Swinject/Swinject) that has easy to use interfaces for managing dependencies.
 

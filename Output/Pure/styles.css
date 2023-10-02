@@ -18,11 +18,65 @@ a:focus {
 }
 
 h1 {
-    font-size: 1.5em;
+    font-size: 2.5em;
+    font-weight: 700; /* boldest */
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+h2 {
+    font-size: 2em;
+    font-weight: 600; /* bolder than h3 and h4, but less than h1 */
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
 }
 
 h3 {
-    font-weight: 100;
+    font-size: 1.5em;
+    font-weight: 500; /* bolder than h4 but less than h2 */
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+}
+
+h4 {
+    font-size: 1.2em;
+    font-weight: 400; /* bolder than regular text */
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+}
+
+
+.content h1 {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.content h2 {
+    margin-top: 0.8em;
+    margin-bottom: 0.6em;
+}
+
+.header h1 {
+    font-size: 1.5em
+}
+
+.header h3 {
+    font-size: 1em
+}
+
+.post-header h2 {
+    margin-top: 0em;
+    margin-bottom: 0.2em;
+}
+
+.content h3 {
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
+}
+
+.content h4 {
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
 }
 
 /* LAYOUT CSS */
@@ -101,7 +155,6 @@ h3 {
     padding-bottom: 0.5em;
 }
 .post-title {
-    font-size: 2em;
     color: #222;
     margin-bottom: 0.2em;
 }
@@ -309,4 +362,23 @@ pre code .dotAccess {
 
 pre code .preprocessing {
     color: #b68a00;
+}
+
+.nav-item a {
+    transition: all 0.3s ease;
+}
+
+.post {
+    transition: all 0.3s ease;
+}
+.post:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+blockquote {
+    font-style: italic;
+    border-left: 3px solid rgba(0, 0, 0, 0.1);
+    padding-left: 1em;
+    color: rgba(0, 0, 0, 0.7);
+    margin: 1em 0;
 }

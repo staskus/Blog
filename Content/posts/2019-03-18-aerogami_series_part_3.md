@@ -7,7 +7,7 @@ excerpt: In this part of the series we'll be fetching and parsing data from the 
 
 In the [previous part](2019-03-17-aerogami_series_part_2) we discovered a way to separate our application into frameworks and setup the architecture of our app to support dependency injection. In this part of the series we'll be fetching and parsing data from the backend using Alamofire and Codable.
 
-# API Client
+## API Client
 
 Although in the scope of this tutorial we'll be using mocked data, the application will be completely ready to support calls to REST APIs.
 
@@ -52,7 +52,7 @@ public class BaseAPIClient: APIClient {
 
 If you clone the [repository](https://github.com/staskus/aerogami-ios), it will use [MockAPIClient](https://github.com/staskus/aerogami-ios/blob/master/TravelAPIKit/BaseAPIClient.swift) which takes data from files. Because it uses the same public interface, `MockAPIClient` and `BaseAPIClient` can be interchanged depending on needs. See [ApplicationAssembly](https://github.com/staskus/aerogami-ios/blob/bd558d5962e7d97300213ad6896ff8d1f548a074/TravelApplication/Application/Assembly/ApplicationAssembly.swift) which assigns dependencies for `APIClient` interface. Depending on different configuration, it can assign any of these two. This little example perfectly illustrates the power of `dependency injection` and usage of `protocols`.
 
-# Data
+## Data
 
 The main entity in this project is a `Trip`. It describes the origin and destination of the flight as well as price and dates.
 
@@ -132,7 +132,7 @@ After receiving `JSON` data we can define `decoder` and automatically parse valu
 
 With this simple and straightforward Codable API our data is cleanly parsed into statically typed object or array of objects after [fetching from API](https://github.com/staskus/aerogami-ios/blob/master/TravelDataKit/Repositories/Trip/Remote/APITripDataStore.swift).
 
-# Repositories
+## Repositories
 
 Classes that are used to fetch data will be called repositories. In `TravelKit` we'll only define the protocols of these repositories. Our UI framework `TravelFeatureKit` will only know about `TravelKit` and protocols of repositories thus the implementations, defined in `TravelDataKit`, will be easily changeable.
 
@@ -148,6 +148,6 @@ public protocol TripRepository {
 
 Because our UI framework will only know about this protocol, we will be able to provide different types of implementations. [TripRepository](https://github.com/staskus/aerogami-ios/blob/bd558d5962e7d97300213ad6896ff8d1f548a074/TravelDataKit/Repositories/Trip/TripRepository.swift) implementation defined in `TravelDataKit` calls the `API` to fetch data and parses it using `Coadable`. However, [FavoriteTripRepository](https://github.com/staskus/aerogami-ios/blob/bd558d5962e7d97300213ad6896ff8d1f548a074/TravelDataKit/Repositories/Trip/FavoriteTripRepository.swift) which also implements `TripRepository` interface, uses `UserDefaults` to fetch locally liked `Trips`. It allows us to generate 2 completely different screens in our app. One showing the current feed of flights fetched from the API and another of liked and locally saved trips. Here [FavoritesAssembly](https://github.com/staskus/aerogami-ios/blob/bd558d5962e7d97300213ad6896ff8d1f548a074/TravelFeatureKit/Features/Favorites/FavoritesAssembly.swift) simply injects necessary dependencies needed for _favorites_ to a `FavoriteFeed` feature.
 
-# Design
+## Design
 
 Before continuing creating the app, we'll see how we can quickly create simple application designs using Sketch or similar tools. In the next part of the series we'll overview the approach.

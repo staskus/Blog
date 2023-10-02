@@ -7,9 +7,9 @@ excerpt: In this part of the series we'll be using Clean Swift architecture for 
 
 When starting to develop any application it's beneficial to think early about the way code can be testable and whether it would be scalable or maintainable. Many iOS applications have suffered from what is called _Massive View Controller_ problem. By putting all the code that fetches, maps, presents and styles into one ViewController it very quickly overgrows in size and complexity. A lot of solutions where introduced to tackle this problem such as MVVM, MVVM + ReactiveCocoa or VIPER. In this application we'll be using [Clean Swift](https://clean-swift.com) approach for breaking up massive view controllers into testable and maintainable parts.
 
-# Data Structures
+## Data Structures
 
-## Data
+### Data
 
 `Struct` containing _raw data_.
 
@@ -20,7 +20,7 @@ When starting to develop any application it's beneficial to think early about th
     }
 ```
 
-## View Model
+### View Model
 
 `Struct` containing _State_ (loading, error, empty, loaded) and mapped data that is used by _View Controllers_ for configuring views. 
 
@@ -46,7 +46,7 @@ When starting to develop any application it's beneficial to think early about th
     }
 ```
 
-## Action
+### Action
 
 `Enum` with actions that _View Controller_ can do and _Interactor_ can handle. 
 
@@ -57,7 +57,7 @@ When starting to develop any application it's beneficial to think early about th
     }
 ```
 
-## Route
+### Route
 
 `Enum` with destinations that _View Controller_ can route to. 
 
@@ -67,9 +67,9 @@ When starting to develop any application it's beneficial to think early about th
     }
 ```
 
-# Components 
+## Components 
 
-## Interactor
+### Interactor
 
 Receives an action, performs work and sends raw data to presenter.
 
@@ -77,14 +77,14 @@ Receives an action, performs work and sends raw data to presenter.
 * Output - _Data_
 * Uses - _Presenter_
 
-## Presenter
+### Presenter
 
 Receives raw data and maps it into _View Model_
 
 * Input - _Data_
 * Output - _View Model_
 
-## View Controller
+### View Controller
 
 Receives _View Model_ and configures a view according to it. Sends actions to _Interactor_.
 
@@ -92,14 +92,14 @@ Receives _View Model_ and configures a view according to it. Sends actions to _I
 * Output - _Action_
 * Uses - _Interactor_, _Router_
 
-## Router
+### Router
 
 Receives _Route_ object from _View Controller_, that contains information about next destination, and opens next _View Controller_ using _Configurator_
 
 * Input - _Route_
 * Uses  - _Configurator_
 
-## Configurator
+### Configurator
 
 Takes an input and creates configured _View Controller_ with other components.
 
@@ -108,15 +108,15 @@ Takes an input and creates configured _View Controller_ with other components.
 * Creates  - _Interactor_, _Presenter_, _View Controller_, _Router_
 
 
-# Feature
+## Feature
 
 The group of these components is called `Feature`. [Clean Swift](https://clean-swift.com) provides with XCode templates that allow to generate all of these components together. We are using [plop templates](https://github.com/staskus/aerogami-ios/tree/master/templates/plop/Feature) for feature generation. All of this allows to avoid writing boilerplate code and concentrate on actual code of the feature.
 
-# Feed Example
+## Feed Example
 
 `Feed` is a main [feature](https://github.com/staskus/aerogami-ios/tree/master/TravelFeatureKit/Features/Feed) of the application. We're going to see how all of these different components is used to create a complete feature.
 
-## Feed Interactor
+### Feed Interactor
 
 `Feed Interactor` uses repositories of _Region_, _Trip_ and _Airport_ for loading data. 
 
@@ -165,7 +165,7 @@ We can see when `FeedInteractor` receives _load_ action it sets current state to
     }
 ```
 
-## Feed Presenter
+### Feed Presenter
 
 [Feed Presenter](https://github.com/staskus/aerogami-ios/blob/master/TravelFeatureKit/Features/Feed/FeedPresenter.swift) essentially takes `Feed.Data` and returns `Feed.ViewModel`.
 
@@ -199,7 +199,7 @@ We can see that _struct_ such as `FeedCardViewModel` is fairly complicated and c
     }
 ```
 
-## Feed View Controller
+### Feed View Controller
 
 View Controller in this architecture is a very lean and clean class. It does what view _should_ do: present data, handle user actions and delegate these actions to 'interactor'. 
 
@@ -235,7 +235,7 @@ _display()_ lets `FeedViewController` know that the state and `Feed.ViewModel` w
     }
 ```
 
-## Feed Router
+### Feed Router
 
 `FeedRouter` handles _route_ actions and opens other view controllers. It uses `BookTripConfigurator` for building `BookTripViewController`. 
 
@@ -274,7 +274,7 @@ For understanding this flow easier we can imagine a hypothetical scenario of `Fe
 
 Although this all may seem too much at first, it actually provides developers with huge clarity when building and maintaining the project. Moreover, all these different components have clear inputs and outputs than can be unit tested. With the growing complexity of the feature it becomes convenient to simply check `Action` to see all the different things that `ViewController` does or analyse `Presenter` to understand what kind of data is actually presented.
 
-## Result
+### Result
 
 In these series we've seen how to build iOS application by separating it into different frameworks, loading data from API and mapping it using `Codable`, sketching UIs following Apple's guidelines and develop it all on top of _Clean_ architecture. All of these steps allow the app to be scalable, maintainable and testable.  
 

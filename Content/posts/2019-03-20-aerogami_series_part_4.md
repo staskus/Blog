@@ -7,7 +7,7 @@ excerpt: We'll see how Sketch can be used to create minimalist application scree
 
 User experience (UX) and design is an integral part of any application. As a developer, I don't have much knowledge or "feeling" towards good looking designs. Moreover, truly great user experience requires many iterations of development and feedback. In this part we'll see how we can take example from Apple's mobile apps and design guidelines to create a familiar looking application.
 
-# Colors
+## Colors
 
 We'll begin to design by choosing the color palette of our application. One of the best ways to ensure familiarity and simplicity of the app is to have consistent colors throughout the application. I found it a great advice to limit yourself to 1 or 2 colors. 
 
@@ -39,7 +39,7 @@ After tweaking these screens and applying our color palette we can create the fi
 
 It displays the essential information such as _origin_, _destination_, _dates_ and _price_. We can also show images which provide visual information about the destination.
 
-# App Icon
+## App Icon
 
 Application icon is also a huge part of first impression of any application. We can use same given [design resources](https://developer.apple.com/design/resources/) that include examples of created app icons. 
 
@@ -53,7 +53,7 @@ The resulting icon looks like this.
 
 We can use [makeappicon.com](https://makeappicon.com) to generate all the necessary sizes of the icon so it could be used for different screen sizes as well as on AppStore. 
 
-# What's next?
+## What's next?
 
 We saw how it's possible to create a clean design of an application without having much knowledge or spending too much time. Especially for small side projects, it's important to concentrate on main functionality and simply use best practices and examples when creating UIs. 
 

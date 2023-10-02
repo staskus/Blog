@@ -7,13 +7,13 @@ excerpt: We'll be creating and releasing an iOS application by showing a real th
 
 When learning any new technology I find it beneficial to follow a real world example. In this tutorial series we'll be creating and releasing an iOS application. The application will be created by showing a real thinking process, going through essential steps and providing the motivation behind them. Although every single line of code won't be covered, all of it will be always available on [GitHub](https://github.com/staskus/aerogami-ios). 
 
-# Prerequisites
+## Prerequisites
 
 Prior knowledge of iOS development and Swift syntax is needed.
 
-# Introduction
+## Introduction
 
-## Our Project
+### Our Project
 
 We'll be creating a flight discovery application. The users of our application should be able to:
 
@@ -23,7 +23,7 @@ We'll be creating a flight discovery application. The users of our application s
 
 In the scope of this project we won't be concerned about the source of information. Our application will use mocked flight information data. However, the structure of the application will support an easy integration with any Rest API. 
 
-## Our Approach
+### Our Approach
 
 Throughout the series we'll cover these topics one-by-one:
 
@@ -35,17 +35,17 @@ Throughout the series we'll cover these topics one-by-one:
 6. Building the UI and Displaying the Data
 7. Release Process
 
-## The Final Product
+### The Final Product
 
 Here is the sneak peek of how the final product will look like. The full codebase can be found on [GitHub](https://github.com/staskus/aerogami-ios).
 
 <img src="/images/aerogami-tutorial/part1/screenshot.png" alt="Application Screenshot" width="200"/>
 
-# High Level View
+## High Level View
 
 Before we start, it's beneficial to understand how we're going to approach the creation of this application.
 
-## Separation of Concerns
+### Separation of Concerns
 
 Essentially our application should be able to perform 3 main tasks:
 

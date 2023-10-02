@@ -7,7 +7,8 @@ excerpt: Soft Skills
 
 We need to learn of our `style under stress`, and know the default coping style:
 
-**For example:**
+### For example
+
 - Freeze: slow/stall
 - Fight: aggressive problem-solve, debate
 - Rabbit holing: dig deep on one topic
