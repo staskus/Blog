@@ -19,3 +19,20 @@ To do image recognition before neural networks there was a lot of manual work in
 
 [Kaggle](https://www.kaggle.com/) is community platform for data scientists. In the scope of the course, it is used to share notebooks. [Jupyter](https://jupyter.org/) is a notebook interface used for the service.
 
+## Comparison
+
+### Traditional programming
+
+#### Inputs -> Program -> Results
+
+### Deep learning
+
+####Inputs + Weights -> Model -> Results
+
+Model is mathematical function that takes inputs and multiplies them by one set of weights and adds them up, then it does the same with the second set of weights and adds them up again. Then it takes all the negative numbers and replaces them with zeros. And then it takes those as inputs to another layer. That is neural network.
+
+At first weights are random so model doesn't do anything useful. Therefore, when we get the result we evaluate how correct they are and then we update the weights. We do this many times until we get the result we want. Model in the end is a very flexible function.
+
+Once we got the trained model, then we can use it just as a regular program:
+
+#### Inputs -> Model -> Results
