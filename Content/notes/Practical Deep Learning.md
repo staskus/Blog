@@ -23,16 +23,16 @@ To do image recognition before neural networks there was a lot of manual work in
 
 ### Traditional programming
 
-#### Inputs -> Program -> Results
+**Inputs -> Program -> Results**
 
 ### Deep learning
 
-####Inputs + Weights -> Model -> Results
+**Inputs + Weights -> Model -> Result**s
 
 Model is mathematical function that takes inputs and multiplies them by one set of weights and adds them up, then it does the same with the second set of weights and adds them up again. Then it takes all the negative numbers and replaces them with zeros. And then it takes those as inputs to another layer. That is neural network.
 
 At first weights are random so model doesn't do anything useful. Therefore, when we get the result we evaluate how correct they are and then we update the weights. We do this many times until we get the result we want. Model in the end is a very flexible function.
 
-Once we got the trained model, then we can use it just as a regular program:
+Once we got the trained model, then we can use it just as a regular program.
 
-#### Inputs -> Model -> Results
+**Inputs -> Model -> Results**
